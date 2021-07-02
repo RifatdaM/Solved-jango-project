@@ -1,0 +1,37 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block nav_bar %}
+{% if user.is_authenticated %}
+<a class="nav-item nav-link" href="{% url 'home' %}">Exchange now</a>
+<a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+{% else %}
+<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+<a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+{% endif %}
+{% endblock nav_bar %}
+
+{% block content %}
+<main role="main" class="container">
+      <div>
+        <div class="col-md">
+    <div class="content-section">
+        <a> Thank you for your email confirmation. Now you can login your account. </a>
+    </div>
+                    </div>
+        <!-- <div class="col-md-4">
+          <div class="content-section">
+            <h3>Our Sidebar</h3>
+            <p class='text-muted'>You can put any information here you'd like.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Latest Posts</li>
+                <li class="list-group-item list-group-item-light">Announcements</li>
+                <li class="list-group-item list-group-item-light">Calendars</li>
+                <li class="list-group-item list-group-item-light">etc</li>
+              </ul>
+            </p>
+          </div>
+        </div> -->
+      </div>
+    </main>
+{% endblock content %}

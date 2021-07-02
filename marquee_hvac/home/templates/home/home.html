@@ -1,0 +1,542 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include "home/header.html" %}
+    <header id="header" class="header">
+      <!-- Slider Section -->
+      <div class="main" style="padding-top: 70px;">
+        <div class="glide" id="glide_1">
+          <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+              <li class="glide__slide">
+                <div class="main_center">
+                  <div class="main__left">
+                    <h1 class="header__info-title">Light Commercial</h1>
+                    <p class="header__info-product_dis">
+                      A 3D printer that can do your most of the desired work.
+                      Product that you can be used for most of the 3D printing
+                      you want to do.
+                    </p>
+                    <span class="header__info-specification">Specification</span>
+                    <span class="header__info-spec">- Spec 1</span>
+                    <span class="header__info-spec">- Spec 1</span>
+                    <span class="header__info-spec">- Spec 1</span>
+                    <span class="header__info-spec">- Spec 1</span>
+
+                    <a href="#" class="btn btn-fill">Contact Us</a>
+                    <a href="#" class="btn btn-outline">See More</a>
+                  </div>
+                  <div class="main__right">
+                    <div class="main__img-container">
+                      <img src="{% static 'home/images/ac1.png' %}" alt="AC 01" class="ac1" />
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="glide__slide">
+                <div class="main_center">
+                  <div class="main__left">
+                    <h1 class="header__info-title">Light Commercial</h1>
+                    <p class="header__info-product_dis">
+                      A 3D printer that can do your most of the desired work.
+                      Product that you can be used for most of the 3D printing
+                      you want to do.
+                    </p>
+                    <span class="header__info-specification">Specification</span>
+                    <span class="header__info-spec">- Spec 1</span>
+                    <span class="header__info-spec">- Spec 1</span>
+                    <span class="header__info-spec">- Spec 1</span>
+                    <span class="header__info-spec">- Spec 1</span>
+
+                    <a href="#" class="btn btn-fill">Contact Us</a>
+                    <a href="#" class="btn btn-outline">See More</a>
+                  </div>
+                  <div class="main__right">
+                    <div class="main__img-container">
+                      <img src="{% static 'home/images/ac2.png' %}" alt="AC 02" class="ac2" />
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="glide__slide">
+                <div class="main_center">
+                  <div class="main__left">
+                    <h1 class="header__info-title">Light Commercial</h1>
+                    <p class="header__info-product_dis">
+                      A 3D printer that can do your most of the desired work.
+                      Product that you can be used for most of the 3D printing
+                      you want to do.
+                    </p>
+                    <span class="header__info-specification">Specification</span>
+                    <span class="header__info-spec">- Spec 1</span>
+                    <span class="header__info-spec">- Spec 1</span>
+                    <span class="header__info-spec">- Spec 1</span>
+                    <span class="header__info-spec">- Spec 1</span>
+
+                    <a href="#" class="btn btn-fill">Contact Us</a>
+                    <a href="#" class="btn btn-outline">See More</a>
+                  </div>
+                  <div class="main__right">
+                    <div class="main__img-container">
+                      <img src="{% static 'home/images/ac1.png' %}" alt="AC 03" class="ac3" />
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="glide__bullets" data-glide-el="controls[nav]">
+            <button class="glide__bullet" data-glide-dir="=0"></button>
+            <button class="glide__bullet" data-glide-dir="=1"></button>
+            <button class="glide__bullet" data-glide-dir="=2"></button>
+          </div>
+
+          <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+              <svg>
+                <use xlink:href="{% static 'home/images/sprite.svg' %}#icon-arrow-left2"></use>
+              </svg>
+            </button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+              <svg>
+                <use xlink:href="{% static 'home/images/sprite.svg' %}#icon-arrow-right2"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main id="product">
+      <!-- Our Product section -->
+      <div class="home_container">
+      <section class="section letest__product" id="letest">
+        <div class="title__container">
+          <div class="section__titles">
+            <h2 class="primary__title">Our Product</h2>
+          </div>
+        </div>
+        <div class="p_container">
+          <div class="glide" id="glide_2">
+            <div class="glide__track" data-glide-el="track">
+              <ul class="glide__slides latest-center">
+                <li class="glide__slide">
+                  <div class="product">
+                    <div class="product__header">
+                      <img src="{% static 'home/images/ac1.png' %}" alt="" />
+                    </div>
+                    <div class="product__footer">
+                      <h3>Your AC Name</h3>
+                      <div class="rating">
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                      </div>
+                      <div class="product__price">
+                        <h4>
+                          <sapn>25,000</sapn>
+                          <sapn style="margin-left: 4px">BDT</sapn>
+                        </h4>
+                        <a href="#">
+                          <button type="button" class="product__btn">
+                            Add To Cart
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="glide__slide">
+                  <div class="product">
+                    <div class="product__header">
+                      <img src="{% static 'home/images/ac2.png' %}" alt="" />
+                    </div>
+                    <div class="product__footer">
+                      <h3>Your AC Name</h3>
+                      <div class="rating">
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                      </div>
+                      <div class="product__price">
+                        <h4>
+                          <sapn>25,000</sapn>
+                          <sapn style="margin-left: 4px">BDT</sapn>
+                        </h4>
+                        <a href="#">
+                          <button type="button" class="product__btn">
+                            Add To Cart
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="glide__slide">
+                  <div class="product">
+                    <div class="product__header">
+                      <img src="{% static 'home/images/ac1.png' %}" alt="" />
+                    </div>
+                    <div class="product__footer">
+                      <h3>Your AC Name</h3>
+                      <div class="rating">
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                      </div>
+                      <div class="product__price">
+                        <h4>
+                          <sapn>25,000</sapn>
+                          <sapn style="margin-left: 4px">BDT</sapn>
+                        </h4>
+                        <a href="#">
+                          <button type="button" class="product__btn">
+                            Add To Cart
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="glide__slide">
+                  <div class="product">
+                    <div class="product__header">
+                      <img src="{% static 'home/images/ac2.png' %}" alt="" />
+                    </div>
+                    <div class="product__footer">
+                      <h3>Your AC Name</h3>
+                      <div class="rating">
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                      </div>
+                      <div class="product__price">
+                        <h4>
+                          <sapn>25,000</sapn>
+                          <sapn style="margin-left: 4px">BDT</sapn>
+                        </h4>
+                        <a href="#">
+                          <button type="button" class="product__btn">
+                            Add To Cart
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="glide__slide">
+                  <div class="product">
+                    <div class="product__header">
+                      <img src="{% static 'home/images/ac2.png' %}" alt="" />
+                    </div>
+                    <div class="product__footer">
+                      <h3>Your AC Name</h3>
+                      <div class="rating">
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                      </div>
+                      <div class="product__price">
+                        <h4>
+                          <sapn>25,000</sapn>
+                          <sapn style="margin-left: 4px">BDT</sapn>
+                        </h4>
+                        <a href="#">
+                          <button type="button" class="product__btn">
+                            Add To Cart
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="glide__slide">
+                  <div class="product">
+                    <div class="product__header">
+                      <img src="{% static 'home/images/ac2.png' %}" alt="" />
+                    </div>
+                    <div class="product__footer">
+                      <h3>Your AC Name</h3>
+                      <div class="rating">
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                      </div>
+                      <div class="product__price">
+                        <h4>
+                          <sapn>25,000</sapn>
+                          <sapn style="margin-left: 4px">BDT</sapn>
+                        </h4>
+                        <a href="#">
+                          <button type="button" class="product__btn">
+                            Add To Cart
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="glide__slide">
+                  <div class="product">
+                    <div class="product__header">
+                      <img src="{% static 'home/images/ac2.png' %}" alt="" />
+                    </div>
+                    <div class="product__footer">
+                      <h3>Your AC Name</h3>
+                      <div class="rating">
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="./img/sprite.svg#icon-star-full"></use>
+                        </svg>
+                      </div>
+                      <div class="product__price">
+                        <h4>
+                          <sapn>25,000</sapn>
+                          <sapn style="margin-left: 4px">BDT</sapn>
+                        </h4>
+                        <a href="#">
+                          <button type="button" class="product__btn">
+                            Add To Cart
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="glide__arrows" data-glide-el="controls">
+              <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                <svg>
+                  <use xlink:href="{% static 'home/images/sprite.svg' %}#icon-arrow-left2"></use>
+                </svg>
+              </button>
+              <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                <svg>
+                  <use xlink:href="{% static 'home/images/sprite.svg' %}#icon-arrow-right2"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Service section -->
+      <section class="service">
+        <div class="title__container">
+          <div class="section__titles">
+            <h2 class="primary__title">Services</h2>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="grid-item">
+            <div class="card">
+              <img class="" src="./img/service (1).jpg" alt="service 1" />
+              <div class="card-content">
+                <h1 class="card-header">Service 1</h1>
+                <p class="card-text">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Nihil ex iure eius quaerat impedit nisi assumenda, iste
+                  alias libero distinctio suscipit sint? Molestiae, neque?
+                  Amet maxime labore eaque quisquam aut!
+                </p>
+                <button class="card-btn">
+                  Learn More
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="card">
+              <img class="" src="./img/service (2).jpg" alt="service 1" />
+              <div class="card-content">
+                <h1 class="card-header">Service 2</h1>
+                <p class="card-text">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Nihil ex iure eius quaerat impedit nisi assumenda, iste
+                  alias libero distinctio suscipit sint? Molestiae, neque?
+                  Amet maxime labore eaque quisquam aut!
+                </p>
+                <button class="card-btn">
+                  Learn More
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="card">
+              <img class="" src="./img/service (3).jpg" alt="service 1" />
+              <div class="card-content">
+                <h1 class="card-header">Service 3</h1>
+                <p class="card-text">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Nihil ex iure eius quaerat impedit nisi assumenda, iste
+                  alias libero distinctio suscipit sint? Molestiae, neque?
+                  Amet maxime labore eaque quisquam aut!
+                </p>
+                <button class="card-btn">
+                  Learn More
+                </button>
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>
+    </main>
+    <div class="service-box">
+    <div class="home_container">
+      <div class="textbtn__box-center">
+        <div class="service__bottom-textbtn">
+          <h3 class="text">find out more about our services and supports</h3>
+          <button href="#" class="btn btn-outline">Services</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- contact us section -->
+    <section class="contactUs">
+    <div class="home_container">
+      <div class="home-contact__grid">
+        <div class="home-contact__gridItem">
+          <div class="title__container">
+            <div class="section__titles right">
+              <h2 class="primary__title">Contact us</h2>
+            </div>
+          </div>
+          <p class="company__tag">Lorem ipsum dolor, sit amet consectetur</p>
+          <img src="./img/service (1).jpg" alt="Company Photo">
+          <h3 class="home__companyName">Company Name</h3>
+          <div class="contact__iconText">
+            <i class="fa fa-map-marker"></i>
+            <h3 class="a__text">the full address of the address</h3>
+          </div>
+          <div class="contact__iconText">
+            <i class="fas fa-phone-alt"></i>
+            <h3 class="a__text">+123456789</h3>
+          </div>
+        </div>
+        <div class="home-contact__gridItem">
+          <div class="home-form">
+            <div class="row100">
+              <div class="col">
+                <div class="inputBox">
+                  <input type="text" name="name" required>
+                  <span class="ftext">Name</span>
+                  <span class="line"></span>
+                </div>
+              </div>
+              <div class="col">
+                <div class="inputBox">
+                  <input type="email" name="email" required>
+                  <span class="ftext">Email</span>
+                  <span class="line"></span>
+                </div>
+              </div>
+              <div class="col">
+                <div class="inputBox textarea">
+                  <textarea required></textarea>
+                  <span class="ftext">Your Message</span>
+                  <span class="line"></span>
+                </div>
+              </div>
+              <input type="submit" value="submit">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% include "home/footer.html" %}
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}

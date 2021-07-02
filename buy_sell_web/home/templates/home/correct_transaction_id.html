@@ -1,0 +1,415 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ user.first_name }} {{ user.last_name }}'s Dashboard</title>
+
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/style_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style3.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css' %}">
+
+
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170171654-1 "></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-170171654-1 ');
+    </script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Page Content  -->
+        <div id="contain" style = "background-color: #f3f5f9; color: #717171;">
+            <main role="main" style="min-height: 100vh;">
+                {% if order.sent_from == 'btcusd' %}
+                        <div class = "money_ex_form" style = "background-color: #ffffff; border-radius: 10px">
+
+                             <form method="post" novalidate>
+                                  {% csrf_token %}
+
+
+                                 <div class="form-group" style="text-align:center">
+                                     <a style="font-size: 20px; color:#000">Order ID: {{ order.belonging_order_id }}</a>
+                                     <br>
+                                     <a style="font-size: 17px; color:#000">
+                                         {% if order.sent_from == 'btcusd'  %}
+                                                Upload Receiver's ID
+                                            {% else %}
+                                                Upload Transaction ID
+                                            {% endif %}
+                                         </a>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md">
+                                        <ul style="list-style-type:none; margin: 0; padding: 0;">
+                                            <li>
+                                                <div style="float:left">
+                                                  <div style="text-align:left; float: right; margin-left: 20px;">
+                                                      <div>
+                                                          <a class="history_a1" style="font-weight: 600; color: black;">Send</a>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                                <div style="float:right;">
+                                                  <div style="text-align:right; float: left; margin-right: 20px;">
+                                                      <div>
+                                                          <a class="history_a1" style="font-weight: 600; color: black;">Receive</a>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                          </li>
+                                        </ul>
+                                    </div>
+                                 </div>
+                                 <hr>
+                                 <div class="form-row">
+                                       <div class="col-md">
+                                            <ul style="list-style-type:none; margin: 0; padding: 0;">
+                                                <li>
+                                                    <div style="float:left">
+                                                      <div style="float: left;">
+                                                          <img class="history_im1" style="background-color: #fff; margin-top: 8px;" src="{% get_static_prefix %}home/images/{{order.sent_from}}_round.png">
+                                                      </div>
+                                                      <div style="text-align:left; float: right; margin-left: 20px;">
+                                                          <div>
+                                                              <a class="history_a2" style="font-weight: 600; color: black;">
+                                                                  {% if order.sent_from == 'btcusd' %}
+                                                                    Bitcoin
+                                                                  {% else %}
+                                                                    {{ order.sent_from }}
+                                                                  {% endif %}
+                                                              </a>
+                                                          </div>
+                                                          <div>
+                                                              <a class="history_a1" style="font-weight: 600; color: black;">{{ order.sent_amount }} {{ order.send_unit }}</a>
+                                                          </div>
+                                                      </div>
+                                                    </div>
+                                                    <div style="float:right;">
+                                                      <div style="float: right;">
+                                                          <img class="history_im1" style="background-color: #fff; margin-top: 8px;" src="{% get_static_prefix %}home/images/{{order.receive_at}}_round.png">
+                                                      </div>
+                                                      <div style="text-align:right; float: left; margin-right: 20px;">
+                                                          <div>
+                                                              <a class="history_a2" style="font-weight: 600; color: black;">
+                                                                  {% if order.receive_at == 'btcusd' %}
+                                                                    Bitcoin
+                                                                  {% else %}
+                                                                    {{ order.receive_at }}
+                                                                  {% endif %}
+                                                              </a>
+                                                          </div>
+                                                          <div>
+                                                              <a class="history_a1" style="font-weight: 600; color: black;">{{ order.to_be_sent }} {{ order.rcv_unit }}</a>
+                                                          </div>
+                                                      </div>
+                                                    </div>
+                                              </li>
+                                            </ul>
+                                        </div>
+                                 </div>
+                                 <hr>
+                                    {% render_field form3.belonging_order_id class="form-control" value=order.id style="visibility: hidden; height: 5px; width: 5px" %}
+                                 <div class="form-group" style="text-align: center;">
+                                     <a style="color: #000; font-size: 12px">
+                                         The transaction ID you have sent before has not been matched with any of the transaction ID of our accounts.
+                                         If you have not sent money yet please send money to any of the following account(s).
+                                        If you think that the Transaction ID("{{ order.trx_id }}") you provided was right you can contact us via phone or email.
+                                     </a>
+                                 </div>
+
+                                 <div class="form-group classWithPad">
+                                                {% render_field form3.correct_trx_id class="form-control" placeholder="Correct Trx ID" %}
+                                 </div>
+
+                                   <div class="form-group classWithPad" style="align: center">
+                                    <button class="form-control" type="submit">Upload</button>
+
+                                   </div>
+
+                                </form>
+                        </div>
+                        {% else %}
+                        <div class = "money_ex_form" style = "background-color: #ffffff; border-radius: 10px">
+
+                             <form method="post" novalidate>
+                                  {% csrf_token %}
+
+
+                                 <div class="form-group" style="text-align:center">
+                                     <a style="font-size: 20px; color:#000">Order ID: {{ order.belonging_order_id }}</a>
+                                     <br>
+                                     <a style="font-size: 17px; color:#000">
+                                         {% if order.sent_from == 'btcusd'  %}
+                                                Upload Receiver's ID
+                                            {% else %}
+                                                Upload Transaction ID
+                                            {% endif %}
+                                         </a>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md">
+                                        <ul style="list-style-type:none; margin: 0; padding: 0;">
+                                            <li>
+                                                <div style="float:left">
+                                                  <div style="text-align:left; float: right; margin-left: 20px;">
+                                                      <div>
+                                                          <a class="history_a1" style="font-weight: 600; color: black;">Send</a>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                                <div style="float:right;">
+                                                  <div style="text-align:right; float: left; margin-right: 20px;">
+                                                      <div>
+                                                          <a class="history_a1" style="font-weight: 600; color: black;">Receive</a>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                          </li>
+                                        </ul>
+                                    </div>
+                                 </div>
+                                 <hr>
+                                 <div class="form-row">
+                                     <div class="col-md">
+                                            <ul style="list-style-type:none; margin: 0; padding: 0;">
+                                                <li>
+                                                    <div style="float:left">
+                                                      <div style="float: left;">
+                                                          <img class="history_im1" style="background-color: #fff; margin-top: 8px;" src="{% get_static_prefix %}home/images/{{order.sent_from}}_round.png">
+                                                      </div>
+                                                      <div style="text-align:left; float: right; margin-left: 20px;">
+                                                          <div>
+                                                              <a class="history_a2" style="font-weight: 600; color: black;">
+                                                                  {% if order.sent_from == 'btcusd' %}
+                                                                    Bitcoin
+                                                                  {% else %}
+                                                                    {{ order.sent_from }}
+                                                                  {% endif %}
+                                                              </a>
+                                                          </div>
+                                                          <div>
+                                                              <a class="history_a1" style="font-weight: 600; color: black;">{{ order.sent_amount }} {{ order.send_unit }}</a>
+                                                          </div>
+                                                      </div>
+                                                    </div>
+                                                    <div style="float:right;">
+                                                      <div style="float: right;">
+                                                          <img class="history_im1" style="background-color: #fff; margin-top: 8px;" src="{% get_static_prefix %}home/images/{{order.receive_at}}_round.png">
+                                                      </div>
+                                                      <div style="text-align:right; float: left; margin-right: 20px;">
+                                                          <div>
+                                                              <a class="history_a2" style="font-weight: 600; color: black;">
+                                                                  {% if order.receive_at == 'btcusd' %}
+                                                                    Bitcoin
+                                                                  {% else %}
+                                                                    {{ order.receive_at }}
+                                                                  {% endif %}
+                                                              </a>
+                                                          </div>
+                                                          <div>
+                                                              <a class="history_a1" style="font-weight: 600; color: black;">{{ order.to_be_sent }} {{ order.rcv_unit }}</a>
+                                                          </div>
+                                                      </div>
+                                                    </div>
+                                              </li>
+                                            </ul>
+                                     </div>
+                                 </div>
+                                 <hr>
+                                    {% render_field form3.belonging_order_id class="form-control" value=order.id style="visibility: hidden; height: 5px; width: 5px" %}
+                                 <div class="form-group" style="text-align: center;">
+                                     <a style="color: #000; font-size: 12px">
+                                         The transaction ID you have sent before has not been matched with any of the transaction ID of our accounts.
+                                         If you have not sent money yet please send money to any of the following account(s).
+                                        If you think that the Transaction ID("{{ order.trx_id }}") you provided was right you can contact us via phone or email.
+                                     </a>
+                                 </div>
+
+                                 <div class="form-group classWithPad">
+                                                {% render_field form3.correct_trx_id class="form-control" placeholder="Correct Trx ID" %}
+                                        </div>
+
+                                   <div class="form-group classWithPad" style="align: center">
+                                    <button class="form-control" type="submit">Upload</button>
+
+                                   </div>
+
+                                </form>
+                        </div>
+                {% endif %}
+            </main>
+            <nav class="navbar navbar-expand-lg" style="background-color: #7386D5">
+                <div class="container-fluid">
+
+                    <!-- <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" >
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button> -->
+                    <a class="navbar-brand mr-4" href="{% url 'home' %}">ExonTime</a>
+
+
+                    <div>
+
+                                <a class="nav-item nav-link" href="{% url 'dashboard' %}">My Account</a>
+
+                    </div>
+                </div>
+            </nav>
+            <footer style="background-color:#373737;" id="footer" class="foot">
+                <div class="container" style="text-align: center; padding-top: 15px;">
+                    <p style="color:#FFFFFF" ><strong>Copyright &copy; 2020 ExonTime </strong></p>
+                </div>
+            </footer>
+         </div>
+    </div>
+
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+    <!-- Popper.JS -->
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.js' %}"></script>
+
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <!-- You can alternatively load the minified version -->
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#content, .foot, .foot2').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+
+    </script>
+
+
+
+
+
+  <script type="text/javascript">
+
+      function DropDown(el) {
+          this.dd = el;
+          this.placeholder = this.dd.children('span');
+          this.opts = this.dd.find('ul.dropdown > li');
+          this.val = '';
+          this.index = -1;
+          this.initEvents();
+      }
+      DropDown.prototype = {
+          initEvents : function() {
+              var obj = this;
+
+              obj.dd.on('click', function(event){
+                  $(this).toggleClass('active');
+                  return false;
+              });
+
+              obj.opts.on('click',function(){
+                  var opt = $(this);
+                  obj.val = opt.text();
+                  obj.index = opt.index();
+                  obj.placeholder.text(obj.val);
+                  document.getElementById("in1").value = obj.val;
+              });
+          },
+          getValue : function() {
+              return this.val;
+          },
+          getIndex : function() {
+              return this.index;
+          }
+      }
+
+      $(function() {
+
+          var dd = new DropDown( $('#dd') );
+
+          $(document).click(function() {
+              // all dropdowns
+              $('.wrapper-dropdown-3').removeClass('active');
+          });
+
+      });
+
+  </script>
+<script type="text/javascript">
+        function idleTimer() {
+            var t;
+            window.onload = resetTimer;
+            //window.onmousemove = resetTimer;
+            //window.onmousedown = resetTimer;
+            window.onclick = resetTimer;
+            window.onscroll = resetTimer;
+            window.onkeypress = resetTimer;
+
+            function logout() {
+                window.location.href = "{% url 'logout' %}";
+            }
+
+           function reload() {
+                  window.location = self.location.href;
+           }
+
+           function resetTimer() {
+                clearTimeout(t);
+                t = setTimeout(logout, 1800000);
+                //t= setTimeout(reload, 300000);
+            }
+        }
+        {% if user.is_authenticated %}
+        idleTimer();
+        {% endif %}
+    </script>
+</body>
+
+</html>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5eaebdd910362a7578be90c0/1e7fdbpi0';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->

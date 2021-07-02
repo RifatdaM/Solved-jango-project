@@ -1,0 +1,216 @@
+    <div id="scroll_here" style="text-align:center;">
+        <div id="payment_div" style="text-align:center; margin-bottom: 1px; margin-top: 40px;">
+            <a style="font-size: 30px; font-weight: 600; color: black;">Price: </a>
+            <a style="font-size: 30px; font-weight: 600; color: black;" id = "amount">
+            </a>
+            <a style="font-size: 30px; font-weight: 600; color: black;">USD</a>
+            <br>
+            <a style="font-size: 16px; font-weight: 400; color: black;">(Including Tax.)</a>
+            <br>
+            <br>
+        </div>
+        <div id="enter_promo" style="display: none;">
+            <form>
+                <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+                    <input value="" placeholder="Promo Code" type="text" class="form-control" id="promo_code_field" style="height: 40px; font-size: 24px; width: 100%; border-radius: 4px;">
+                </div>
+                <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+                    <a class="how-btn" style="color: white;" onclick="set_amount_after_promo();">Apply Promo Code</a>
+                    <style>.how-btn {background-color: #004385;margin-left: 8px;margin-right: 8px;transition-duration: 0.4s;padding-top: 8px;padding-bottom: 8px;font-weight: 300;font-size: 14px;padding-left: 8px;padding-right: 8px;border-radius: 4px;cursor: pointer;}.how-btn:hover {background-color: #004385;margin-left: 0px;margin-right: 0px;}</style>
+                </div>
+            </form>
+        </div>
+        <div id="payment_div_promo" style="text-align:center; margin-bottom: 20px; margin-top: 20px; display: none;">
+            <a style="font-size: 30px; font-weight: 600; color: black;">Net Payable: </a>
+            <a style="font-size: 30px; font-weight: 600; color: black;" id = "amount_promo"></a>
+            <a style="font-size: 30px; font-weight: 600; color: black;">USD</a>
+            <br>
+            <a style="font-size: 16px; font-weight: 400; color: black;">(Applying Promo Code)</a>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div>
+        <div id="paypal-button-container"></div>
+        <script src="https://www.paypal.com/sdk/js?client-id=Ac88B5nxAb6PKjQ1kWr_xt7UgxOye1b7e9nGSXXrNnSNmYwW_Io2R7ZHbDN95l_24C9D2_Xcc5--gT7t"></script>
+    </div>
+
+    <script>
+             var subs_pos = 0;
+             function set_amount(amnt){
+                 var amount;
+                 amount = amnt;
+                 document.getElementById("amount").innerHTML = amount;
+                 document.body.querySelector('#payment_div').style.display = 'block';
+                 document.body.querySelector('#paypal-button-container').style.display = 'block';
+                 document.body.querySelector('#close_btn').style.display = 'block';
+                 var code = document.getElementById("adj_c_2").innerHTML;
+                 if(code.length>0){
+                     document.body.querySelector('#enter_promo').style.display = 'block';
+                 }
+                 var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+                 var top = document.getElementById("scroll_here").getBoundingClientRect().top;
+                 subs_pos = scrollTop;
+                 window.scroll({
+                     top: top+scrollTop-100,
+                     left: 0,
+                     behavior: 'smooth'
+                 });
+             }
+             function set_amount_after_promo(){
+                 var orig_code;
+                 orig_code = document.getElementById("adj_c_2").innerHTML;
+                 var code_input;
+                 code_input = document.getElementById("promo_code_field").value;
+                 var or_price = document.getElementById("amount").innerHTML;
+                 dis = document.getElementById("dis_"+or_price).innerHTML;
+                 if(code_input == orig_code){
+                     document.getElementById("amount_promo").innerHTML = or_price - dis;
+                     document.body.querySelector('#payment_div_promo').style.display = 'block';
+                 }
+
+             }
+    </script>
+    <script>
+             function close_paypal(){
+                 document.body.querySelector('#payment_div').style.display = 'none';
+                 document.body.querySelector('#paypal-button-container').style.display = 'none';
+                 document.body.querySelector('#close_btn').style.display = 'none';
+                 document.body.querySelector('#payment_div_promo').style.display = 'none';
+                 document.body.querySelector('#enter_promo').style.display = 'none';
+                 window.scroll({
+                     top: subs_pos,
+                     left: 0,
+                     behavior: 'smooth'
+                 });
+             }
+    </script>
+
+    <script>
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          // This function sets up the details of the transaction, including the amount and line item details.
+          var code = document.getElementById("amount_promo").innerHTML;
+          var price;
+          if(code){
+              price = code;
+          }
+          else {
+              price = document.getElementById("amount").innerHTML;
+          }
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: price
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          // This function captures the funds from the transaction.
+          return actions.order.capture().then(function(details) {
+            // This function shows a transaction success message to your buyer.
+            alert('Transaction completed by ' + details.payer.name.given_name);
+          });
+        }
+      }).render('#paypal-button-container');
+      document.body.querySelector('#paypal-button-container').style.display = 'none';
+      document.body.querySelector('#payment_div').style.display = 'none';
+      document.body.querySelector('#close_btn').style.display = 'none';
+      document.body.querySelector('#enter_promo').style.display = 'none';
+      document.body.querySelector('#payment_div_promo').style.display = 'none';
+      //This function displays Smart Payment Buttons on your web page.
+    </script>
+
+
+<div id="adj_c_2" style="visibility: hidden; display: none;">QWASZXERDFCV1234</div>
+    <div id="dis_55" style="visibility: hidden; display: none;">10</div>
+    <div id="dis_88" style="visibility: hidden; display: none;">15</div>
+    <div id="dis_110" style="visibility: hidden; display: none;">15</div>
+    <div id="dis_197" style="visibility: hidden; display: none;">20</div>
+    <div id="dis_275" style="visibility: hidden; display: none;">30</div>
+
+
+
+
+
+
+
+
+    <!--<div id="scroll_here" style="text-align:center;">
+        <div id="payment_div" style="text-align:center; margin-bottom: 40px; margin-top: 40px;">
+            <a style="font-size: 30px; font-weight: 600; color: black;">Pay </a>
+            <a style="font-size: 30px; font-weight: 600; color: black;" id = "amount">
+            </a>
+            <a style="font-size: 30px; font-weight: 600; color: black;">USD</a>
+            <br>
+            <a style="font-size: 16px; font-weight: 400; color: black;">(Including Tax.)</a>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div>
+        <div id="paypal-button-container"></div>
+        <script src="https://www.paypal.com/sdk/js?client-id=Ac88B5nxAb6PKjQ1kWr_xt7UgxOye1b7e9nGSXXrNnSNmYwW_Io2R7ZHbDN95l_24C9D2_Xcc5--gT7t"></script>
+    </div>
+
+    <script>
+             var subs_pos = 0;
+             function set_amount(amnt){
+                 var amount;
+                 amount = amnt;
+                 document.getElementById("amount").innerHTML = amount;
+                 document.body.querySelector('#payment_div').style.display = 'block';
+                 document.body.querySelector('#paypal-button-container').style.display = 'block';
+                 document.body.querySelector('#close_btn').style.display = 'block';
+                 var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+                 var top = document.getElementById("scroll_here").getBoundingClientRect().top;
+                 subs_pos = scrollTop;
+                 window.scroll({
+                     top: top+scrollTop-100,
+                     left: 0,
+                     behavior: 'smooth'
+                 });
+             }
+    </script>
+    <script>
+             function close_paypal(){
+                 document.body.querySelector('#payment_div').style.display = 'none';
+                 document.body.querySelector('#paypal-button-container').style.display = 'none';
+                 document.body.querySelector('#close_btn').style.display = 'none';
+                 window.scroll({
+                     top: subs_pos,
+                     left: 0,
+                     behavior: 'smooth'
+                 });
+             }
+    </script>
+
+    <script>
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          // This function sets up the details of the transaction, including the amount and line item details.
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: document.getElementById("amount").innerHTML
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          // This function captures the funds from the transaction.
+          return actions.order.capture().then(function(details) {
+            // This function shows a transaction success message to your buyer.
+            alert('Transaction completed by ' + details.payer.name.given_name);
+          });
+        }
+      }).render('#paypal-button-container');
+      document.body.querySelector('#paypal-button-container').style.display = 'none';
+      document.body.querySelector('#payment_div').style.display = 'none';
+      document.body.querySelector('#close_btn').style.display = 'none';
+      //This function displays Smart Payment Buttons on your web page.
+    </script>-->
+

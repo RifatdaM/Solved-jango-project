@@ -1,0 +1,1094 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ user.first_name }} {{ user.last_name }}'s Dashboard</title>
+
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css' %}">
+
+
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a href = "{% url 'home' %}" style="text-align: center"><h3>ExonTime</h3></a>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>Dashboard</p>
+                <li>
+                    <a href="{% url 'home' %}">Exchange Now</a>
+                </li>
+                <li class="active">
+                    <!-- <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a> -->
+                    <a href="{% url 'dashboard' %}">Home</a>
+                    <!-- <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul> -->
+                </li>
+                <li>
+                    <a href="{% url 'exchange_rate' %}">Exchange rates</a>
+                </li>
+                <li>
+                    <a href="{% url 'order_history' %}">Completed transactions</a>
+                </li>
+                <li>
+                    <a href="{% url 'contact_us' %}">Contact Us/ Help</a>
+                </li>
+                <li>
+                    <a href="#">Tutorial</a>
+                </li>
+                <li>
+                    <a href="{% url 'pending_order' %}">Pending orders</a>
+                </li>
+                <li>
+                    <a href="{% url 'track_order' %}">Track Your Order</a>
+                </li>
+                <li>
+                    <a href="{% url 'settings' %}">Settings</a>
+                    <!-- <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Settings</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Profile</a>
+                        </li>
+                        <li>
+                            <a href="#">Address</a>
+                        </li>
+                    </ul> -->
+                </li>
+            </ul>
+
+            <!-- <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="" class="download"></a>
+                </li>
+                <li>
+                    <a href="" class="article"></a>
+                </li>
+            </ul> -->
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" style = "background-color: #f3f5f9; color: #717171">
+
+
+            {% if profile_info.address|length == 0 %}
+                <div style="background-color: #406080; padding: 10px; border-radius: 10px; text-align: center; margin-bottom: 8px">
+                          <a href="{% url 'address' %}" style="color: #fff">Your account is now limited, please provide requird information to get full access. Click here to provide information.</a>
+                </div>
+                {% endif %}
+            {% if profile_info.profile_status == 'not_verified' %}
+                <div style="background-color: #406080; padding: 10px; border-radius: 10px; text-align: center; margin-bottom: 8px">
+                          <a href="{% url 'doc_upload' %}" style="color: #fff">Your account is now limited, please provide requird document to get full access. Click here to upload document.</a>
+                </div>
+                {% endif %}
+            <main role="main">
+                <div class="row" id="replace_it" style="min-height: 100vh;">
+                    <div class="col-md">
+            {% for t_id in invalid_trx_id %}
+
+                        <div class = "money_ex_form" style = "background-color: #fc4041; border-radius: 10px">
+
+                             <form method="post" novalidate>
+                                  {% csrf_token %}
+
+
+                                 <div class="form-group" style="text-align:center">
+                                     <a style="font-size: 20px; color:#fff">Order ID: {{ t_id.belonging_order_id }}</a>
+                                     <br>
+                                     <a style="font-size: 17px; color:#fff">You uploaded wrong transaction ID, please provide the correct one.</a>
+                                 </div>
+                                 <div class="form-row">
+                                      <div class="form-col col-md classWithPad" style="text-align: center">
+
+                                          <div class="form-group">
+
+                                              <a style="font-size: 15px; color:#fff">Sent from: {% if t_id.sent_from == 'skrill' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/skrill.png' %}"></div>
+                                                {% elif t_id.sent_from == 'neteller' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/neteller.png' %}"></div>
+                                                {% elif t_id.sent_from == 'paypal' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/paypal.png' %}"></div>
+                                                {% elif t_id.sent_from == 'bkash' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/bkash.png' %}"></div>
+                                                {% elif t_id.sent_from == 'payoneer' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/payoneer.png' %}"></div>
+                                                  {% elif t_id.sent_from == 'btcusd' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/btcusd.png' %}"></div>
+                                                {% endif %}</a>
+
+                                          </div>
+
+                                          <!-- <div class="mx-auto" style="height: 10px;"></div> -->
+
+                                          <div class="form-group">
+
+
+                                                <a style="font-size: 15px; color:#fff">Amount: {{ t_id.sent_amount }} {{ t_id.send_unit }}</a>
+                                          <!-- <input type="text" class="form-control" id="from" style="visibility: hidden; height: 5px"> -->
+                                        </div>
+
+
+                                      </div>
+                                     <div class="mx-auto" style="width: 5px;">
+                                        </div>
+
+                                     <div class="form-col col-md classWithPad" style="text-align: center">
+                                         <div class="form-group">
+
+                                             <a style="font-size: 15px; color:#fff">Receive at: {% if t_id.receive_at == 'skrill' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/skrill.png' %}"></div>
+                                                {% elif t_id.receive_at == 'neteller' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/neteller.png' %}"></div>
+                                                {% elif t_id.receive_at == 'paypal' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/paypal.png' %}"></div>
+                                                {% elif t_id.receive_at == 'bkash' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/bkash.png' %}"></div>
+                                                {% elif t_id.receive_at == 'payoneer' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/payoneer.png' %}"></div>
+                                                 {% elif t_id.receive_at == 'btcusd' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/btcusd.png' %}"></div>
+                                                {% endif %}</a>
+                                         </div>
+
+
+                                         <!-- <div class="mx-auto" style="height: 10px;"></div> -->
+                                         <div class="form-group">
+
+                                            <a style="font-size: 15px; color:#fff">Amount: {{ t_id.to_be_sent }} {{ t_id.rcv_unit }}</a>
+
+                                          <!-- <input type="text" class="form-control" id="to" style="visibility: hidden; height: 5px"> -->
+                                        </div>
+
+                                      </div>
+                                 </div>
+
+                                 <div class="form-group" style="text-align: center">
+
+                                     <a style="color: #fff; font-size: 12px">The transaction ID you have sent before has not been matched with any of the transaction ID of our accounts.
+                                         If you have not sent money yet please send money to any of the following account(s).
+                                     If you think that the Transaction ID("{{ t_id.trx_id }}") you provided was right you can contact us via phone or email.</a>
+                                     <br>
+                                     {% for id in av_ids %}
+                                        {% if id.title == t_id.sent_from %}
+                                                {% if id.state == 'active' %}
+                                                    <img style="height: 20px; width: 20px;" src="{% static 'home/images/arrow_acc.png' %}">
+                                                    <a style="color: #000; font-size: 12px">{{ id.address }}</a>
+                                                    <br>
+                                                {% endif %}
+                                        {% endif %}
+                                     {% endfor %}
+                                 </div>
+
+
+
+                                 <div class="form-group classWithPad">
+                                          {% render_field form3.correct_trx_id class="form-control" placeholder="Transaction ID" %}
+
+                                        </div>
+                                     <div class="form-group">
+
+                                     {% render_field form3.belonging_order_id value=t_id.id class="form-control" style="visibility: hidden; height: 5px; width: 5px" %}
+                                        </div>
+
+                                   <div class="form-group classWithPad" style="align: center">
+                                    <button class="form-control" type="submit">Upload</button>
+
+                                   </div>
+
+                                </form>
+                        </div>
+                        {% endfor %}
+
+
+
+                        {% for order in orders %}
+                        {% if order.sent_from == 'btcusd' %}
+                        <div class = "money_ex_form" style = "background-color: #77aa66; border-radius: 10px">
+
+                             <form method="post" novalidate>
+                                  {% csrf_token %}
+
+
+                                 <div class="form-group" style="text-align:center">
+                                     <a style="font-size: 20px; color:#fff">Order ID: {{ order.id }}</a>
+                                     <br>
+                                     <a style="font-size: 17px; color:#fff">
+                                         {% if order.sent_from == 'btcusd'  %}
+                                                Upload Receiver's ID
+                                            {% else %}
+                                                Upload Transaction ID
+                                            {% endif %}
+                                         </a>
+                                 </div>
+                                 <div class="form-row">
+                                      <div class="form-col col-md classWithPad" style="text-align: center">
+
+                                          <div class="form-group">
+
+                                              <a style="font-size: 15px; color:#fff">Sent form: {% if order.sent_from == 'skrill' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/skrill.png' %}"></div>
+                                                {% elif order.sent_from == 'neteller' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/neteller.png' %}"></div>
+                                                {% elif order.sent_from == 'paypal' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/paypal.png' %}"></div>
+                                                {% elif order.sent_from == 'bkash' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/bkash.png' %}"></div>
+                                                {% elif order.sent_from == 'payoneer' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/payoneer.png' %}"></div>
+                                                {% elif order.sent_from == 'btcusd' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/btcusd.png' %}"></div>
+                                                {% endif %}</a>
+
+                                          </div>
+
+                                          <!-- <div class="mx-auto" style="height: 10px;"></div> -->
+
+                                          <div class="form-group">
+
+
+                                                <a style="font-size: 15px; color:#fff">Amount: {{ order.sent_amount }} {{ order.send_unit }}</a>
+                                          <!-- <input type="text" class="form-control" id="from" style="visibility: hidden; height: 5px"> -->
+                                        </div>
+
+                                                {% render_field form4.belonging_order_id class="form-control" value=order.id style="visibility: hidden; height: 5px; width: 5px" %}
+                                              <!-- <input type="text" class="form-control" id="from" style="visibility: hidden; height: 5px"> -->
+
+
+                                      </div>
+                                     <div class="mx-auto" style="width: 5px;">
+                                        </div>
+
+                                     <div class="form-col col-md classWithPad" style="text-align: center">
+                                         <div class="form-group">
+
+                                             <a style="font-size: 15px; color:#fff">Receive at: {% if order.receive_at == 'skrill' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/skrill.png' %}"></div>
+                                                {% elif order.receive_at == 'neteller' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/neteller.png' %}"></div>
+                                                {% elif order.receive_at == 'paypal' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/paypal.png' %}"></div>
+                                                {% elif order.receive_at == 'bkash' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/bkash.png' %}"></div>
+                                                {% elif order.receive_at == 'payoneer' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/payoneer.png' %}"></div>
+                                                 {% elif order.receive_at == 'btcusd' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/btcusd.png' %}"></div>
+                                                {% endif %}</a>
+                                         </div>
+
+
+                                         <!-- <div class="mx-auto" style="height: 10px;"></div> -->
+                                         <div class="form-group">
+
+                                            <a style="font-size: 15px; color:#fff">Amount: {{ order.to_be_sent }} {{ order.rcv_unit }}</a>
+
+                                          <!-- <input type="text" class="form-control" id="to" style="visibility: hidden; height: 5px"> -->
+                                        </div>
+
+                                      </div>
+                                 </div>
+
+                                 <div class="form-group" style="text-align: center">
+                                     {% if order.sent_from == 'btcusd'  %}
+                                     <a style="color: #fff">Our {{ order.sent_from }} wallet address will be sent to your email. please send btc to that wallet address. We will complete your transaction after
+                                     we receive at least one confirmaton. </a>
+                                     {% else %}
+                                     <a style="color: #fff; font-size: 12px">Our {{ order.sent_from }} account(s) is/are shown below. You can send money to any of the
+                                         following account(s). Please provide the transaction ID after sending money.</a>
+                                     {% endif %}
+                                     <br>
+                                     {% for id in av_ids %}
+                                        {% if id.title == order.sent_from %}
+                                                {% if id.state == 'active' %}
+                                                    <img style="height: 20px; width: 20px;" src="{% static 'home/images/arrow_acc.png' %}">
+                                                    <a style="color: #000; font-size: 12px">{{ id.address }}</a>
+                                                    <br>
+                                                {% endif %}
+                                        {% endif %}
+                                     {% endfor %}
+                                 </div>
+
+                                 <div class="form-group classWithPad">
+                                          {% render_field form4.rcv_acount class="form-control" placeholder="Receiving account name/No" %}
+                                        </div>
+
+                                   <div class="form-group classWithPad" style="align: center">
+                                    <button class="form-control" type="submit">Upload</button>
+
+                                   </div>
+
+                                </form>
+                        </div>
+                        {% else %}
+                        <div class = "money_ex_form" style = "background-color: #77aa66; border-radius: 10px">
+
+                             <form method="post" novalidate>
+                                  {% csrf_token %}
+
+
+                                 <div class="form-group" style="text-align:center">
+                                     <a style="font-size: 20px; color:#fff">Order ID: {{ order.id }}</a>
+                                     <br>
+                                     <a style="font-size: 17px; color:#fff">
+                                         {% if order.sent_from == 'btcusd'  %}
+                                                Upload Receiver's ID
+                                            {% else %}
+                                                Upload Transaction ID
+                                            {% endif %}
+                                         </a>
+                                 </div>
+                                 <div class="form-row">
+                                      <div class="form-col col-md classWithPad" style="text-align: center">
+
+                                          <div class="form-group">
+
+                                              <a style="font-size: 15px; color:#fff">Sent form: {% if order.sent_from == 'skrill' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/skrill.png' %}"></div>
+                                                {% elif order.sent_from == 'neteller' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/neteller.png' %}"></div>
+                                                {% elif order.sent_from == 'paypal' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/paypal.png' %}"></div>
+                                                {% elif order.sent_from == 'bkash' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/bkash.png' %}"></div>
+                                                {% elif order.sent_from == 'payoneer' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/payoneer.png' %}"></div>
+                                                {% elif order.sent_from == 'btcusd' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/btcusd.png' %}"></div>
+                                                {% endif %}</a>
+
+                                          </div>
+
+                                          <!-- <div class="mx-auto" style="height: 10px;"></div> -->
+
+                                          <div class="form-group">
+
+
+                                                <a style="font-size: 15px; color:#fff">Amount: {{ order.sent_amount }} {{ order.send_unit }}</a>
+                                          <!-- <input type="text" class="form-control" id="from" style="visibility: hidden; height: 5px"> -->
+                                        </div>
+
+                                                {% render_field form2.belonging_order_id class="form-control" value=order.id style="visibility: hidden; height: 5px; width: 5px" %}
+                                              <!-- <input type="text" class="form-control" id="from" style="visibility: hidden; height: 5px"> -->
+
+
+                                      </div>
+                                     <div class="mx-auto" style="width: 5px;">
+                                        </div>
+
+                                     <div class="form-col col-md classWithPad" style="text-align: center">
+                                         <div class="form-group">
+
+                                             <a style="font-size: 15px; color:#fff">Receive at: {% if order.receive_at == 'skrill' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/skrill.png' %}"></div>
+                                                {% elif order.receive_at == 'neteller' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/neteller.png' %}"></div>
+                                                {% elif order.receive_at == 'paypal' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/paypal.png' %}"></div>
+                                                {% elif order.receive_at == 'bkash' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/bkash.png' %}"></div>
+                                                {% elif order.receive_at == 'payoneer' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 100px; background-color: #fff" src="{% static 'home/images/payoneer.png' %}"></div>
+                                                 {% elif order.receive_at == 'btcusd' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 45px; width: 130px; background-color: #fff" src="{% static 'home/images/btcusd.png' %}"></div>
+                                                {% endif %}</a>
+                                         </div>
+
+
+                                         <!-- <div class="mx-auto" style="height: 10px;"></div> -->
+                                         <div class="form-group">
+
+                                            <a style="font-size: 15px; color:#fff">Amount: {{ order.to_be_sent }} {{ order.rcv_unit }}</a>
+
+                                          <!-- <input type="text" class="form-control" id="to" style="visibility: hidden; height: 5px"> -->
+                                        </div>
+
+                                      </div>
+                                 </div>
+
+                                 <div class="form-group" style="text-align: center">
+                                     {% if order.sent_from == 'btcusd'  %}
+                                     <a style="color: #fff">Our {{ order.sent_from }} wallet address will be sent to your email. please send btc to that wallet address. We will complete your transaction after
+                                     we receive at least one confirmaton. </a>
+                                     {% else %}
+                                     <a style="color: #fff; font-size: 12px">Our {{ order.sent_from }} account(s) is/are shown below. You can send money to any of the
+                                         following account(s). Please provide the transaction ID after sending money.</a>
+                                     {% endif %}
+                                     <br>
+                                     {% for id in av_ids %}
+                                        {% if id.title == order.sent_from %}
+                                                {% if id.state == 'active' %}
+                                                    <img style="height: 20px; width: 20px;" src="{% static 'home/images/arrow_acc.png' %}">
+                                                    <a style="color: #000; font-size: 12px">{{ id.address }}</a>
+                                                    <br>
+                                                {% endif %}
+                                        {% endif %}
+                                     {% endfor %}
+                                 </div>
+
+                                 <div class="form-group classWithPad">
+                                                {% render_field form2.send_acount class="form-control" placeholder="sender account no/email" %}
+                                        </div>
+
+                                 <div class="form-group classWithPad">
+                                                {% render_field form2.trx_id class="form-control" placeholder="Transaction ID" %}
+                                        </div>
+                                 <div class="form-group classWithPad">
+                                          {% render_field form2.rcv_acount class="form-control" placeholder="Receiving account name/No" %}
+                                        </div>
+
+                                   <div class="form-group classWithPad" style="align: center">
+                                    <button class="form-control" type="submit">Upload</button>
+
+                                   </div>
+
+                                </form>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        <div class = "money_ex_form" style = "background-color: #99aacc; border-radius: 10px">
+
+                             <form method="post" novalidate>
+                                  {% csrf_token %}
+                                 <div class="form-group" style="text-align:center"><a style="font-size: 25px; color:#fff">Money Exchange</a></div>
+                                 <div class="form-row">
+                                      <div class="form-col col-md classWithPad">
+                                          <div class="form-group" style="text-align:center"><a style="font-size: 25px; color:#fff">Send</a></div>
+                                          <div class="form-group" style="text-align:center">
+                                              <img id="send_img" style="height: 45px; width: 120px; background-color:#fff" src="">
+                                          </div>
+                                          <div class="form-group">
+                                            <!--<select class="form-control form-control-lg" id="from_select" onchange="refreshOrderForm1()">
+                                                <option value="paypal">Paypal</option>
+                                                <option value="payoneer">Payoneer</option>
+                                                <option value="skrill">Skrill</option>
+                                                <option value="neteller">Neteller</option>
+                                                <option value="bkash">Bkash</option>
+                                                <option value="btcusd">BTC USD</option>
+                                            </select>-->
+                                              {% render_field form.sent_from id="from_select" class="form-control" style="height: 50px; font-size: 22px;" onchange="refreshOrderForm1()" %}
+                                          </div>
+                                          <!-- <div class="mx-auto" style="height: 10px;"></div> -->
+
+
+
+                                              <!--{% render_field form.sent_from id="from" class="form-control" style="visibility: hidden; height: 5px" %}-->
+                                          <!-- <input type="text" class="form-control" id="from" style="visibility: hidden; height: 5px"> -->
+
+                                        <div class="form-group">
+                                            {% render_field form.sent_amount id="number1" class="form-control" placeholder="amount to be sent" style="height: 50px; font-size:18px;" oninput="refreshOrderForm1()" %}
+                                          <!-- <input type="number" class="form-control" id="number1" placeholder="amount to be sent" oninput="Conversion1()"> -->
+
+
+                                                <div class="form-group col-md2" style="text-align:right">
+                                                    <a style="font-size: 12px; left:0px; color:#fff" id="notice"></a>
+                                                    <a style="font-size: 12px; left:0px; color:#fff" id="notice_am"></a>
+                                                    <a style="font-size: 20px; left:0px" id="from_unit_show"></a>
+                                                </div>
+                                                <!--{% render_field form.send_unit id="from_unit" class="form-control" style="visibility: hidden; height: 5px" %}-->
+
+
+                                        </div>
+                                      </div>
+
+
+                                     <div class="form-col col-md classWithPad">
+                                         <div class="form-group" style="text-align:center"><a style="font-size: 25px; color:#fff">Receive</a></div>
+                                         <div class="form-group" style="text-align:center">
+                                             <img id="rcv_img" style="height: 45px; width: 120px; background-color:#fff" src="">
+                                         </div>
+                                         <div class="form-group">
+                                            <!-- <select class="form-control form-control-lg" id="to_select" onchange="refreshOrderForm1()">
+                                                <option value="paypal">Paypal</option>
+                                                <option value="payoneer">Payoneer</option>
+                                                <option value="skrill">Skrill</option>
+                                                <option value="neteller">Neteller</option>
+                                                <option value="bkash">Bkash</option>
+                                                <option value="btcusd">BTC USD</option>
+                                            </select> -->
+                                             {% render_field form.receive_at id="to_select" class="form-control" style="height: 50px; font-size: 22px;" onchange="refreshOrderForm1()" %}
+                                        </div>
+                                         <!-- <div class="mx-auto" style="height: 10px;"></div> -->
+
+                                             <!--{% render_field form.receive_at id="to" class="form-control" style="visibility: hidden; height: 5px" %}-->
+                                          <!-- <input type="text" class="form-control" id="to" style="visibility: hidden; height: 5px"> -->
+
+                                        <div class="form-group">
+                                            {% render_field form.to_be_sent id="number2" class="form-control" style="height: 50px; font-size: 18px;" placeholder="receivable amount" oninput="refreshOrderForm2()" %}
+                                          <!-- <input type="number" class="form-control" id="number2" placeholder="receivable amount" oninput="Conversion2()"> -->
+
+                                            <div class="form-group" style="text-align:right">
+                                                <a style="font-size: 12px; color:#fff" id="to_notice"></a>
+                                                <a style="font-size: 12px; color:#fff" id="to_notice_am"></a>
+                                                <a style="font-size: 20px" id="to_unit_show"></a>
+                                            </div>
+                                            <div class="form-group" style="text-align:left">
+                                                <a style="font-size: 15px; color:#fff">Reserve: </a>
+                                                <a id="reserve_amount" style="font-size: 15px; color:#fff"></a>
+                                                <a id="reserve_unit" style="font-size: 15px; color:#fff"></a>
+                                            </div>
+                                           <!-- {% render_field form.rcv_unit id="to_unit" class="form-control" style="visibility: hidden; height: 5px" %} -->
+
+
+                                        </div>
+
+
+                                      </div>
+                                 </div>
+
+                                   <div class="form-group classWithPad" style="align: center">
+
+                                    <button class="form-control" type="submit" id="order_btn">Place Order</button>
+
+                                   </div>
+
+                                </form>
+                        </div>
+
+                        {% if pending_orders %}
+
+
+                        <div class="content-section" id="pending_order_table" style="text-align: center; padding-top: 25px">
+                          <h4>Your recent orders</h4>
+                        <table class="table-bordered" style="width: calc(100%)">
+                            <!-- <tr class="bg-primary">...</tr>
+                            <tr class="bg-success">...</tr>
+                            <tr class="bg-warning">...</tr>
+                            <tr class="bg-danger">...</tr>
+                            <tr class="bg-info">...</tr> -->
+                          <thead>
+                            <tr>
+                              <th scope="col" style="word-break:break-all;">Order ID</th>
+                              <th scope="col" style="word-break:break-all;">Description</th>
+                              <th scope="col" style="word-break:break-all;">Amount</th>
+                              <th scope="col" style="word-break:break-all;">Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for pending_order in pending_orders %}
+                            <tr>
+                                <td style="font-size: 15px; word-break:break-all;">{{ pending_order.belonging_order_id }}</td>
+                              <td scope="row" style="word-break:break-all;">
+                                  {{ pending_order.sent_from }} to {{ pending_order.receive_at }}
+                              </td>
+
+                              <td style="font-size: 15px; word-break:break-all;">
+                                  <div style="flex:0 0 26px;">
+                                      {{ pending_order.sent_amount }}{{ pending_order.send_unit }}
+                                      <img style="height: 15px; width: 15px;" src="{% static 'home/images/arrow_acc.png' %}">
+                                      {{ pending_order.to_be_sent }} {{ pending_order.rcv_unit }}
+                                  </div>
+                              </td>
+                                <td style="font-size: 15px; word-break:break-all;">{{ pending_order.status }} </td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                        <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Create book button -->
+
+                        {% if reviews %}
+                        {% else %}
+                        <div style="text-align: center; margin-top: 10px;" id="pop_up_btn">
+                            <button class="review_msg btn btn-primary" type="button" name="button">Rate us</button>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+
+
+                    </div>
+                    <div class="col-md-5" style="margin-top: 8px">
+                      <div class="content-section" id="exchange_table">
+                          <h3>We exchange</h3>
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col" style="word-break:break-all;">Platform</th>
+                              <th scope="col" style="word-break:break-all;">Min</th>
+                              <th scope="col" style="word-break:break-all;">Max</th>
+                              <th scope="col" style="word-break:break-all;">Reserve</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for reserve in reserves %}
+                            <tr>
+                              <th scope="row" style="word-break:break-all;">{% if reserve.title == 'skrill' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 35px; width: 70px;" src="{% static 'home/images/skrill.png' %}"></div>
+                                                {% elif reserve.title == 'neteller' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px;" src="{% static 'home/images/neteller.png' %}"></div>
+                                                {% elif reserve.title == 'paypal' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px;" src="{% static 'home/images/paypal.png' %}"></div>
+                                                {% elif reserve.title == 'bkash' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 35px; width: 80px;" src="{% static 'home/images/bkash.png' %}"></div>
+                                                {% elif reserve.title == 'payoneer' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px;" src="{% static 'home/images/payoneer.png' %}"></div>
+                                                {% elif reserve.title == 'btcusd' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px;" src="{% static 'home/images/btcusd.png' %}"></div>
+                                                {% endif %}
+                              </th>
+                              <td style="font-size: 15px; word-break:break-all;">{{ reserve.minim }} {{ reserve.unit }}</td>
+                              <td style="font-size: 15px; word-break:break-all;">{{ reserve.maxim }} {{ reserve.unit }}</td>
+                                <td style="font-size: 15px; word-break:break-all;"><a id="{{ reserve.title }}_reserve" >{{ reserve.reserve_am }}</a> {{ reserve.unit }}</td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                </div>
+
+            </main>
+            <nav class="navbar navbar-expand-lg" style="background-color: #7386D5">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" >
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        <footer style="background-color:#373737;" id="footer" class="foot">
+            <div class="container">
+				<div class="row">
+					<!-- footer-widget -->
+					<div class="col-sm-3" style="text-align:center">
+						<div class="footer-widget news-letter">
+							<h3 style="color:#FFFFFF;font-size:20px;" ><strong>ExonTime</strong></h3>
+
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Buy & Sell</a></li>
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Reviews</a></li>
+                                <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Rates</a></li>
+
+						</div>
+                        <br>
+					</div>
+
+					<div class="col-sm-3" style="text-align:center">
+						<div class="footer-widget news-letter">
+							<h3 style="color:#FFFFFF;font-size:20px;"><strong>Policies</strong></h3>
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Terms and Conditions</a></li>
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Privacy Policy</a></li>
+                                <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Refund Policy</a></li>
+						</div>
+                        <br>
+					</div>
+
+
+
+					<div class="col-sm-3" style="text-align:center">
+						<div class="footer-widget news-letter">
+						   <h3 style="color:#FFFFFF;font-size:20px;"><strong>Company</strong></h3>
+						    <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">About</a></li>
+							<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Tutorial</a></li>
+
+						<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Help</a></li>
+						</div>
+                        <br>
+					</div>
+
+					<div class="col-sm-3" style="text-align:center">
+					<a href=""><img src="{% static 'home/images/GooglePlay.png' %}" width="150" height="60"></a>
+
+					<div class="footer-widget social-widget" style="text-align:center">
+                    <h3 style="color:#FFFFFF;font-size:20px;">Follow us</h3>
+
+					<a href=""><img src="{% static 'home/images/facebook.png' %}" width="35" height="35"></a>
+					<a href=""><img src="{% static 'home/images/youtube.png' %}" width="50" height="35"></a>
+                    <a href=""><img src="{% static 'home/images/instagram.png' %}" width="35" height="35"></a>
+
+					</div>
+
+
+					</div>
+				</div>
+			</div>
+            <div style="background-color:#7386D5;" class="foot2">
+			<div class="container" style="text-align: center; padding-top: 15px;">
+				<p style="color:#FFFFFF" ><strong>Copyright &copy; 2020 ExonTime </strong></p>
+			</div>
+		    </div>
+        </footer>
+
+
+         </div>
+
+
+
+    </div>
+
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+    <!-- Popper.JS -->
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.js' %}"></script>
+
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <!-- You can alternatively load the minified version -->
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $(".review_msg").modalForm({
+        formURL: "{% url 'review_msg' %}"
+    });
+
+});
+</script>
+
+    <script type="text/javascript">
+    var refreshOrderForm1 = function(){
+        $.ajax({
+            url: "{% url 'get_info_update' %}",
+            method: 'GET',
+            dataType : "json",
+            data: {},
+            success: function(response){
+              var val = parseFloat(document.getElementById("number1").value);
+              madeSelectionfrom = document.getElementById("from_select").value;
+              madeSelectionto = document.getElementById("to_select").value;
+              var ans = 0;
+              var res = 0.0;
+              var max = 0.0;
+              var rt = 0.0;
+              for(var i = 0; i < response["reserves"].length; i++)
+              {
+                  var product = response["reserves"][i];
+                  if(product["title"] == madeSelectionfrom){
+                      var rate = parseFloat(product[madeSelectionto]);
+                      rt = rate;
+                      max = product["maxim"];
+                      if(val == 0){ ans = 0; }
+                      else{ ans = val*rate; }
+                      document.getElementById("from_unit_show").innerHTML = product["unit"];
+                      var ul = product["title"]+'.png';
+                      document.getElementById("send_img").src = '{% static 'home/images/' %}'+ ul;
+                      if(val < product["minim"]){
+                        document.getElementById("notice").innerHTML = "Select amount greater than ";
+                        document.getElementById("notice_am").innerHTML = product["minim"];
+                        document.getElementById("order_btn").disabled = true;
+                      }
+                      else if(val > product["maxim"]){
+                        document.getElementById("notice").innerHTML = "Select amount less than ";
+                        document.getElementById("notice_am").innerHTML = product["maxim"];
+                        document.getElementById("order_btn").disabled = true;
+                      }
+                      else{
+                        document.getElementById("notice").innerHTML = "";
+                        document.getElementById("notice_am").innerHTML = "";
+                        document.getElementById("order_btn").disabled = false;
+                      }
+                  }
+                  if(product["title"] == madeSelectionto){
+                      document.getElementById("to_unit_show").innerHTML = product["unit"];
+                      var ul = product["title"]+'.png';
+                      document.getElementById("rcv_img").src = '{% static 'home/images/' %}'+ ul;
+                      document.getElementById("reserve_amount").innerHTML = product["reserve_am"];
+                      document.getElementById("reserve_unit").innerHTML = product["unit"];
+                      res = product["reserve_am"];
+                  }
+              }
+              if(ans > res && (rt*max)>res){
+                document.getElementById("to_notice").innerHTML = "Select amount less than ";
+                document.getElementById("to_notice_am").innerHTML = res;
+                document.getElementById("order_btn").disabled = true;
+                document.getElementById("notice").innerHTML = "";
+                document.getElementById("notice_am").innerHTML = "";
+
+              }
+              else{
+                document.getElementById("to_notice").innerHTML = "";
+                document.getElementById("to_notice_am").innerHTML = "";
+              }
+              ans = ans.toFixed(2);
+              document.getElementById("number2").value = ans;
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+  </script>
+
+    <script type="text/javascript">
+    var refreshOrderForm2 = function(){
+        $.ajax({
+            url: "{% url 'get_info_update' %}",
+            method: 'GET',
+            dataType : "json",
+            data: {},
+            success: function(response){
+              var val = parseFloat(document.getElementById("number2").value);
+              madeSelectionfrom = document.getElementById("from_select").value;
+              madeSelectionto = document.getElementById("to_select").value;
+              var ans = 0.0;
+              var res = 0.0;
+              var max = 0.0;
+              var rt = 0.0;
+              for(var i = 0; i < response["reserves"].length; i++)
+              {
+                  var product = response["reserves"][i];
+                  if(product["title"] == madeSelectionfrom){
+                      var rate = parseFloat(product[madeSelectionto]);
+                      rt = rate;
+                      if(val == 0){ ans = 0; }
+                      else{ ans = val*(1/rate); }
+                      document.getElementById("from_unit").value = product["unit"];
+                      var ul = product["title"]+'.png';
+                      document.getElementById("send_img").src = '{% static 'home/images/' %}'+ ul;
+                      max = product["maxim"];
+                      if(ans < product["minim"]){
+                        document.getElementById("notice").innerHTML = "Select amount greater than ";
+                        document.getElementById("notice_am").innerHTML = product["minim"];
+                        document.getElementById("order_btn").disabled = true;
+                      }
+                      else if(ans > product["maxim"]){
+                        document.getElementById("notice").innerHTML = "Select amount less than ";
+                        document.getElementById("notice_am").innerHTML = product["maxim"];
+                        document.getElementById("order_btn").disabled = true;
+                      }
+                      else{
+                        document.getElementById("notice").innerHTML = "";
+                        document.getElementById("notice_am").innerHTML = "";
+                        document.getElementById("order_btn").disabled = false;
+                      }
+                  }
+                  if(product["title"] == madeSelectionto){
+                      document.getElementById("to_unit_show").innerHTML = product["unit"];
+                      var ul = product["title"]+'.png';
+                      document.getElementById("rcv_img").src = '{% static 'home/images/' %}'+ ul;
+                      document.getElementById("reserve_amount").innerHTML = product["reserve_am"];
+                      document.getElementById("reserve_unit").innerHTML = product["unit"];
+                      res = product["reserve_am"];
+                  }
+              }
+
+              if(val > res && (rt*max)>res){
+                document.getElementById("to_notice").innerHTML = "Select amount less than ";
+                document.getElementById("to_notice_am").innerHTML = res;
+                document.getElementById("order_btn").disabled = true;
+                document.getElementById("notice").innerHTML = "";
+                document.getElementById("notice_am").innerHTML = "";
+              }
+              else{
+                document.getElementById("to_notice").innerHTML = "";
+                document.getElementById("to_notice_am").innerHTML = "";
+              }
+              ans = ans.toFixed(2);
+              document.getElementById("number1").value = ans;
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+  </script>
+
+    <script type="text/javascript">
+    var checker = function(){
+        $.ajax({
+            url: "{% url 'get_info_update' %}",
+            method: 'GET',
+            dataType : "json",
+            data: {},
+            success: function(response){
+              var madeSelectionto = document.getElementById("to_select").value;
+              for(var i = 0; i < response["reserves"].length; i++)
+              {
+                var product = response["reserves"][i];
+                if(product["title"] == madeSelectionto){
+                    var id = "reserve_amount";
+                    var val = parseFloat(document.getElementById(id).innerHTML);
+                    var res = product["reserve_am"];
+                    //alert(val+""+res);
+                    if(res != val){
+                        refreshOrderForm1();
+                    }
+                }
+              }
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+    var total_seconds = 1;
+
+    setInterval(function(){
+        checker();
+    },total_seconds * 1000);
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            madeSelectionfrom = document.getElementById("from_select").value,
+            madeSelectionto = document.getElementById("to_select").value,
+            refreshOrderForm1();
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content, .navbar, .navbar-btn, .foot, .foot2').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+
+    </script>
+
+
+    <script type="text/javascript">
+    var refreshStream = function(){
+        $.ajax({
+            url: "{% url 'dashboard' %}",
+            method: 'GET',
+            data: {},
+            success: function(response){
+              $('#exchange_table').replaceWith($('#exchange_table',response));
+              $('#pending_order_table').replaceWith($('#pending_order_table',response));
+              //$('#pop_up_btn').replaceWith($('#pop_up_btn',response));
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+    var total_seconds = 1;
+
+    setInterval(function(){
+        refreshStream();
+    },total_seconds * 1000);
+
+    </script>
+
+
+  <script type="text/javascript">
+
+      function DropDown(el) {
+          this.dd = el;
+          this.placeholder = this.dd.children('span');
+          this.opts = this.dd.find('ul.dropdown > li');
+          this.val = '';
+          this.index = -1;
+          this.initEvents();
+      }
+      DropDown.prototype = {
+          initEvents : function() {
+              var obj = this;
+
+              obj.dd.on('click', function(event){
+                  $(this).toggleClass('active');
+                  return false;
+              });
+
+              obj.opts.on('click',function(){
+                  var opt = $(this);
+                  obj.val = opt.text();
+                  obj.index = opt.index();
+                  obj.placeholder.text(obj.val);
+                  document.getElementById("in1").value = obj.val;
+              });
+          },
+          getValue : function() {
+              return this.val;
+          },
+          getIndex : function() {
+              return this.index;
+          }
+      }
+
+      $(function() {
+
+          var dd = new DropDown( $('#dd') );
+
+          $(document).click(function() {
+              // all dropdowns
+              $('.wrapper-dropdown-3').removeClass('active');
+          });
+
+      });
+
+  </script>
+</body>
+
+</html>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5eaebdd910362a7578be90c0/1e7fdbpi0';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->

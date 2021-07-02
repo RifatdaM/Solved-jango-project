@@ -1,0 +1,208 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Exontime | Policies</title>
+    {% endif %}
+
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/style2.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css' %}">
+    <script src="{% static 'home/js/iconify.min.js' %}"></script>
+
+
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/flickity.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'home/css/font-awesome.css' %}">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170171654-1 "></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-170171654-1 ');
+    </script>
+
+
+</head>
+
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'home' %}">ExonTime</a>
+
+          <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'dashboard' %}" style="color: white;">My account</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}" style="color: white;">Logout</a>
+                {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}" style="color: white;">Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}" style="color: white;">Register</a>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+        <div class="policy">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="content-section">
+                        <h3>ExonTime</h3>
+                        <p class='text-muted'>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-light">
+                                    <a href="{% url 'about_us' %}">About US</a>
+                                </li>
+                            </ul>
+                        </p>
+                        <h3>Our Policies</h3>
+                        <p class='text-muted'>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-light">
+                                    <a href="{% url 'terms_conditions' %}">Terms & Conditions</a>
+                                </li>
+                                <li class="list-group-item list-group-item-light">
+                                    <a href="{% url 'priv_poli' %}">Privacy Policy</a>
+                                </li>
+                                <li class="list-group-item list-group-item-light">
+                                    <a href="{% url 'refund_poli' %}">Refund Policy</a>
+                                </li>
+                                <li class="list-group-item list-group-item-light">
+                                    <a href="{% url 'aml_poli' %}">Anti-Money Laundering and KYC Policy</a>
+                                </li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+                <div class="col col-md col-lg">
+                    <div class="content-section">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+
+
+            <footer style="background-color:#ffffff;" id="footer" class="foot">
+                <div style="background-color:#373737" class="foot2">
+                    <div class="container" style="text-align: center; padding-top: 15px;">
+                        <p style="color:#FFFFFF" ><strong>Copyright &copy; 2020 ExonTime </strong></p>
+                    </div>
+                </div>
+            </footer>
+
+
+        </div>
+
+    <button class="btn btn-primary scroll-top" data-scroll="up" type="button">
+        <i class="fa fa-chevron-up" style="font-size: 35px;"></i>
+    </button>
+
+    </div>
+
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+    <!-- Popper.JS -->
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'home/js/flickity.pkgd.js' %}"></script>
+    <script defer="" src="{% static 'home/js/owl-carousel.min.js' %}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+          $(window).scroll(function () {
+            if ($(this).scrollTop() > 400) {
+              $('.scroll-top').fadeIn();
+            } else {
+              $('.scroll-top').fadeOut();
+            }
+          });
+
+          $('.scroll-top').click(function () {
+            $("html, body").animate({
+              scrollTop: 0
+            }, 100);
+              return false;
+          });
+
+        });
+    </script>
+<script type="text/javascript">
+        function idleTimer() {
+            var t;
+            window.onload = resetTimer;
+            //window.onmousemove = resetTimer;
+            //window.onmousedown = resetTimer;
+            window.onclick = resetTimer;
+            window.onscroll = resetTimer;
+            window.onkeypress = resetTimer;
+
+            function logout() {
+                window.location.href = "{% url 'logout' %}";
+            }
+
+           function reload() {
+                  window.location = self.location.href;
+           }
+
+           function resetTimer() {
+                clearTimeout(t);
+                t = setTimeout(logout, 1800000);
+                //t= setTimeout(reload, 300000);
+            }
+        }
+        {% if user.is_authenticated %}
+        idleTimer();
+        {% endif %}
+    </script>
+</body>
+
+</html>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5eaebdd910362a7578be90c0/1e7fdbpi0';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->

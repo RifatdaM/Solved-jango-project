@@ -1,0 +1,638 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ user.first_name }} {{ user.last_name }}'s Dashboard</title>
+
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/style_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style3.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css' %}">
+
+
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Page Content  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+            </div>
+          </div>
+        </div>
+        <div id="contain" style = "background-color: #f3f5f9; color: #717171;">
+            <main role="main" style="min-height: 100vh;">
+                {% if orders %}
+                <div class="row h-100 justify-content-center align-items-center" style="margin-bottom: 20px;">
+                    <div class="col-10 col-md-8 col-lg-6">
+                        <!-- Form -->
+                        <div style="text-align:center;">
+                            <a class="responsive_heading" style="color:black;">
+                                Search by Order ID
+                            </a>
+                        </div>
+                        <div class="input-group" id="search_box" name="search_box" style="margin-top: 20px; margin-bottom: 20px;">
+                              <input type="text" class="form-control" placeholder="search by order id" id="get_order_id">
+                              <div>
+                                <button style="outline: none;" id="search_btn" class="btn btn-primary">Search</button>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="add_remove_here">
+                    <div id="not_found" style="text-align:center; margin-bottom: 15px;">
+                        <h3>Sorry! Order with this order id is not found.</h3>
+                        <div class="col-md" style="text-align:center; margin-top: 15px;">
+                                <button style="outline: none;" id="search_fail_close" class="buy_btn_btn btn" type="button" name="button">
+                                    Close
+                                </button>
+                        </div>
+                    </div>
+                    <div id="order_detail" class="transactions" style="background-color:white;">
+                        <div class="form-group" style="text-align:center">
+                             <a style="font-size: 20px; color:#000">Search Result</a>
+                            <br>
+                            <a style="font-size: 20px; color:#000" id="_order_id">Order ID:</a>
+                         </div>
+                         <div class="row">
+                            <div class="col-md">
+                                <ul style="list-style-type:none; margin: 0; padding: 0;">
+                                    <li>
+                                        <div style="float:left">
+                                          <div style="text-align:left; float: right; margin-left: 20px;">
+                                              <div>
+                                                  <a class="history_a1" style="font-weight: 600; color: black;">Send</a>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div style="float:right;">
+                                          <div style="text-align:right; float: left; margin-right: 20px;">
+                                              <div>
+                                                  <a class="history_a1" style="font-weight: 600; color: black;">Receive</a>
+                                              </div>
+                                          </div>
+                                        </div>
+                                  </li>
+                                </ul>
+                            </div>
+                             <div class="col-md-3" style="text-align:center;">
+                            </div>
+                         </div>
+                         <hr>
+                         <div class="form-row">
+                             <div class="col-md">
+                                    <ul style="list-style-type:none; margin: 0; padding: 0;">
+                                        <li>
+                                            <div style="float:left">
+                                              <div style="float: left;">
+                                                  <img id="send" class="history_im1" style="background-color: #fff; margin-top: 8px;" src="">
+                                              </div>
+                                              <div style="text-align:left; float: right; margin-left: 20px;">
+                                                  <div>
+                                                      <a id="sent_from" class="history_a2" style="font-weight: 600; color: black;">
+
+                                                      </a>
+                                                  </div>
+                                                  <div>
+                                                      <a id="sent_amount" class="history_a1" style="font-weight: 600; color: black;">
+
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                            <div style="float:right;">
+                                              <div style="float: right;">
+                                                  <img id="receive" class="history_im1" style="background-color: #fff; margin-top: 8px;" src="">
+                                              </div>
+                                              <div style="text-align:right; float: left; margin-right: 20px;">
+                                                  <div>
+                                                      <a id="receive_at" class="history_a2" style="font-weight: 600; color: black;">
+
+                                                      </a>
+                                                  </div>
+                                                  <div>
+                                                      <a id="receive_amount" class="history_a1" style="font-weight: 600; color: black;"></a>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                      </li>
+                                    </ul>
+                             </div>
+                             <div class="col-md-3" style="text-align:center;">
+                                <a id="time" class="history_t" style="color: black;">
+
+                                </a>
+                            </div>
+                         </div>
+                        <hr>
+                        <div class="form-row">
+                             <div class="col-md">
+                                    <ul style="list-style-type:none; margin: 0; padding: 0;">
+                                        <li>
+                                            <div style="float:left">
+                                              <div style="text-align:left; float: right;">
+                                                  <div>
+                                                      <a class="history_a1" style="font-weight: 600; color: black;">
+                                                          Sender:
+                                                      </a>
+                                                  </div>
+                                                  <div>
+                                                      <a id="sent_account" class="history_a2" style="font-weight: 600; color: black;">
+
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                            <div style="float:right;">
+                                              <div style="text-align:right; float: left;">
+                                                  <div>
+                                                      <a class="history_a1" style="font-weight: 600; color: black;">
+                                                          Receiver:
+                                                      </a>
+                                                  </div>
+                                                  <div>
+                                                      <a id="receive_account" class="history_a2" style="font-weight: 600; color: black;">
+
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                      </li>
+                                    </ul>
+                             </div>
+                             <div class="col-md-3" style="text-align:center;">
+                                <a id="status" class="history_t" style="color: black;">
+
+                                </a>
+                            </div>
+                         </div>
+                         <hr>
+                        <div class="col-md" style="text-align:center; margin-top: 15px;">
+                                <button style="outline: none;" id="search_close" class="buy_btn_btn btn" type="button" name="button">
+                                    Close
+                                </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="replace_it">
+                    <div class="transactions" style="text-align:center; background: white;">
+                        <div style="margin: 20px;">
+                            <a class="responsive_heading" style="color:black;">
+                                Transaction History
+                            </a>
+                        </div>
+                        <div style="margin: 20px;">
+                            <a style="font-size: 20px; font-weoght: 400; color:black;"></a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <ul style="list-style-type:none; margin: 0; padding: 0;">
+                                    <li>
+                                        <div style="float:left">
+                                          <div style="text-align:left; float: right; margin-left: 20px;">
+                                              <div>
+                                                  <a class="history_a1" style="font-weight: 600; color: black;">Send</a>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div style="float:right;">
+                                          <div style="text-align:right; float: left; margin-right: 20px;">
+                                              <div>
+                                                  <a class="history_a1" style="font-weight: 600; color: black;">Receive</a>
+                                              </div>
+                                          </div>
+                                        </div>
+                                  </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3" style="text-align:center;">
+                            </div>
+                        </div>
+                        {% for order in orders %}
+                        <hr>
+                        <div class="row">
+                            <div class="col-md">
+                                <ul style="list-style-type:none; margin: 0; padding: 0;">
+                                    <li>
+                                        <div style="float:left">
+                                          <div style="float: left;">
+                                              <img class="history_im1" style="background-color: #fff; margin-top: 8px;" src="{% get_static_prefix %}home/images/{{order.sent_from}}_round.png">
+                                          </div>
+                                          <div style="text-align:left; float: right; margin-left: 20px;">
+                                              <div>
+                                                  <a class="history_a2" style="font-weight: 600; color: black;">
+                                                      {% if order.sent_from == 'btcusd' %}
+                                                        Bitcoin
+                                                      {% else %}
+                                                        {{ order.sent_from }}
+                                                      {% endif %}
+                                                  </a>
+                                              </div>
+                                              <div>
+                                                  <a class="history_a1" style="font-weight: 600; color: black;">{{ order.sent_amount }} {{ order.send_unit }}</a>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div style="float:right;">
+                                          <div style="float: right;">
+                                              <img class="history_im1" style="background-color: #fff; margin-top: 8px;" src="{% get_static_prefix %}home/images/{{order.receive_at}}_round.png">
+                                          </div>
+                                          <div style="text-align:right; float: left; margin-right: 20px;">
+                                              <div>
+                                                  <a class="history_a2" style="font-weight: 600; color: black;">
+                                                      {% if order.receive_at == 'btcusd' %}
+                                                        Bitcoin
+                                                      {% else %}
+                                                        {{ order.receive_at }}
+                                                      {% endif %}
+                                                  </a>
+                                              </div>
+                                              <div>
+                                                  <a class="history_a1" style="font-weight: 600; color: black;">{{ order.to_be_sent }} {{ order.rcv_unit }}</a>
+                                              </div>
+                                          </div>
+                                        </div>
+                                  </li>
+                                </ul>
+                            </div>
+
+                            <div class="col-md-3" style="text-align:center;">
+                                <button style="outline: none;" data-id="{% url 'completed_order_details' order.id %}" class="buy_btn_btn show_details btn" type="button" name="button">
+                                    See Details
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div style="height: 30px;">
+
+                        </div>
+                        {% if is_paginated %}
+                            {% if page_obj.has_previous %}
+                                <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                                <a class="btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}">Previous</a>
+                            {% endif %}
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                    <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages }}">Last</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% else %}
+                    <div style="margin: 20px; text-align: center;">
+                        <a class="responsive_heading" style="color:black;">
+                            No transaction available
+                        </a>
+                    </div>
+                {% endif %}
+            </main>
+            <nav class="navbar navbar-expand-lg" style="background-color: #7386D5">
+                <div class="container-fluid">
+
+                    <!-- <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" >
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button> -->
+                    <a class="navbar-brand mr-4" href="{% url 'home' %}">ExonTime</a>
+                    <button style="outline: none; margin-right: 8px;" class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" href="{% url 'home' %}">Exchange now</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home' %}#our_rates">Rates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home' %}#we_exchange">Reserves</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'dashboard' %}">My account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <footer style="background-color:#373737;" id="footer" class="foot">
+                <div class="container" style="text-align: center; padding-top: 15px;">
+                    <p style="color:#FFFFFF" ><strong>Copyright &copy; 2020 ExonTime </strong></p>
+                </div>
+            </footer>
+         </div>
+    </div>
+
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+    <!-- Popper.JS -->
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.js' %}"></script>
+
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <!-- You can alternatively load the minified version -->
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".show_details").each(function () {
+          $(this).modalForm({formURL: $(this).data('id')});
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#contain, .foot, .foot2').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var p1;
+        var p2;
+        $('#search_close').click(function(){
+              if(!p2){
+                p2 = $('#order_detail').detach();
+              }
+              if(!p1){
+                p1 = $('#not_found').detach();
+              }
+        });
+        $('#search_fail_close').click(function(){
+              if(!p2){
+                p2 = $('#order_detail').detach();
+              }
+              if(!p1){
+                p1 = $('#not_found').detach();
+              }
+        });
+        p1 = $('#not_found').detach();
+        p2 = $('#order_detail').detach();
+        $('#search_btn').click(function(){
+           var order_id = $('#get_order_id').val();
+            $.ajax({
+                url: "{% url 'search_filter_completed_order' %}",
+                method: 'GET',
+                data: {
+                  'order_id': order_id
+                },
+                success: function(response){
+                  for(var i = 0; i < response["search_result"].length; i++)
+                  {
+                      var order = response["search_result"][i];
+                      if(order["id"] != "not_available"){
+                          if(!p2){
+                            p2 = $('#order_detail').detach();
+                          }
+                          if(!p1){
+                            p1 = $('#not_found').detach();
+                          }
+                          p2.appendTo('#add_remove_here');
+                          p2 = null;
+                          document.getElementById("_order_id").innerHTML = "Order ID: "+order_id;
+                          if(order.hasOwnProperty("sent_from")){
+                            document.getElementById("sent_from").innerHTML = order["sent_from"];
+                          }
+                          else{
+                            document.getElementById("sent_from").innerHTML = "Not available";
+                          }
+
+                          if(order.hasOwnProperty("receive_at")){
+                            document.getElementById("receive_at").innerHTML = order["receive_at"];
+                          }
+                          else{
+                            document.getElementById("receive_at").innerHTML = "Not available";
+                          }
+                          if(order.hasOwnProperty("send_acount")){
+                            document.getElementById("sent_account").innerHTML = order["send_acount"];
+                          }
+                          else{
+                            document.getElementById("sent_account").innerHTML = "Not available";
+                          }
+
+                          if(order.hasOwnProperty("rcv_acount")){
+                            document.getElementById("receive_account").innerHTML = order["rcv_acount"];
+                          }
+                          else{
+                            document.getElementById("receive_account").innerHTML = "Not available";
+                          }
+
+                          if(order.hasOwnProperty("status")){
+                            document.getElementById("status").innerHTML = order["status"];
+                          }
+                          else{
+                            document.getElementById("status").innerHTML = "Not confirmed";
+                          }
+
+                          if(order.hasOwnProperty("date_ordered")){
+                            var date = new Date(order["date_ordered"]);
+                            var dt = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+"  "+date.getHours()+":"+date.getMinutes();
+                            document.getElementById("time").innerHTML = dt;
+                          }
+                          else{
+                            document.getElementById("receive_account").innerHTML = "Not available";
+                          }
+                          var send_amount = order["sent_amount"]+ " " + order["send_unit"];
+                          var rcv_amount = order["to_be_sent"]+ " " + order["rcv_unit"];
+                          document.getElementById("sent_amount").innerHTML = send_amount;
+                          document.getElementById("receive_amount").innerHTML = rcv_amount;
+                          var ul = order["sent_from"]+'_round.png';
+                          document.getElementById("send").src = '{% static 'home/images/' %}'+ ul;
+                          var ul = order["receive_at"]+'_round.png';
+                          document.getElementById("receive").src = '{% static 'home/images/' %}'+ ul;
+                          var url = "{% url 'completed_order_details' pk=0 %}".replace('0', order["id"]);
+                          $('#search_details').data("id", url);
+                          $(".show_details_search").each(function () {
+                              $(this).modalForm({formURL: $('#search_details').data('id')});
+                            });
+                      }
+                      else{
+                          if(!p1){
+                            p1 = $('#not_found').detach();
+                          }
+                          if(!p2){
+                            p2 = $('#order_detail').detach();
+                          }
+                          p1.appendTo('#add_remove_here');
+                          p1 = null;
+                      }
+                  }
+                },
+                error: function(error){
+                    console.log(error);
+                    console.log("error");
+                }
+            });
+        });
+
+      });
+
+
+    </script>
+
+
+ <script type="text/javascript">
+    var refreshStream = function(){
+        $.ajax({
+            url: "{% url 'completed_order' %}",
+            method: 'GET',
+            data: {},
+            success: function(response){
+                if(!{{page_obj.has_previous}}){
+                    $('#replace_it').replaceWith($('#replace_it',response));
+                }
+                $(".show_details").each(function () {
+                    $(this).modalForm({formURL: $(this).data('id')});
+                });
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+    var total_seconds = 10;
+
+    setInterval(function(){
+        refreshStream();
+    },total_seconds * 1000);
+
+ </script>
+
+
+  <script type="text/javascript">
+
+      function DropDown(el) {
+          this.dd = el;
+          this.placeholder = this.dd.children('span');
+          this.opts = this.dd.find('ul.dropdown > li');
+          this.val = '';
+          this.index = -1;
+          this.initEvents();
+      }
+      DropDown.prototype = {
+          initEvents : function() {
+              var obj = this;
+
+              obj.dd.on('click', function(event){
+                  $(this).toggleClass('active');
+                  return false;
+              });
+
+              obj.opts.on('click',function(){
+                  var opt = $(this);
+                  obj.val = opt.text();
+                  obj.index = opt.index();
+                  obj.placeholder.text(obj.val);
+                  document.getElementById("in1").value = obj.val;
+              });
+          },
+          getValue : function() {
+              return this.val;
+          },
+          getIndex : function() {
+              return this.index;
+          }
+      }
+
+      $(function() {
+
+          var dd = new DropDown( $('#dd') );
+
+          $(document).click(function() {
+              // all dropdowns
+              $('.wrapper-dropdown-3').removeClass('active');
+          });
+
+      });
+
+  </script>
+<script type="text/javascript">
+        function idleTimer() {
+            var t;
+            window.onload = resetTimer;
+            //window.onmousemove = resetTimer;
+            //window.onmousedown = resetTimer;
+            window.onclick = resetTimer;
+            window.onscroll = resetTimer;
+            window.onkeypress = resetTimer;
+
+            function logout() {
+                window.location.href = "{% url 'logout' %}";
+            }
+
+           function reload() {
+                  window.location = self.location.href;
+           }
+
+           function resetTimer() {
+                clearTimeout(t);
+                t = setTimeout(logout, 1800000);
+                //t= setTimeout(reload, 300000);
+            }
+        }
+        {% if user.is_authenticated %}
+        idleTimer();
+        {% endif %}
+    </script>
+</body>
+
+</html>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5eaebdd910362a7578be90c0/1e7fdbpi0';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->

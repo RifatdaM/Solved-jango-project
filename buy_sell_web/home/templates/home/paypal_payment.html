@@ -1,0 +1,179 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Paypal Payments</title>
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/style_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style3.css' %}">
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+
+
+</head>
+<body>
+    <div class="wrapper" style = "background-color: #f3f5f9; color: #717171;">
+        <div class="container" style = "background-color: #f3f5f9; color: #717171; margin-top: 110px; border-radius: 12px;">
+            <main role="main" style="text-align: center; min-height: 85vh;">
+                <div class="row">
+                    <div class="col-md" style="margin: 10px; text-align: center;">
+                        <div style="text-align: center;">
+                            <a class="responsive_heading" style="color: black;">Our Packages</a>
+                            <div class="row" style="margin-top: 40px; text-align: center;">
+                                <div class="col-md" style="min-width: 150px; border-radius: 8px; background-color: #5f70db; padding: 0px; margin: 5px; margin-bottom: 40px;">
+                                    <div style="padding: 10px; text-align: center; background-color: #0E1C29; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                                        <a style="font-size: 25px; font-weight: 500; color: white;">1 Month</a>
+                                    </div>
+                                    <div style="padding-top: 52px; padding-bottom: 90px; text-align: center;">
+                                        <a style="font-size: 45px; font-weight: 500; color: white;">$55</a>
+                                    </div>
+                                </div>
+                                <div class="col-md" style="min-width: 150px; border-radius: 8px; background-color: #5f70db; padding: 0px; margin: 5px; margin-bottom: 40px;">
+                                    <div style="padding: 10px; text-align: center; background-color: #0E1C29; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                                        <a style="font-size: 25px; font-weight: 500; color: white;">2 Months</a>
+                                    </div>
+                                    <div style="padding-top: 52px; padding-bottom: 25px; text-align: center;">
+                                        <a style="font-size: 45px; font-weight: 500; color: white;">$88</a>
+                                        <br>
+                                        <a style="font-size: 20px; font-weight: 500; color: white; opacity: 0.9;">44$/month</a>
+                                        <br>
+                                        <a style="font-size: 27px; font-weight: 500; color: white;">Save 22$</a>
+                                    </div>
+                                </div>
+                                <div class="col-md" style="min-width: 150px; border-radius: 8px; background-color: #5f70db; padding: 0px; margin: 5px; margin-bottom: 40px;">
+                                    <div style="padding: 10px; text-align: center; background-color: #0E1C29; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                                        <a style="font-size: 25px; font-weight: 500; color: white;">3 Months</a>
+                                        <br>
+                                        <a style="font-size: 18px; font-weight: 500; color: white;">Most Popular</a>
+                                    </div>
+                                    <div style="padding-top: 25px; padding-bottom: 25px; text-align: center;">
+                                        <a style="font-size: 45px; font-weight: 500; color: white;">$110</a>
+                                        <br>
+                                        <a style="font-size: 20px; font-weight: 500; color: white; opacity: 0.9;">36.7$/month</a>
+                                        <br>
+                                        <a style="font-size: 27px; font-weight: 500; color: white;">Save 55$</a>
+                                    </div>
+                                </div>
+                                <div class="col-md" style="min-width: 150px; border-radius: 8px; background-color: #5f70db; padding: 0px; margin: 5px; margin-bottom: 40px;">
+                                    <div style="padding: 10px; text-align: center; background-color: #0E1C29; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                                        <a style="font-size: 25px; font-weight: 500; color: white;">6 Months</a>
+                                        <br>
+                                        <a style="font-size: 18px; font-weight: 500; color: white;">Best Price</a>
+                                    </div>
+                                    <div style="padding-top: 25px; padding-bottom: 25px; text-align: center;">
+                                        <a style="font-size: 45px; font-weight: 500; color: white;">$198</a>
+                                        <br>
+                                        <a style="font-size: 20px; font-weight: 500; color: white; opacity: 0.9;">33$/month</a>
+                                        <br>
+                                        <a style="font-size: 27px; font-weight: 500; color: white;">Save 132$</a>
+                                    </div>
+                                </div>
+                                <div class="col-md" style="min-width: 150px; border-radius: 8px; background-color: #5f70db; padding: 0px; margin: 5px; margin-bottom: 40px;">
+                                    <div style="padding: 10px; padding-bottom: 13px; text-align: center; background-color: #0E1C29; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                                        <a style="font-size: 25px; font-weight: 500; color: white;">1 Year</a>
+                                        <br>
+                                        <a style="font-size: 16px; font-weight: 500; color: white;">Massive Savings</a>
+                                    </div>
+                                    <div style="padding-top: 25px; padding-bottom: 25px; text-align: center;">
+                                        <a style="font-size: 45px; font-weight: 500; color: white;">$275</a>
+                                        <br>
+                                        <a style="font-size: 20px; font-weight: 500; color: white; opacity: 0.9;">22.9$/month</a>
+                                        <br>
+                                        <a style="font-size: 27px; font-weight: 500; color: white;">Save 385$</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="margin: 10px; text-align: center;">
+                        <a class="responsive_heading" style="color: black;">Select Package and Pay</a>
+                        <div style="margin-top: 30px; margin-bottom: 30px;">
+                            <select class="form-control form-control-lg select_item" id="package_select">
+                                <option value="55">1 Month</option>
+                                <option value="88">2 Months</option>
+                                <option value="110">3 Months</option>
+                                <option value="198">6 Months</option>
+                                <option value="275">1 Year</option>
+                            </select>
+                        </div>
+                        <div style="height: 50px;">
+
+                        </div>
+                        <script src="https://www.paypal.com/sdk/js?client-id=Ac88B5nxAb6PKjQ1kWr_xt7UgxOye1b7e9nGSXXrNnSNmYwW_Io2R7ZHbDN95l_24C9D2_Xcc5--gT7t"></script>
+                        <div id="paypal-button-container" style="z-index: 1"></div>
+                    </div>
+                </div>
+            </main>
+            <nav class="navbar navbar-expand-lg" style="background-color: #7386D5; z-index: 2000;">
+                <div class="container-fluid">
+
+                    <!-- <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" >
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button> -->
+                    <a class="navbar-brand mr-4" href="#">Billionaire Forex Payments</a>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" href="https://www.billionaireforexltd.com">Visit site</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <footer style="background-color:#373737;" id="footer" class="foot">
+                <div class="container" style="text-align: center; padding-top: 15px;">
+                    <p style="color:#FFFFFF" ><strong>Copyright &copy; 2020 Billionaire Forex Ltd. </strong></p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+
+
+    <script src="{% static 'home/js/bootstrap.js' %}"></script>
+
+
+    <!--<script>
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          // This function sets up the details of the transaction, including the amount and line item details.
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: 0.01
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          // This function captures the funds from the transaction.
+          return actions.order.capture().then(function(details) {
+            // This function shows a transaction success message to your buyer.
+            alert('Transaction completed by ' + details.payer.name.given_name);
+          });
+        }
+      }).render('#paypal-button-container');
+      //This function displays Smart Payment Buttons on your web page.
+    </script>-->
+
+</body>
+
+</html>

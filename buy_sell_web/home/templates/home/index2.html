@@ -1,0 +1,213 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Side Navigation Bar</title>
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'home/css/styles.css' %}">
+  <script src="{% static 'home/js/style.min.js' %}"></script>
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+  <script type="text/javascript" src="{% static 'home/js/modernizr.custom.79639.js' %}"></script>
+  <noscript><link rel="stylesheet" type="text/css" href="{% static 'home/css/noJS.css' %}" /></noscript>
+  <script>
+      $(document).ready(function(){
+          $(".hamburger").click(function(){
+             $(".wrapper").toggleClass("collapse");
+          });
+      });
+  </script>
+</head>
+<body>
+  
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>Sidebar</h2>
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="#"><i class="fas fa-address-card"></i>About</a></li>
+            <li><a href="#"><i class="fas fa-project-diagram"></i>portfolio</a></li>
+            <li><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
+            <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
+            <li><a href="#"><i class="fas fa-map-pin"></i>Map</a></li>
+        </ul> 
+        <div class="social_media">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+
+  <div class="top_navbar">
+    
+    <div class="top_menu">
+      <ul>
+        <li><a href="#">
+          <i class="fas fa-search"></i></a></li>
+        <li><a href="#">
+          <i class="fas fa-bell"></i>
+          </a></li>
+        <li><a href="#">
+          <i class="fas fa-user"></i>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  
+    <div class="main_content">
+        <!-- <div class="header">Welcome!! Have a nice day.</div> -->
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+          {% endfor %}
+
+          <!-- {% for field in form.visible_fields %}
+            <div class="num_field-1">
+                {{ field.label_tag }}
+                {% render_field field style="border: 2px dashed red;" %}
+              {% if field.help_text %}
+                <small class="num_field-1">{{ field.help_text }}</small>
+              {% endif %}
+            </div>
+          {% endfor %} -->
+
+            <div class="num_field_div">
+                <!-- {{ form.number1.label_tag }} -->
+                {% render_field form.number1 id="number1" class="num1" oninput="Conversion1()" %}
+
+                <!-- {{ form.number2.label_tag }} -->
+                {% render_field form.number2 id="number2" class="num2" oninput="Conversion2()" %}
+            </div>
+            <input id="in1" type = "text" class = "in1">
+            <select name="converts" id="Selection" class = "in1">
+                <option>Chose Option</option>
+                <option value="1">EC to US</option>
+                <option value="2">EC to Euro</option>
+                <option value="3">US to EC</option>
+                <option value="4">US to Euro</option>
+                <option value="5">Euro to EC</option>
+                <option value="6">Euro to US</option>
+            </select>
+
+          <button type="submit" class="btn btn-primary" value="Convert">Submit</button>
+        </form>
+
+        <section class="main">
+              <div id="dd" class="wrapper-dropdown-3" tabindex="1">
+                  <span>system</span>
+                  <ul class="dropdown">
+                      <li><a href="#"><i class="icon-envelope icon-large"></i>bkas</a></li>
+                      <li><a href="#"><i class="icon-truck icon-large"></i>rocket</a></li>
+                      <li><a href="#"><i class="icon-plane icon-large"></i>nogod</a></li>
+                  </ul>
+              </div>
+              <div id="dd2" class="wrapper-dropdown-4" tabindex="1">
+                  <span>system</span>
+                  <ul class="dropdown">
+                      <li><a href="#"><i class="icon-envelope icon-large"></i>bkas</a></li>
+                      <li><a href="#"><i class="icon-truck icon-large"></i>rocket</a></li>
+                      <li><a href="#"><i class="icon-plane icon-large"></i>nogod</a></li>
+                  </ul>
+              </div>
+        </section>
+
+
+
+        <div class="info">
+        </div>
+    </div>
+</div>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    function Conversion1() {
+        var val = document.getElementById("number1").value,
+        madeSelection = document.getElementById("Selection").value,
+        ans
+
+        if (madeSelection == 1) ans = val * 0.37;
+        if (madeSelection == 2) ans = val * 0.30;
+        if (madeSelection == 3) ans = val * 2.70;
+        if (madeSelection == 4) ans = val * 0.80;
+        if (madeSelection == 5) ans = val * 3.38;
+        if (madeSelection == 6) ans = val * 1.25;
+        if (val == 0) ans = 0;
+        document.getElementById("number2").value = ans;
+    }
+    function Conversion2() {
+        var val = document.getElementById("number2").value,
+        madeSelection = document.getElementById("Selection").value,
+        ans
+
+        if (madeSelection == 1) ans = val * (1/0.37);
+        if (madeSelection == 2) ans = val * (1/0.30);
+        if (madeSelection == 3) ans = val * (1/2.70);
+        if (madeSelection == 4) ans = val * (1/0.80);
+        if (madeSelection == 5) ans = val * (1/3.38);
+        if (madeSelection == 6) ans = val * (1/1.25);
+        if (val == 0) ans = 0;
+        document.getElementById("number1").value = ans;
+    }
+  </script>
+
+  <script type="text/javascript">
+
+      function DropDown(el) {
+          this.dd = el;
+          this.placeholder = this.dd.children('span');
+          this.opts = this.dd.find('ul.dropdown > li');
+          this.val = '';
+          this.index = -1;
+          this.initEvents();
+      }
+      DropDown.prototype = {
+          initEvents : function() {
+              var obj = this;
+
+              obj.dd.on('click', function(event){
+                  $(this).toggleClass('active');
+                  return false;
+              });
+
+              obj.opts.on('click',function(){
+                  var opt = $(this);
+                  obj.val = opt.text();
+                  obj.index = opt.index();
+                  obj.placeholder.text(obj.val);
+                  document.getElementById("in1").value = obj.val;
+              });
+          },
+          getValue : function() {
+              return this.val;
+          },
+          getIndex : function() {
+              return this.index;
+          }
+      }
+
+      $(function() {
+
+          var dd = new DropDown( $('#dd') );
+
+          $(document).click(function() {
+              // all dropdowns
+              $('.wrapper-dropdown-3').removeClass('active');
+          });
+
+      });
+
+  </script>
+</body>
+</html>

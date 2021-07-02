@@ -1,0 +1,240 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/4215895d94.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="shortcut icon" type="image/png" href="img/favicon.ico" />
+
+    <title>MACHRONICS | Technology</title>
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/flickity.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'home/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/3dp_css.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+            <div class="container">
+                <img src="{% static 'home/images/logo.png' %}" style="height: 50px; width: 50px;">
+                <a class="navbar-brand mr-4" href="{% url 'home' %}" style="color: black; margin-left: 30px;">MARQUEE HVAC</a>
+
+                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+
+                </div>
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+                        <a class="nav-item nav-link" href="{% url 'about' %}">About Us</a>
+                        <div class="dropdown">
+                            <a class="nav-item nav-link" href="#">Products
+                                <i class="fa fa-caret-down"></i>
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                        </div>
+                        <a class="nav-item nav-link" href="{% url 'downloads' %}">Downloads</a>
+                        <a class="nav-item nav-link" href="{% url 'services' %}">Services</a>
+                        <a class="nav-item nav-link" href="{% url 'contact' %}">Contact US</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="site-content">
+        <div class="welcome_bg">
+            <div class="row header__info">
+                <div class="col-md-8">
+                    <span class="header__info-top">3D Printer</span>
+                    <h1 class="header__info-title">best performance</h1>
+                    <p class="header__info-product_dis">
+                        A 3D printer that can do your most of the desired work. Product
+                        that you can be used for most of the 3D printing you want to do.
+                    </p>
+                    <a href="#" class="header__info-learn_more">Learn More</a>
+                    <span class="header__info-special_feature">Special Feature</span>
+                    <span class="header__info-feature">- UPS module</span>
+                    <span class="header__info-feature">- Auto bed leveling</span>
+                    <span class="header__info-feature">- Silent motor driver</span>
+                    <span class="header__info-price">Price: 25,000 BDT</span>
+
+                    <a href="#" class="button button-white" style="float: left">
+                        <i class="fas fa-shopping-cart"></i> add to cart
+                    </a>
+                    <a href="#" class="button button-outline">customize</a>
+
+                </div>
+                <div class="col-md-4 header__img">
+                    <img
+                        class="header__img-size"
+                        src="{% static 'home/images/3d_printer.png' %}"
+                        alt="3d Printer"
+                    />
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%; height: auto; padding-left: 20px;">
+            <div class="row margin_0 padding_0" style="width: 100%;">
+                <div class="col-md productCard_outer_div padding_0">
+                    <div class="productCard pColor1">
+                        <div class="row" style="padding: 20px 20px 20px 20px;">
+                            <div class="col-sm productCard__info">
+                                <h2 class="productCard__info-title">best budget</h2>
+                                <span class="productCard__info-special_feature">
+                                    special feature
+                                </span>
+                                <span class="productCard__info-feature">- UPS module</span>
+                                <span class="productCard__info-feature">- Auto bed leveling</span>
+                                <span class="productCard__info-feature">- Silent motor driver</span>
+                                <span class="productCard__info-price">Price: 25,000 BDT</span>
+
+                                <div style="margin-top: 20px; margin-bottom: 20px;">
+                                    <a href="#" class="buttonSmall-red">
+                                        <i class="fas fa-shopping-cart"></i> add to cart
+                                    </a>
+                                </div>
+
+                                <div style="margin-top: 20px; margin-bottom: 20px;">
+                                    <a href="#" class="buttonSmall-outlineRed">customize</a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm productCard__img">
+                                <img
+                                    class="productCard__img-size"
+                                    src="{% static 'home/images/3d_printer.png' %}"
+                                    alt="3d Printer"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md productCard_outer_div padding_0">
+                    <div class="productCard pColor2">
+                        <div class="row" style="padding: 20px 20px 20px 20px;">
+                            <div class="col-sm productCard__info">
+                                <h2 class="productCard__info-title">best budget</h2>
+                                <span class="productCard__info-special_feature">
+                                    special feature
+                                </span>
+                                <span class="productCard__info-feature">- UPS module</span>
+                                <span class="productCard__info-feature">- Auto bed leveling</span>
+                                <span class="productCard__info-feature">- Silent motor driver</span>
+                                <span class="productCard__info-price">Price: 25,000 BDT</span>
+
+                                <div style="margin-top: 20px; margin-bottom: 20px;">
+                                    <a href="#" class="buttonSmall-red">
+                                        <i class="fas fa-shopping-cart"></i> add to cart
+                                    </a>
+                                </div>
+
+                                <div style="margin-top: 20px; margin-bottom: 20px;">
+                                    <a href="#" class="buttonSmall-outlineRed">customize</a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm productCard__img">
+                                <img
+                                    class="productCard__img-size"
+                                    src="{% static 'home/images/3d_printer.png' %}"
+                                    alt="3d Printer"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md productCard_outer_div padding_0">
+                    <div class="productCard pColor1">
+                        <div class="row" style="padding: 20px 20px 20px 20px;">
+                            <div class="col-sm productCard__info">
+                                <h2 class="productCard__info-title">best budget</h2>
+                                <span class="productCard__info-special_feature">
+                                    special feature
+                                </span>
+                                <span class="productCard__info-feature">- UPS module</span>
+                                <span class="productCard__info-feature">- Auto bed leveling</span>
+                                <span class="productCard__info-feature">- Silent motor driver</span>
+                                <span class="productCard__info-price">Price: 25,000 BDT</span>
+
+                                <div style="margin-top: 20px; margin-bottom: 20px;">
+                                    <a href="#" class="buttonSmall-red">
+                                        <i class="fas fa-shopping-cart"></i> add to cart
+                                    </a>
+                                </div>
+
+                                <div style="margin-top: 20px; margin-bottom: 20px;">
+                                    <a href="#" class="buttonSmall-outlineRed">customize</a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm productCard__img">
+                                <img
+                                    class="productCard__img-size"
+                                    src="{% static 'home/images/3d_printer.png' %}"
+                                    alt="3d Printer"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%; height: auto">
+            <div style="text-align: center; width: 100%; margin-top: 60px;">
+                <div class="topTitle">
+                    <h4 class="title">
+                        <span class="subTitle">Make your Own</span>
+                        <span class="mainTitle">Customize 3D Printer</span>
+                    </h4>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 50px;">
+                <div class="col-md">
+                    <div class="row">
+
+                    </div>
+                </div>
+                <div class="col-md">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'home/js/flickity.pkgd.js' %}"></script>
+    <script defer="" src="{% static 'home/js/owl-carousel.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.js' %}"></script>
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+    <script src="{% static 'home/js/iconify.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{% load widget_tweaks %}
+{% load static %}
+
+<form method="post" novalidate>
+  {% csrf_token %}
+
+  <div class="modal-header">
+    <h3 class="modal-title">Rate Us</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+      {% for error in form.non_field_errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+
+
+      <div class="form-group">
+        <label for="{{ form.msg.id_for_label }}">Review message</label>
+        {% render_field form.msg class="form-control" placeholder="write a review message here" %}
+        <div class="{% if form.msg.errors %} invalid{% endif %}">
+          {% for error in form.msg.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+        {% render_field form.rating class="form-control" id="rating" style="visibility: hidden;" %}
+
+      <div class="form-group" style="margin-top: -30px;">
+        <a style="color: black; font-size:17px; font-weight: 400;">Rate:</a>
+        <div style="text-align: center;">
+          <div style="height: 40px; width: 40px; background-color: white; margin-right: 5px; display: inline-block;" id="star1" onclick="set_rating(1)">
+            <img src="{% static 'home/images/star_black.png' %}" style="height: 40px; width: 40px;">
+          </div>
+          <div style="height: 40px; width: 40px; background-color: white; margin-right: 5px; display: inline-block;" id="star2" onclick="set_rating(2)">
+            <img src="{% static 'home/images/star_black.png' %}" style="height: 40px; width: 40px;">
+          </div>
+          <div style="height: 40px; width: 40px; background-color: white; margin-right: 5px; display: inline-block;" id="star3" onclick="set_rating(3)">
+            <img src="{% static 'home/images/star_black.png' %}" style="height: 40px; width: 40px;">
+          </div>
+          <div style="height: 40px; width: 40px; background-color: white; margin-right: 5px; display: inline-block;" id="star4" onclick="set_rating(4)">
+            <img src="{% static 'home/images/star_black.png' %}" style="height: 40px; width: 40px;">
+          </div>
+          <div style="height: 40px; width: 40px; background-color: white; display: inline-block;" id="star5" onclick="set_rating(5)">
+            <img src="{% static 'home/images/star_black.png' %}" style="height: 40px; width: 40px;">
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+  <hr>
+
+  <div style="padding-top: 5px; padding-left: 18px; padding-bottom: 18px; padding-right: 18px; text-align: left;" >
+    <button id="post_btn" type="button" class="submit-btn btn btn-primary" disabled>Post</button>
+  </div>
+
+  <script type="text/javascript">
+    function set_rating(rating) {
+      document.getElementById("rating").value = rating;
+      post_btn_state();
+      for(var i=1; i<6; i++){
+        if(i<=rating){
+          document.getElementById("star"+i).style.backgroundColor='#00C8FF';
+        }
+        else{
+          document.getElementById("star"+i).style.backgroundColor='white';
+        }
+      }
+    }
+    function post_btn_state() {
+      var rating = document.getElementById("rating").value;
+      if(rating > 0){
+        document.getElementById("post_btn").disabled = false;
+      }
+      else{
+        document.getElementById("post_btn").disabled = true;
+      }
+
+    }
+  </script>
+
+</form>

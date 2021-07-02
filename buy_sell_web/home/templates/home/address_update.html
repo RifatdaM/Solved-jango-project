@@ -1,0 +1,91 @@
+{% load widget_tweaks %}
+
+<form method="post" novalidate>
+  {% csrf_token %}
+
+  <div class="modal-header">
+    <h3 class="modal-title">Edit Address</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+      {% for error in form.non_field_errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+
+
+      <div class="form-group">
+        <label for="{{ form.address.id_for_label }}">Address line 1</label>
+        {% render_field form.address class="form-control" value=profile.address %}
+        <div class="{% if form.address.errors %} invalid{% endif %}">
+          {% for error in form.address.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.address2.id_for_label }}">Address line 2</label>
+        {% render_field form.address2 class="form-control" value=profile.address2 %}
+        <div class="{% if form.address2.errors %} invalid{% endif %}">
+          {% for error in form.address2.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.city.id_for_label }}">City</label>
+        {% render_field form.city class="form-control" value=profile.city %}
+        <div class="{% if form.city.errors %} invalid{% endif %}">
+          {% for error in form.city.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.state.id_for_label }}">State</label>
+        {% render_field form.state class="form-control" value=profile.state %}
+        <div class="{% if form.state.errors %} invalid{% endif %}">
+          {% for error in form.state.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.zip.id_for_label }}">Zip code</label>
+        {% render_field form.zip class="form-control" value=profile.zip %}
+        <div class="{% if form.zip.errors %} invalid{% endif %}">
+          {% for error in form.zip.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.country_code.id_for_label }}">Country</label>
+        {% render_field form.country_code class="form-control" value=profile.country_code %}
+        <div class="{% if form.country_code.errors %} invalid{% endif %}">
+          {% for error in form.country_code.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+  </div>
+
+  <hr>
+
+  <div style="padding-top: 5px; padding-left: 18px; padding-bottom: 18px; padding-right: 18px; text-align: left;" >
+    <button type="button" class="btn btn-default" data-dismiss="modal" style="float: left;">Close</button>
+    <button type="button" class="submit-btn btn btn-primary" style="margin-left: 40px;">Update</button>
+  </div>
+
+</form>

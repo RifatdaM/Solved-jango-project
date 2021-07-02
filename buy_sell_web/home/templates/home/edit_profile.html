@@ -1,0 +1,400 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ user.first_name }} {{ user.last_name }}'s Dashboard</title>
+
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/style_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style3.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css' %}">
+
+
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170171654-1 "></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-170171654-1 ');
+    </script>
+
+
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Page Content  -->
+        <div id="contain2" style = "background-color: #f3f5f9; color: #717171">
+            <main role="main"  style="min-height: 85vh">
+                <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md" style="background-color:#fff; padding: 0px; margin:10px;">
+                        <!-- Form -->
+                        <div style="text-align:center; background-color: #bfc; padding: 15px;"><h4>Personal Information</h4></div>
+                        <div class="row" id="address_box" style="margin-top: 15px; margin-bottom: 15px; padding-right: 10px; padding-left:10px;">
+                            <div class="col-md" style="text-align:left;"><h6>Address:</h6></div>
+                            <div class="col-md">
+                                <a style="font-size: 12px;">
+                                    {{user_info.address}}, {{user_info.address2}}, <br>{{user_info.city}},<br>
+                                    {{user_info.state}}, {{user_info.zip}}, <br>{{user_info.country_code}}
+                                </a>
+                            </div>
+
+
+                              <div class="col-md" style="text-align:center;" id="pop_up_btn">
+                                <button class="address_edit btn btn-primary" type="button" name="button" style="color:#fff; font-size: 12px;">Edit</button>
+                              </div>
+
+                        </div>
+                        <div class="row" id="phone_box" style="margin-top: 15px; margin-bottom: 15px; padding-right: 10px; padding-left:10px;">
+                            <div class="col-md" style="text-align:left;"><h6>Phone:</h6></div>
+                            <div class="col-md">
+                                <a style="font-size: 12px;">
+                                    {{user_info.phone}}
+                                </a>
+                            </div>
+                              <div class="col-md" style="text-align:center;" id="pop_up_btn2">
+                                <button class="phone_edit btn btn-primary" type="button" name="button" style="color:#fff; font-size: 12px;">Edit</button>
+                              </div>
+                        </div>
+
+                        <div class="row" id="name_box" style="margin-top: 15px; margin-bottom: 15px; padding-right: 10px; padding-left:10px;">
+                            <div class="col-md" style="text-align:left;"><h6>Name:</h6></div>
+                            <div class="col-md">
+                                <a style="font-size: 12px;">
+                                    {{user.first_name}}  {{user.last_name}}
+                                </a>
+                            </div>
+                              <div class="col-md" style="text-align:center;">
+                                <button id="name_edit_btn" class="btn btn-primary" style="color:#fff; font-size: 12px; visibility:hidden;">Edit</button>
+                              </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md" style="background-color:#fff; padding: 0px; margin:10px; height: flex;">
+                        <div style="text-align:center; background-color: #bfc; padding: 15px;"><h4>Profile information & Security</h4></div>
+                        <div class="row" id="email_box" style="margin-top: 15px; margin-bottom: 15px; padding-right: 10px; padding-left:10px;">
+                            <div class="col-md" style="text-align:left;"><h6>Email:</h6></div>
+                            <div class="col-md">
+                                <a style="font-size: 12px;">
+                                    {{user.email}}
+                                </a>
+                            </div>
+                              <div class="col-md" style="text-align:center;">
+                                <button id="email_edit_btn" class="btn btn-primary" style="color:#fff; font-size: 12px; visibility:hidden;">Edit</button>
+                              </div>
+                        </div>
+                        <div class="row" id="id_box" style="margin-top: 15px; margin-bottom: 15px; padding-right: 10px; padding-left:10px;">
+                            <div class="col-md" style="text-align:left;"><h6>User ID:</h6></div>
+                            <div class="col-md">
+                                <a style="font-size: 12px;">
+                                    {{user.id}}
+                                </a>
+                            </div>
+                              <div class="col-md" style="text-align:center;">
+                                <button id="id_edit_btn" class="btn btn-primary" style="color:#fff; font-size: 12px; visibility:hidden;">Edit</button>
+                              </div>
+                        </div>
+                        <div class="row" id="password_box" style="margin-top: 15px; margin-bottom: 15px; padding-right: 10px; padding-left:10px;">
+                            <div class="col-md" style="text-align:left;"><h6>Password:</h6></div>
+                            <div class="col-md">
+                                <a style="font-size: 12px;">
+                                    *************
+                                </a>
+                            </div>
+
+
+                              <div class="col-md" style="text-align:center;" id="pop_up_btn3">
+                                <button class="password_change btn btn-primary" type="button" name="button" style="color:#fff; font-size: 12px;">Change</button>
+                              </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md" style="background-color:#fff; padding: 0px; margin:10px;">
+                        <!-- Form -->
+                        <div style="text-align:center; background-color: #bfc; padding: 15px;"><h4>Verification</h4></div>
+                        <div class="row" id="verification_box" style="margin-top: 15px; margin-bottom: 15px; padding-right: 10px; padding-left:10px;">
+                            <div class="col-md" style="text-align:left;"><h6>Acount Status:</h6></div>
+                            <div class="col-md">
+
+                                    {% if user_info.profile_status == 'not_verified' %}
+                                       <a style="font-size: 12px;">Not Verified</a>
+                                    {% elif user_info.profile_status == 'new' %}
+                                        <a style="font-size: 12px;">Not Verified</a>
+                                    {% elif user_info.profile_status == 'pending' %}
+                                        <a style="font-size: 12px;">Verification pending</a>
+                                    {% elif user_info.profile_status == 'verified' %}
+                                        <a style="font-size: 12px;">Verified</a>
+                                    {% endif %}
+
+                            </div>
+                              <div class="col-md" style="text-align:center;">
+                                  {% if user_info.profile_status == 'not_verified' %}
+                                    <a id="veerify_btn" class="btn btn-primary" href="{% url 'doc_upload' %}" style="color:#fff; font-size: 12px;">Verify</a>
+                                    {% elif user_info.profile_status == 'new' %}
+                                    <a id="veerify_btn" class="btn btn-primary" href="{% url 'address' %}" style="color:#fff; font-size: 12px;">Verify</a>
+                                    {% elif user_info.profile_status == 'pending' %}
+                                    <a id="veerify_btn" class="btn btn-primary" style="color:#fff; font-size: 12px; visibility: hidden;">Verify</a>
+                                    {% elif user_info.profile_status == 'verified' %}
+                                    <a id="veerify_btn" class="btn btn-primary" style="color:#fff; font-size: 12px; visibility: hidden;">Verify</a>
+                                    {% endif %}
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <!-- Form -->
+
+                    </div>
+
+                </div>
+            </main>
+            <nav class="navbar navbar-expand-lg" style="background-color: #7386D5">
+                <div class="container-fluid">
+
+                    <!-- <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" >
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button> -->
+                    <a class="navbar-brand mr-4" href="{% url 'home' %}">ExonTime</a>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" href="{% url 'home' %}">Exchange now</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home' %}#our_rates">Rates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home' %}#we_exchange">Reserves</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'dashboard' %}">My account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        <footer style="background-color:#373737;" id="footer" class="foot">
+            <div class="container" style="text-align: center; padding-top: 15px;">
+                <p style="color:#FFFFFF" ><strong>Copyright &copy; 2020 ExonTime </strong></p>
+            </div>
+        </footer>
+
+
+         </div>
+
+
+
+    </div>
+
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+    <!-- Popper.JS -->
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.js' %}"></script>
+
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <!-- You can alternatively load the minified version -->
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $(".address_edit").modalForm({
+        formURL: "{% url 'address_update' %}"
+    });
+
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $(".phone_edit").modalForm({
+        formURL: "{% url 'phone_update' %}"
+    });
+
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $(".password_change").modalForm({
+        formURL: "{% url 'password_change' %}"
+    });
+
+});
+</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content, .navbar, .navbar-btn, .foot, .foot2').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+
+    </script>
+
+
+  <script type="text/javascript">
+
+      function DropDown(el) {
+          this.dd = el;
+          this.placeholder = this.dd.children('span');
+          this.opts = this.dd.find('ul.dropdown > li');
+          this.val = '';
+          this.index = -1;
+          this.initEvents();
+      }
+      DropDown.prototype = {
+          initEvents : function() {
+              var obj = this;
+
+              obj.dd.on('click', function(event){
+                  $(this).toggleClass('active');
+                  return false;
+              });
+
+              obj.opts.on('click',function(){
+                  var opt = $(this);
+                  obj.val = opt.text();
+                  obj.index = opt.index();
+                  obj.placeholder.text(obj.val);
+                  document.getElementById("in1").value = obj.val;
+              });
+          },
+          getValue : function() {
+              return this.val;
+          },
+          getIndex : function() {
+              return this.index;
+          }
+      }
+
+      $(function() {
+
+          var dd = new DropDown( $('#dd') );
+
+          $(document).click(function() {
+              // all dropdowns
+              $('.wrapper-dropdown-3').removeClass('active');
+          });
+
+      });
+
+  </script>
+<script type="text/javascript">
+        function idleTimer() {
+            var t;
+            window.onload = resetTimer;
+            //window.onmousemove = resetTimer;
+            //window.onmousedown = resetTimer;
+            window.onclick = resetTimer;
+            window.onscroll = resetTimer;
+            window.onkeypress = resetTimer;
+
+            function logout() {
+                window.location.href = "{% url 'logout' %}";
+            }
+
+           function reload() {
+                  window.location = self.location.href;
+           }
+
+           function resetTimer() {
+                clearTimeout(t);
+                t = setTimeout(logout, 1800000);
+                //t= setTimeout(reload, 300000);
+            }
+        }
+        {% if user.is_authenticated %}
+        idleTimer();
+        {% endif %}
+    </script>
+     <script type="text/javascript">
+    var refreshStream = function(){
+        $.ajax({
+            url: "{% url 'settings' %}",
+            method: 'GET',
+            data: {},
+            success: function(response){
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+    var total_seconds = 900;
+    setInterval(function(){
+        refreshStream();
+    },total_seconds * 1000);
+
+    </script>
+</body>
+
+</html>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5eaebdd910362a7578be90c0/1e7fdbpi0';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->

@@ -1,0 +1,75 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+{% include "home/header.html" %}
+    <div class="site-content">
+        <div style="margin-left: 70px; margin-right: 70px; padding-top: 30px;">
+            <div class="row">
+                <a style="font-weight: 50; font-size: 30px;">
+                    Catalogue(s)
+                </a>
+            </div>
+            <div class="row" style="margin-top: 80px; margin-bottom: 80px;">
+                <div class="col-md" style="text-align: center; max-width: 33%;">
+                    <div>
+                        <img src="{% static 'home/images/Residential-Cover-150x150.jpg'%}">
+                        <br>
+                        <br>
+                        <a style="font-weight: 50; font-size: 15px; color: #0c5460">
+                            Residential Air Conditioner
+                        </a>
+                        <br>
+                        <br>
+
+                        <a class="transition-btn-rev-download" href="{% static 'home/pdfs/Wall-Mount.pdf'%}" download>
+                            Download
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md" style="text-align: center; max-width: 33%;">
+                    <div>
+                        <img src="{% static 'home/images/Light-Commercial-Cover-150x150.jpg' %}">
+                        <br>
+                        <br>
+                        <a style="font-weight: 50; font-size: 15px; color: #0c5460">
+                            Light Commercial Air Conditioner
+                        </a>
+                        <br>
+                        <br>
+                        <a class="transition-btn-rev-download" href="{% static 'home/pdfs/Light-Commercial.pdf'%}" download>
+                            Download
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md" style="text-align: center; max-width: 33%;">
+                    <div>
+                        <img src="{% static 'home/images/Commercial-Cover-150x150.png' %}">
+                        <br>
+                        <br>
+                        <a style="font-weight: 50; font-size: 15px; color: #0c5460">
+                            Commercial Air Conditioner
+                        </a>
+                        <br>
+                        <br>
+                        <a class="transition-btn-rev-download" href="{% static 'home/pdfs/Commercial.pdf'%}" download>
+                            Download
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% include "home/footer.html" %}
+    </div>
+
+
+
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

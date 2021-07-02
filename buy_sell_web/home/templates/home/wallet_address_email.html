@@ -1,0 +1,9 @@
+{% autoescape off %}
+Hi {{ user.username }},
+You have placed an order for {{ to_be_sent }} {{ rcv_unit }} to be received at {{ receive_at }} account: "{{ rcv_account }}".
+And you have selected {{ sent_from }} for making payment. Please send amount {{ sent_amount }} {{ send_unit }} to following wallet address.
+Yow will receive your payment after we receive at-least one confirmation.
+Order ID: {{ order_id }}
+BTC wallet address: {{ wallet_address }}
+Or you can get the wallet address from order details of pending orders.
+{% endautoescape %}

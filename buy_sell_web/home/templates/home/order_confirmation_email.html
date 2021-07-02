@@ -1,0 +1,8 @@
+{% autoescape off %}
+Hi {{ user.username }},
+Thank You for Placing an order at exontime.com. Your order id is: {{ order_id }}
+You can track your order with this ID.
+Your Order details:
+Send: {{ sent_amount }} {{ sent_from }} {{ sent_unit }}
+receive: {{ receive_amount }} {{ receive_at }} {{ receive_unit }}
+{% endautoescape %}

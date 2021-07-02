@@ -1,0 +1,822 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>MARQUEEHVAC | Air Condition</title>
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/flickity.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'home/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+            <div class="container">
+                <img src="{% static 'home/images/logo.png' %}" style="height: 50px; width: 50px;">
+                <a class="navbar-brand mr-4" href="{% url 'home' %}" style="color: black; margin-left: 30px;">MARQUEE HVAC</a>
+
+                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+
+                </div>
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="#">Home</a>
+                        <a class="nav-item nav-link" href="#">About Us</a>
+                        <div class="dropdown">
+                            <a class="nav-item nav-link" href="#">Products
+                                <i class="fa fa-caret-down"></i>
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                        </div>
+                        <a class="nav-item nav-link" href="#">Downloads</a>
+                        <a class="nav-item nav-link" href="#">Services</a>
+                        <a class="nav-item nav-link" href="#">Contact US</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="site-content">
+        <div class="top-bg-div-cloud">
+            <div class="bg-div" style="background-image: url('{% static 'home/images/background.jpg'%}');">
+                <div class="zoom-out">
+
+                </div>
+            </div>
+            <div class="cloud-div-jq">
+                <img class="cloud-img" src="{% static 'home/images/slider-clouds.png'%}">
+            </div>
+            <div class="ac_image_div">
+                <img class="ac_image_top" src="{% static 'home/images/ac_home_page.png' %}">
+            </div>
+        </div>
+
+        <div class="slide-from-left slide-from-left-outer-div">
+            <div class="row slide-from-left-row-div">
+                <div class="col-md slide-from-left-col-md-div">
+                    <div class="slide-from-left-image-div">
+                        <img class="slide-from-left-image" src="{% static 'home/images/slide_from_left1.jpg' %}">
+                    </div>
+                    <div class="slide-from-left-text-div">
+                        <br>
+                        <a>MANUFACTURING</a>
+                        <br>
+                        <br>
+                        <p>
+                            Kendo is the largest air conditioner manufacturer in Malaysia, specialised in commercial air conditioner production for different industry need. We own an 10-acre factory with full facilities, warehouse and research & development department based in Malaysia.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md slide-from-left-col-md-div">
+                    <div class="slide-from-left-image-div">
+                        <img class="slide-from-left-image" src="{% static 'home/images/slide_from_left2.jpg' %}">
+                    </div>
+                    <div class="slide-from-left-text-div">
+                        <br>
+                        <a>AIR-CON OEM</a>
+                        <br>
+                        <br>
+                        <p>
+                            We have dedicated sale team and consultation service to suggesting the righteous air conditioning solution for various business industry use. We have certified experts in handling all technical issues, including servicing and installation.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md slide-from-left-col-md-div">
+                    <div class="slide-from-left-image-div">
+                        <img class="slide-from-left-image" src="{% static 'home/images/slide_from_left3.jpg' %}">
+                    </div>
+                    <div class="slide-from-left-text-div">
+                        <br>
+                        <a>FULL RANGE OF AIR-CONDITIONER</a>
+                        <br>
+                        <br>
+                        <p>
+                            We provide maintenance and repair service as well, we have own facility and genuine spare parts manufactured locally for component replacement. All parts and products are in line with the company’s strict policy on quality consistency.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-blue-div">
+            <div class="slide-from-left slide-from-left-in-blue-div">
+                <div class="row slide-from-left-in-blue-row-div">
+                    <div class="col-md-10 slide-from-left-in-blue-col-md-10-div">
+                        <div class="slide-from-left-in-blue-text-div">
+                            <a class="slide-from-left-in-blue-text" style="color: white">Find out more about MarqueeHVAC and our services support</a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 slide-from-left-in-blue-col-md-2-div">
+                        <div class="slide-from-left-in-blue-btn-div">
+                            <a class="transition-btn">
+                                Services
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-from-left slide-from-left-on-plant-bg-outer-div">
+            <div class="row slide-from-left-on-plant-bg-row-div">
+                <div class="col-md slide-from-left-on-plant-bg-col-md-div">
+                    <div class="slide-from-left-on-plant-bg-col-md-inner-div">
+                        <div class="slide-from-left-on-plant-bg-text-div">
+                            <a class="slide-from-left-on-plant-bg-text">
+                                We have every solution for air conditioning
+                            </a>
+                            <br>
+                            <br>
+                            <p>
+                                Kendo Appliances Malaysia Sdn Bhd is an ISO certified company specialised in air conditioner manufacturing, we’re committed to constantly delivery a more efficient quality air conditioning products to our customers
+                            </p>
+                        </div>
+                        <br>
+                        <div class="slide-from-left-on-plant-bg-btn-div">
+                            <a class="transition-btn-rev">
+                                ABOUT US
+                            </a>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="slide-from-left-on-plant-bg-list-div">
+                            <div class="slide-from-left-on-plant-bg-list-el">
+                                <div class="slide-from-left-on-plant-bg-list-el1-i-div">
+                                    <i class="fa fa-industry slide-from-left-on-plant-bg-list-el1-i"></i>
+                                </div>
+                                <div class="slide-from-left-on-plant-bg-list-el1-a-div">
+                                    <a class="slide-from-left-on-plant-bg-list-el1-a">
+                                        OEM , Manufacturing, Research & Develop
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="slide-from-left-on-plant-bg-list-el">
+                                <div class="slide-from-left-on-plant-bg-list-el2-i-div">
+                                    <i class="fa fa-certificate slide-from-left-on-plant-bg-list-el3-i"></i>
+                                </div>
+                                <div class="slide-from-left-on-plant-bg-list-el1-a-div">
+                                    <a class="slide-from-left-on-plant-bg-list-el1-a">
+                                        Sales, Servicing, Support, Marketing
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="slide-from-left-on-plant-bg-list-el">
+                                <div class="slide-from-left-on-plant-bg-list-el3-i-div">
+                                    <i class="fa fa-lock slide-from-left-on-plant-bg-list-el3-i"></i>
+                                </div>
+                                <div class="slide-from-left-on-plant-bg-list-el1-a-div">
+                                    <a class="slide-from-left-on-plant-bg-list-el1-a">
+                                        Repair , Genuine Spare Parts
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md slide-from-left-on-plant-bg-col-md-div">
+                    <div class="slide-from-left-on-plant-bg-img-div">
+                        <img style="width: 100%; height: auto;" src="{% static 'home/images/central-ac.png' %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-in-plant-bg-outer-div">
+            <div class="slide-in-plant-bg-bg-holder-div" style="background-image: url('{% static 'home/images/plant_bg.jpeg' %}');">
+                <div class="slide-in-plant-bg-slider-div slide-from-left">
+                    <div class="slide-in-plant-div-padding-div-in-slider">
+                        <div class="slide-in-plant-div-left-floated-div">
+                            <div class="slide-in-plant-div-not-expandable-text-div">
+                                <a class="slide-in-plant-div-not-expandable-text-head">
+                                    How can we help you?
+                                </a>
+                                <br>
+                                <br>
+                                <p>
+                                    We committed the deliver the best air conditioning service to all of our customers. Dedicated sales and support team ready in providing assistance for any air-conditioning need.
+                                </p>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="slide-in-plant-div-expandable-text-div">
+                                <div class="slide-in-plant-div-expandable-text-title-div" id="expandable-menu-1" onclick="expand_block('1')">
+                                    <div class="slide-in-plant-div-expandable-text-title-text-div">
+                                        <a class="slide-in-plant-div-expandable-text-title-text" id="expandable-menu-1-text">
+                                            Residential
+                                        </a>
+                                    </div>
+                                    <div class="slide-in-plant-div-expandable-text-title-plus-sign-div">
+                                        <a class="slide-in-plant-div-expandable-text-title-plus-sign" id="expandable-menu-1-plus">
+                                            +
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="slide-in-plant-div-expanded-text-outer-dev" id="expanded-text-1">
+                                    <div class="slide-in-plant-div-expanded-text-inner-dev">
+                                        <a class="slide-in-plant-div-expanded-text">
+                                            We have wide range of air-conditions selection with different fitting need for residential use.
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="slide-in-plant-div-expandable-text-title-div" id="expandable-menu-2" onclick="expand_block('2')">
+                                    <div class="slide-in-plant-div-expandable-text-title-text-div">
+                                        <a class="slide-in-plant-div-expandable-text-title-text" id="expandable-menu-2-text">
+                                            Commercial
+                                        </a>
+                                    </div>
+                                    <div class="slide-in-plant-div-expandable-text-title-plus-sign-div">
+                                        <a class="slide-in-plant-div-expandable-text-title-plus-sign" id="expandable-menu-2-plus">
+                                            +
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="slide-in-plant-div-expanded-text-outer-dev" id="expanded-text-2">
+                                    <div class="slide-in-plant-div-expanded-text-inner-dev">
+                                        <a class="slide-in-plant-div-expanded-text">
+                                            Need the perfect solution for your business air-conditioning? Contact us to find out more about our air-conditioner products
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="slide-in-plant-div-expandable-text-title-div-last" id="expandable-menu-3" onclick="expand_block('3')">
+                                    <div class="slide-in-plant-div-expandable-text-title-text-div">
+                                        <a class="slide-in-plant-div-expandable-text-title-text" id="expandable-menu-3-text">
+                                            Repair
+                                        </a>
+                                    </div>
+                                    <div class="slide-in-plant-div-expandable-text-title-plus-sign-div">
+                                        <a class="slide-in-plant-div-expandable-text-title-plus-sign" id="expandable-menu-3-plus">
+                                            +
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="slide-in-plant-div-expanded-text-outer-dev" id="expanded-text-3">
+                                    <div class="slide-in-plant-div-expanded-text-inner-dev">
+                                        <a class="slide-in-plant-div-expanded-text">
+                                           We have qualified servicing technician ready to fix all technical-related issue, feel free to contact us for more warranty and spare parts enquiry
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-in-grey-bg-outer-div">
+            <div class="slide-in-grey-bg-bg-holder-div" style="background-image: url('{% static 'home/images/light-grey-background.jpg' %}');">
+                <div class="slide-in-grey-bg-slider-div slide-from-left">
+                    <div class="slide-in-grey-bg-padding-div">
+                        <div class="slide-in-grey-bg-top-text-para-div-outer">
+                            <div class="slide-in-grey-bg-top-text-para-div-inner">
+                                <a class="slider-in-grey-bg-top-text">INCOMPARABLE PRODUCTS RELIABILITY & PERFORMANCE YOU CAN COUNT ON</a>
+                                <br>
+                                <br>
+                                <a class="slide-in-grey-bg-top-p">Proved product quality, a solid air-conditioning brand choice by customers all over the world.</a>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="slide-in-grey-bg-bottom-div">
+                            <div class="row slide-in-grey-bg-bottom-div-row">
+                                <div class="col-md slide-in-grey-bg-bottom-col-div">
+                                    <div class="slide-in-grey-bg-in-col-div">
+                                        <div class="slide-in-grey-bg-in-col-div-flot-left">
+                                            <a class="slide-in-grey-bg-in-col-div-flot-left-text">
+                                                5x Cooler than average
+                                            </a>
+                                        </div>
+                                        <div class="slide-in-grey-bg-in-col-div-flot-right">
+                                            <a class="slide-in-grey-bg-in-col-div-flot-right-text count" data-value="500">
+                                                500%
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr class="slide-in-grey-bg-hr-blue">
+                                    <br>
+                                    <div class="slide-in-grey-bg-under-blue-hr-div">
+                                        <a class="slide-in-grey-bg-under-blue-hr-text">
+                                            Ultra effective cooling than average conventional air-conditioner
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md slide-in-grey-bg-bottom-col-div">
+                                    <div class="slide-in-grey-bg-in-col-div">
+                                        <div class="slide-in-grey-bg-in-col-div-flot-left">
+                                            <a class="slide-in-grey-bg-in-col-div-flot-left-text">
+                                                3X More durable
+                                            </a>
+                                        </div>
+                                        <div class="slide-in-grey-bg-in-col-div-flot-right">
+                                            <a class="slide-in-grey-bg-in-col-div-flot-right-text count" data-value="300">
+                                                300%
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr class="slide-in-grey-bg-hr-blue">
+                                    <br>
+                                    <div class="slide-in-grey-bg-under-blue-hr-div">
+                                        <a class="slide-in-grey-bg-under-blue-hr-text">
+                                            Build to last, sustainable and durable performance
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md slide-in-grey-bg-bottom-col-div">
+                                    <div class="slide-in-grey-bg-in-col-div">
+                                        <div class="slide-in-grey-bg-in-col-div-flot-left">
+                                            <a class="slide-in-grey-bg-in-col-div-flot-left-text">
+                                                2x faster cooling
+                                            </a>
+                                        </div>
+                                        <div class="slide-in-grey-bg-in-col-div-flot-right">
+                                            <a class="slide-in-grey-bg-in-col-div-flot-right-text count" data-value="200">
+                                                200%
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr class="slide-in-grey-bg-hr-blue">
+                                    <br>
+                                    <div class="slide-in-grey-bg-under-blue-hr-div">
+                                        <a class="slide-in-grey-bg-under-blue-hr-text">
+                                            Super fast cooling to freeze up your space within minutes
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="photo-slide-div">
+            <div class="photo-slide-div-inner-div">
+                <div class="row photo-slide-div-row-div">
+                    <div class="col-md photo-slide-div-row-div-col-div-with-bg-image" >
+                        <img class="photo-slide-div-row-div-col-div-with-bg-image-image" src="{% static 'home/images/beautiful-living-room-683x1024.jpg' %}">
+                    </div>
+                    <div class="col-md photo-slide-div-row-div-col-div-2">
+                        <div class="photo-slide-div-row-div-col-div-2-inner-div">
+                            <div class="photo-slide-div-row-div-col-div-2-inner-div-inner-div">
+                                <a class="photo-slide-div-row-div-col-div-2-inner-div-inner-div-a">
+                                    AWARD WINING FOR EXCELLENT PRODUCTS’ QUALITY AND RELIABILITY.
+                                </a>
+                                <br>
+                                <br>
+                                <a class="photo-slide-div-row-div-col-div-2-inner-div-inner-div-a2">
+                                    Kendo Appliances Malaysia is the best choice available on market when comes to air-conditioning, Kendo Appliances Malaysia is an ISO certified manufacturer company, specialised in providing air conditioning services for residential to commercial use.
+                                </a>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="photo-slide-div-row-div-col-div-2-inner-div-inner-div-2">
+                                <div class="slideshow-container">
+                                    <div class="mySlides fade">
+                                        <div class="numbertext">
+                                            1 / 3
+                                        </div>
+                                        <img src="img1.jpg" class="photo-slide-div-row-div-col-div-2-inner-div-inner-div-2-slide-img">
+                                        <div class="text">
+                                            Caption Text
+                                        </div>
+                                    </div>
+
+                                    <div class="mySlides fade">
+                                        <div class="numbertext">
+                                            2 / 3
+                                        </div>
+                                        <img src="img2.jpg" class="photo-slide-div-row-div-col-div-2-inner-div-inner-div-2-slide-img">
+                                        <div class="text">
+                                            Caption Two
+                                        </div>
+                                    </div>
+
+                                    <div class="mySlides fade">
+                                        <div class="numbertext">
+                                            3 / 3
+                                        </div>
+                                        <img src="img3.jpg" class="photo-slide-div-row-div-col-div-2-inner-div-inner-div-2-slide-img">
+                                        <div class="text">
+                                            Caption Three
+                                        </div>
+                                    </div>
+                                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                                </div>
+                                <br>
+                                <div class="photo-slide-div-row-div-col-div-2-inner-div-inner-div-2-slide-dots">
+                                    <span class="dot" onclick="currentSlide(1)"></span>
+                                    <span class="dot" onclick="currentSlide(2)"></span>
+                                    <span class="dot" onclick="currentSlide(3)"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message-section">
+            <div class="message-section-inner-div">
+                <div class="row">
+                    <div class="col-md message-section-inner-div-col-div-1">
+                        <div class="message-section-inner-div-col-div-1-inner-div">
+                            <a class="message-section-inner-div-col-div-1-inner-div-a-1">
+                                Best air-condition manufacturer in Malaysia
+                            </a>
+                            <br>
+                            <br>
+                            <img class="message-section-inner-div-col-div-1-inner-div-img" src="{% static 'home/images/DSC_0420-300x200.jpg' %}">
+                            <br>
+                            <br>
+                            <a class="message-section-inner-div-col-div-1-inner-div-a-2">
+                                KENDO APPLIANCES MALAYSIA SDN BHD (1214573-D)
+                            </a>
+                            <br>
+                            <a class="message-section-inner-div-col-div-1-inner-div-a-3">
+                                20-3-2, JALAN SETIA PRIMA (Q) U13/Q
+                                SETIA ALAM, SEKSYEN U13
+                                40170 SHAH ALAM, SELANGOR D.E MALAYSIA
+                            </a>
+                            <br>
+                            <br>
+                            <div class="message-section-inner-div-col-div-1-inner-div-inner-div">
+                                <div class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-1">
+                                    <i class="fa fa-phone message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-1-i"></i>
+                                </div>
+                                <div class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-2">
+                                    <a class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-2-a">
+                                        +603-3343 0686
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="message-section-inner-div-col-div-1-inner-div-inner-div">
+                                <div class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-1">
+                                    <i class="fa fa-fax message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-1-i"></i>
+                                </div>
+                                <div class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-2">
+                                    <a class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-2-a">
+                                        +603 3343 2525
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md message-section-inner-div-col-div-2">
+                        <div class="message-section-inner-div-col-div-2-inner-div">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Name</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example.com">
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Message</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-custom">
+            <div class="footer-custom-inner-div">
+                <div class="row">
+                    <div class="col-md footer-custom-inner-div-col-div-1">
+                        <a class="footer-custom-inner-div-col-div-1-a-1">
+                           KENDO APPLIANCES MY
+                        </a>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-1-a-2">
+                           Kendo Appliances Malaysia Sdn Bhd is an ISO certified company specialised in air conditioner manufacturing and committed to constantly deliver a more efficient and quality air conditioning products.
+                        </a>
+                        <br>
+                        <br>
+                        <div class="footer-custom-inner-div-col-div-1-inner-div">
+                            <div class="footer-custom-inner-div-col-div-1-inner-div-inner-div">
+                                <img class="footer-custom-inner-div-col-div-1-inner-div-inner-div-img" src="{% static 'home/images/fb-logo-150x150.png' %}">
+                            </div>
+                            <div class="footer-custom-inner-div-col-div-1-inner-div-inner-div-2">
+                                <a class="footer-custom-inner-div-col-div-1-inner-div-inner-div-2-a">
+                                   Follow us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md footer-custom-inner-div-col-div-2">
+                        <a class="footer-custom-inner-div-col-div-2-a-1">
+                           Services
+                        </a>
+                        <br>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-2-a-2">
+                           Manufacturing
+                        </a>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-2-a-2">
+                           Customization
+                        </a>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-2-a-2">
+                           OEM
+                        </a>
+                    </div>
+                    <div class="col-md footer-custom-inner-div-col-div-3">
+                        <a class="footer-custom-inner-div-col-div-3-a-1">
+                           Products Type
+                        </a>
+                        <br>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-3-a-2">
+                           CASSETTE NON-INVERTER
+                        </a>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-3-a-2">
+                           WALL MOUNTED
+                        </a>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-3-a-2">
+                           PORTABLE
+                        </a>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-3-a-2">
+                           FLOOR STANDING
+                        </a>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-3-a-2">
+                           CEILING MOUNTED
+                        </a>
+                        <br>
+                        <br>
+                        <a class="footer-custom-inner-div-col-div-3-a-2">
+                           ACCESSORIES
+                        </a>
+                    </div>
+                    <div class="col-md footer-custom-inner-div-col-div-4">
+                        <img class="footer-custom-inner-div-col-div-4-img" src="{% static 'home/images/logo.png' %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'home/js/flickity.pkgd.js' %}"></script>
+    <script defer="" src="{% static 'home/js/owl-carousel.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.js' %}"></script>
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+    <script src="{% static 'home/js/iconify.min.js' %}"></script>
+
+    <script type="text/javascript">
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+    </script>
+
+    <script type="text/javascript">
+        var section = document.querySelector('.slide-in-grey-bg-bottom-div');
+        var hasEntered = false;
+
+        window.addEventListener('scroll', (e) => {
+            var shouldAnimate = (window.scrollY + window.innerHeight) >= section.offsetTop;
+
+            if (shouldAnimate && !hasEntered) {
+                hasEntered = true;
+
+                $('.count').each(function () {
+                    $(this).prop('Counter',0).animate({
+                    Counter: $(this).data('value')
+                    }, {
+                    duration: 4000,
+                    easing: 'swing',
+                    step: function (now) {
+                        var cnt = Math.ceil(now);
+                        var text = '';
+                        text = text + cnt + '%';
+                        $(this).text(text);
+                    }
+                    });
+                });
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        function expand_block(number) {
+            var id = 'expanded-text-' + number;
+            var id_menu = 'expandable-menu-' + number;
+            var id_menu_text = 'expandable-menu-' + number + '-text';
+            var id_menu_plus = 'expandable-menu-' + number + '-plus';
+            var element = document.getElementById(id);
+            var element_menu = document.getElementById(id_menu);
+            var element_menu_text = document.getElementById(id_menu_text);
+            var element_menu_plus = document.getElementById(id_menu_plus);
+            var check = element_menu_plus.innerHTML.indexOf('+');
+            if(check >= 0){
+                element.setAttribute("style", "display: block;");
+                element_menu.setAttribute("style", "background-color: #0c94e3;");
+                element_menu_text.setAttribute("style", "color: white;");
+                element_menu_plus.setAttribute("style", "color: white;");
+                element_menu_plus.innerHTML = '-';
+                element_menu.onmouseover = function()
+                {
+                    this.style.backgroundColor = "#0c94e3";
+                    element_menu_text.setAttribute("style", "color: white;");
+                    element_menu_plus.setAttribute("style", "color: white;");
+                }
+                element_menu.onmouseleave = function()
+                {
+                    this.style.backgroundColor = "#0c94e3";
+                    element_menu_text.setAttribute("style", "color: white;");
+                    element_menu_plus.setAttribute("style", "color: white;");
+                }
+            }
+            else{
+                element.setAttribute("style", "display: none;");
+                element_menu.setAttribute("style", "background-color: white;");
+                element_menu_text.setAttribute("style", "color: #444444;");
+                element_menu_plus.setAttribute("style", "color: #444444;");
+                element_menu_plus.innerHTML = '+';
+                element_menu.onmouseover = function()
+                {
+                    this.style.backgroundColor = "#0c94e3";
+                    element_menu_text.setAttribute("style", "color: white;");
+                    element_menu_plus.setAttribute("style", "color: white;");
+                }
+                element_menu.onmouseleave = function()
+                {
+                    this.style.backgroundColor = "white";
+                    element_menu_text.setAttribute("style", "color: #444444;");
+                    element_menu_plus.setAttribute("style", "color: #444444;");
+                }
+            }
+
+        }
+    </script>
+
+    <script type="text/javascript">
+        function slide_left() {
+            $(".cloud-img").animate({
+                    marginLeft: "-220px",
+                    overflow: "hidden",
+                },
+                20000,
+                slide_right
+            );
+        }
+        function slide_right() {
+            $(".cloud-img").animate({
+                    marginLeft: "-120px",
+                    overflow: "hidden",
+                },
+                20000,
+                slide_left
+            );
+        }
+        $(document).ready(function() {
+            slide_left();
+        });
+    </script>
+
+    <script type="text/javascript">
+        let animation1 = document.querySelector('.bg-div');
+        let animation2 = document.querySelector('.zoom-out');
+        //let animation3 = document.querySelector('.cloud-div');
+
+        window.addEventListener('focus', function() {
+            animation1.style.animationPlayState = 'running';
+            animation2.style.animationPlayState = 'running';
+            //animation3.style.animationPlayState = 'running';
+        });
+
+        window.addEventListener('blur', function() {
+
+            animation1.style.animationPlayState = 'paused';
+            animation2.style.animationPlayState = 'paused';
+            //animation3.style.animationPlayState = 'paused';
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var animation_elements = $.find('.slide-from-left');
+            var web_window = $(window);
+            function check_if_in_view() {
+                var window_height = web_window.height();
+                var window_top_position = web_window.scrollTop();
+                var window_bottom_position = (window_top_position + window_height);
+
+                $.each(animation_elements, function() {
+                    var element = $(this);
+                    var element_height = $(element).outerHeight();
+                    var element_top_position = $(element).offset().top;
+                    var element_bottom_position = (element_top_position + element_height);
+
+                    if ((element_bottom_position >= window_top_position) && (element_top_position <= window_bottom_position)) {
+                        element.animate({
+                                marginLeft: "0px",
+                            },
+                            1000,
+                        );
+                    }
+                    else {
+                        /*element.animate({
+                                marginLeft: "-500px",
+                            },
+                            20,
+                        );*/
+                    }
+                });
+            }
+
+            $(window).on('scroll resize', function() {
+                check_if_in_view()
+            })
+
+            $(window).trigger('scroll');
+
+        });
+    </script>
+
+</body>
+</html>

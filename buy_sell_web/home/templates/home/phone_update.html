@@ -1,0 +1,40 @@
+{% load widget_tweaks %}
+
+<form method="post" novalidate>
+  {% csrf_token %}
+
+  <div class="modal-header">
+    <h3 class="modal-title">Edit phone number</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+      {% for error in form.non_field_errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+
+
+      <div class="form-group">
+        <label for="{{ form.phone.id_for_label }}">Phone number</label>
+        {% render_field form.phone class="form-control" value=profile.phone %}
+        <div class="{% if form.phone.errors %} invalid{% endif %}">
+          {% for error in form.phone.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+  </div>
+  <hr>
+
+  <div style="padding-top: 5px; padding-left: 18px; padding-bottom: 18px; padding-right: 18px; text-align: left;" >
+    <button type="button" class="btn btn-default" data-dismiss="modal" style="float: left;">Close</button>
+    <button type="button" class="submit-btn btn btn-primary" style="margin-left: 40px;">Update</button>
+  </div>
+
+</form>

@@ -1,0 +1,111 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<main role="main" class="container">
+      <div>
+        <div class="col-md">
+    <div class="content-section" style="padding: 30px">
+        <h2 style="text-align: center">Uploaded documents</h2>
+        <br>
+        <a> To activate your account we are required to verify your identity. Please ensure that you have one form of Photo ID in addition to a document verifying your Proof of Residence ready for upload. Please follow the steps below. </a>
+        <br>
+        <br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+           <div class="form-col">
+               <H3>Proof of Identity(Photo ID)</H3>
+               <div style="font-weight:bold;">PHOTO ID SHOULD BE:</div>
+                <br>
+                <div style="display:flex;"><div style="flex:0 0 36px;"><img src="{% static 'home/images/tick_mark.png' %}"></div><div style="flex:1 0;">Valid Passport</div></div>
+                <div style="display:flex;"><div style="flex:0 0 36px;">&nbsp;</div><div style="flex:1 0; color:#87b439; font-style:italic;">OR</div></div>
+                <div style="display:flex;"><div style="flex:0 0 36px;"><img src="{% static 'home/images/tick_mark.png' %}"></div><div style="flex:1 0;">Valid Government ID, such as a Drivers Licence or State ID</div></div>
+                <div style="display:flex;"><div style="flex:0 0 36px;">&nbsp;</div><div style="flex:1 0; color:#87b439; font-style:italic;">OR</div></div>
+                <div style="display:flex;"><div style="flex:0 0 36px;"><img src="{% static 'home/images/tick_mark.png' %}"></div><div style="flex:1 0;">Valid National Identity Card</div></div>
+                <br>
+                <div style="display:flex;"><div style="flex:0 0 36px;"><img style="margin-left:-6px;" src="{% static 'home/images/warning_shield.png' %}"></div><div style="flex:1 0;">All photo ID documents must be valid and clearly show your full name, date of birth and issue / expiry date.</div></div>
+                <br>
+               <div style="font-size:16px; font-weight:bold; color:#87b439;">Please upload a colour copy of your Passport, Driver License or Government Issued Photo ID</div>
+                <br>
+                <div style="font-weight:bold;">Please note:</div>
+                <br>
+                <div style="display:flex;"><div style="flex:0 0 26px;"><img style="height: 20px; width: 20px;" src="{% static 'home/images/arrow.png' %}"></div><div style="flex:1 0;">Your photo ID is clear and visible</div></div>
+                <div style="display:flex;"><div style="flex:0 0 26px;"><img style="height: 20px; width: 20px;" src="{% static 'home/images/arrow.png' %}"></div><div style="flex:1 0;">Your ID is issued by a Government Agency</div></div>
+                <div style="display:flex;"><div style="flex:0 0 26px;"><img style="height: 20px; width: 20px;" src="{% static 'home/images/arrow.png' %}"></div><div style="flex:1 0;">Your Name, Date of Birth and Expiry/Issue Date are clearly shown</div></div>
+                <br>
+              <div class="col-md-8 mb-3">
+                <!-- <label for="first_name">First name</label> -->
+                <!-- <input type="text" class="form-control" id="validationServer01" placeholder="First name" required> -->
+                {% render_field formset.file %}
+                  <div>{{ formset.errors.file }}</div>
+                <!-- <div class="valid-feedback">
+                  Looks good!
+                </div> -->
+              </div>
+               <div style="font-size:12px;">
+                            <div style="flex:1 0; font-weight:bold;">FILE TYPES:</div>
+                            <div style="flex:3 0;">.pdf, .jpeg, .jpg; max file size 10 Mb.</div>
+               </div>
+               <br>
+               <H3>Proof of Residence</H3>
+               <div style="font-weight:bold;">PROOF OF RESIDENCE SHOULD BE:</div>
+                <br>
+                <div style="display:flex;"><div style="flex:0 0 36px;"><img src="{% static 'home/images/tick_mark.png' %}"></div><div style="flex:1 0;">Utility Bill, Phone Bill, Internet Bill</div></div>
+                <div style="display:flex;"><div style="flex:0 0 36px;">&nbsp;</div><div style="flex:1 0; color:#87b439; font-style:italic;">OR</div></div>
+                <div style="display:flex;"><div style="flex:0 0 36px;"><img src="{% static 'home/images/tick_mark.png' %}"></div><div style="flex:1 0;">Bank Statement</div></div>
+
+
+                <br>
+                <br>
+                <div style="display:flex;"><div style="flex:0 0 36px;"><img style="margin-left:-6px;" src="{% static 'home/images/warning_shield.png' %}"></div><div style="flex:1 0;">All proof of residences must be current and not outdated by more than 90 days, show the full document, clearly display the name and address (no PO Boxes), and show a provision of services such as money owed or paid.</div></div>
+                <br>
+               <div style="font-size:16px; font-weight:bold; color:#87b439;">Please upload your proof of residence</div>
+                <br>
+                <div style="font-weight:bold;">Please note:</div>
+                <br>
+                <div style="display:flex;"><div style="flex:0 0 26px;"><img style="height: 20px; width: 20px;" src="{% static 'home/images/arrow.png' %}"></div><div style="flex:1 0;">Your photo ID is clear and visible</div></div>
+                <div style="display:flex;"><div style="flex:0 0 26px;"><img style="height: 20px; width: 20px;" src="{% static 'home/images/arrow.png' %}"></div><div style="flex:1 0;">Your ID is issued by a Government Agency</div></div>
+                <div style="display:flex;"><div style="flex:0 0 26px;"><img style="height: 20px; width: 20px;" src="{% static 'home/images/arrow.png' %}"></div><div style="flex:1 0;">Your Name, Date of Birth and Expiry/Issue Date are clearly shown</div></div>
+                <br>
+              <div class="col-md-8 mb-3">
+                <!-- <label for="validationServer02">Last name</label>
+                <input type="text" class="form-control" id="validationServer02" placeholder="Last name"required> -->
+
+                {% render_field formset.file2 %}
+                  <div>{{ formset.errors.file2 }}</div>
+                <!-- <div class="valid-feedback">
+                  Looks good!
+                </div> -->
+              </div>
+               <div style="font-size:12px;">
+                            <div style="flex:1 0; font-weight:bold;">FILE TYPES:</div>
+                            <div style="flex:3 0;">.pdf, .jpeg, .jpg; max file size 10 Mb.</div>
+               </div>
+               <br>
+               <br>
+           </div>
+            <div class="form-group" style="align: center">
+
+                <button class="form-control" type="submit">Submit</button>
+
+            </div>
+        </form>
+    </div>
+                    </div>
+        <!-- <div class="col-md-4">
+          <div class="content-section">
+            <h3>Our Sidebar</h3>
+            <p class='text-muted'>You can put any information here you'd like.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Latest Posts</li>
+                <li class="list-group-item list-group-item-light">Announcements</li>
+                <li class="list-group-item list-group-item-light">Calendars</li>
+                <li class="list-group-item list-group-item-light">etc</li>
+              </ul>
+            </p>
+          </div>
+        </div> -->
+      </div>
+    </main>
+{% endblock content %}

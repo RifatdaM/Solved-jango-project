@@ -1,0 +1,19 @@
+	Alias /static /home/imran/website-files/buy_sell_web/static
+        <Directory /home/imran/website-files/buy_sell_web/static>
+                Require all granted
+        </Directory>
+
+        Alias /media /home/imran/website-files/buy_sell_web/media
+        <Directory /home/imran/website-files/buy_sell_web/media>
+                Require all granted
+        </Directory>
+
+        <Directory /home/imran/website-files/buy_sell_web/buy_sell_web>
+                <Files wsgi.py>
+                        Require all granted
+                </Files>
+        </Directory>
+
+        WSGIScriptAlias / /home/imran/website-files/buy_sell_web/buy_sell_web/wsgi.py
+        WSGIDaemonProcess exontime_app python-path=/home/imran/website-files/buy_sell_web/ python-home=/home/imran/website-files/venv
+        WSGIProcessGroup exontime_app

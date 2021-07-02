@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{ user.username }},
+Your order with order id: {{ order_id }} has been canceled. If you have paid for this order you will be refunded soon. 
+Order details are shown below:
+Send: {{ sent_amount }} {{ sent_from }} {{ send_unit }} 
+receive: {{ to_be_sent }} {{ receive_at }} {{ rcv_unit }}
+{% endautoescape %}

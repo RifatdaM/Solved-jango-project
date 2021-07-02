@@ -1,0 +1,116 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+{% include "home/header.html" %}
+    <div class="site-content">
+        <div style="margin-bottom: 70px;">
+            <div id="map"></div>
+        </div>
+        <div class="message-section">
+            <div class="message-section-inner-div">
+                <div class="row">
+                    <div class="col-md message-section-inner-div-col-div-1">
+                        <div class="message-section-inner-div-col-div-1-inner-div">
+                            <a class="message-section-inner-div-col-div-1-inner-div-a-1">
+                                Best air-condition manufacturer in Malaysia
+                            </a>
+                            <br>
+                            <br>
+                            <img class="message-section-inner-div-col-div-1-inner-div-img" src="{% static 'home/images/DSC_0420-300x200.jpg' %}">
+                            <br>
+                            <br>
+                            <a class="message-section-inner-div-col-div-1-inner-div-a-2">
+                                KENDO APPLIANCES MALAYSIA SDN BHD (1214573-D)
+                            </a>
+                            <br>
+                            <a class="message-section-inner-div-col-div-1-inner-div-a-3">
+                                20-3-2, JALAN SETIA PRIMA (Q) U13/Q
+                                SETIA ALAM, SEKSYEN U13
+                                40170 SHAH ALAM, SELANGOR D.E MALAYSIA
+                            </a>
+                            <br>
+                            <br>
+                            <div class="message-section-inner-div-col-div-1-inner-div-inner-div">
+                                <div class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-1">
+                                    <i class="fa fa-phone message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-1-i"></i>
+                                </div>
+                                <div class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-2">
+                                    <a class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-2-a">
+                                        +603-3343 0686
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="message-section-inner-div-col-div-1-inner-div-inner-div">
+                                <div class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-1">
+                                    <i class="fa fa-fax message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-1-i"></i>
+                                </div>
+                                <div class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-2">
+                                    <a class="message-section-inner-div-col-div-1-inner-div-inner-div-inner-div-2-a">
+                                        +603 3343 2525
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md message-section-inner-div-col-div-2">
+                        <div class="message-section-inner-div-col-div-2-inner-div">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Name</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example.com">
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Message</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% include "home/footer.html" %}
+    </div>
+
+
+
+{% endblock content %}
+
+{% block js %}
+<script type="text/javascript">
+    function initMap() {
+        const uluru = { lat: -23, lng: 90};
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            center: uluru,
+        });
+        const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+        });
+    }
+</script>
+ <script
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjT3A2XgyBSpX2UEk_1kSNkYjoMN_8Bb4&callback=initMap&libraries=&v=weekly"
+     async>
+ </script>
+
+{% endblock js %}

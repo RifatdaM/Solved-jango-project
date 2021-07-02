@@ -1,0 +1,1621 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>ExonTime | Exchange your cash</title>
+
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/home_style10.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/float_btn14.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css' %}">
+    <script src="{% static 'home/js/iconify.min.js' %}"></script>
+
+
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/flickity.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'home/css/font-awesome.css' %}">
+</head>
+
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'home' %}">ExonTime</a>
+
+          <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'dashboard' %}" style="color: white;">My account</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}" style="color: white;">Logout</a>
+                {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}" style="color: white;">Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}" style="color: white;">Register</a>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+        <div id="content">
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                </div>
+              </div>
+            </div>
+                <div id="replace_it" class="wave1">
+                    {% if messages %}
+                    <div class="messages" style="background-color: #406080; padding: 10px; border-radius: 10px; text-align: center; margin-bottom: 8px">
+                        {% for message in messages %}
+                        <a  style="color:white;" {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="col-md" id="exchanger_exontime">
+                        <div class = "money_ex_form" style = "background-color: transparent; border-radius: 10px">
+                            {% if user.is_authenticated %}
+                            <form method="post" novalidate>
+                                {% csrf_token %}
+                                <div class="form-group" style="text-align:center; margin: 40px;">
+                                     <a style="font-size: 20px; color:#000">Exchange</a>
+                                     <br>
+                                     <a class="heading_home" style="color: black;" id="exchange_head"></a>
+                                 </div>
+                                 <div class="form-group">
+                                     <div class="row">
+                                         <div class="col-md">
+                                             <div style="text-align: left; margin-left: 8px;">
+                                                <a style="color:#333; font-weight: 500;">You spend</a>
+                                            </div>
+                                         <div class="col-md box_border" style="">
+                                                <div class="num">
+                                                    {% render_field form.sent_amount id="number1" class="form-control" step="0.01" tabindex="1" placeholder="0.00" type="number" style="font-weight: 600; font-size: 25px; height: 60px; background: transparent; border-color: transparent;" oninput="refreshOrderForm1();" %}
+                                                </div>
+                                                 <div class="select">
+                                                     {% render_field form.sent_from id="from_select" class="form-control form-control-lg select_item" onchange="refreshOrderForm1();" %}
+                                                </div>
+
+                                        </div>
+                                         <div>
+                                             <div style="text-align: left; margin-left: 8px; float: left;">
+                                                <a style="font-weight: 400; font-size:14px; color: red;" id="from_notice"></a>
+                                            </div>
+                                             <div style="text-align: Right; margin-right: 0px;">
+                                                <a style="color:#333; font-weight: 600; font-size:25px;" id="from_unit"></a>
+                                            </div>
+                                         </div>
+                                         </div>
+
+                                         <div class="col-md-1 box_button" style="text-align:center;">
+                                                 <i class='fas fa-exchange-alt arrow' style="font-size:45px"></i>
+                                         </div>
+
+                                         <div class="col-md">
+                                             <div style="text-align: left; margin-left: 8px;">
+                                                <a style="color:#333; font-weight: 500;">You receive</a>
+                                            </div>
+                                         <div class="col-md box_border">
+
+                                                <div class="num">
+                                                    {% render_field form.to_be_sent id="number2" class="form-control" style="font-weight: 600; font-size:25px; height: 60px; background: transparent; border-color: transparent;" tep="0.01" tabindex="1" placeholder="0.00" type="number" oninput="refreshOrderForm2();" %}
+                                                </div>
+                                                 <div class="select">
+                                                     {% render_field form.receive_at id="to_select" class="form-control form-control-lg select_item" onchange="refreshOrderForm1();" %}
+                                                </div>
+
+
+                                        </div>
+                                         <div>
+                                             <div style="text-align: left; margin-left: 8px; float: left; margin-bottom: 20px;">
+                                                <a style="font-weight: 400; font-size:14px; color: red;" id="to_notice"></a>
+                                            </div>
+                                             <div style="text-align: Right; margin-right: 0px;">
+                                                <a style="color:#333; font-weight: 600; font-size:25px;" id="to_unit"></a>
+                                            </div>
+                                         </div>
+                                         </div>
+                                         <div class="col-md buy_btn" >
+                                            <button class="buy_btn_btn" type="submit" id="buy_button">
+                                                Buy
+                                            </button>
+                                        </div>
+                                     </div>
+                                 </div>
+                            </form>
+                            {% else %}
+                                 <div class="form-group" style="text-align:center; margin: 40px;">
+                                     <a style="font-size: 20px; color:#000">Exchange</a>
+                                     <br>
+                                     <a class="heading_home" style="color: black;" id="exchange_head"></a>
+                                 </div>
+                                 <div class="form-group">
+                                     <div class="row">
+                                         <div class="col-md">
+                                             <div style="text-align: left; margin-left: 8px;">
+                                                <a style="color:#333; font-weight: 500;">You spend</a>
+                                            </div>
+                                         <div class="col-md box_border" style="">
+                                                <div class="num">
+                                                    <input oninput="refreshOrderForm1();" step="0.01"; tabindex="1"; placeholder="0.00" type="number" class="form-control" id="number1" style="font-weight: 600; font-size: 25px; height: 60px; background: transparent; border-color: transparent;">
+                                                </div>
+                                                 <div class="select">
+                                                    <select class="form-control form-control-lg select_item" id="from_select" onchange="refreshOrderForm1();" >
+                                                        <option value="paypal">Paypal</option>
+                                                        <option value="payoneer">Payoneer</option>
+                                                        <option value="skrill">Skrill</option>
+                                                        <option value="neteller">Neteller</option>
+                                                        <option value="bkash">Bkash</option>
+                                                        <option value="btcusd">BTC USD</option>
+                                                    </select>
+                                                </div>
+
+                                        </div>
+                                         <div>
+                                             <div style="text-align: left; margin-left: 8px; float: left;">
+                                                <a style="font-weight: 400; font-size:14px; color: red;" id="from_notice"></a>
+                                            </div>
+                                             <div style="text-align: Right; margin-right: 0px;">
+                                                <a style="color:#333; font-weight: 600; font-size:25px;" id="from_unit"></a>
+                                            </div>
+                                         </div>
+                                         </div>
+
+                                         <div class="col-md-1 box_button" style="text-align:center;">
+                                                 <i class='fas fa-exchange-alt arrow' style="font-size:45px"></i>
+                                         </div>
+
+                                         <div class="col-md">
+                                             <div style="text-align: left; margin-left: 8px;">
+                                                <a style="color:#333; font-weight: 500;">You receive</a>
+                                            </div>
+                                         <div class="col-md box_border">
+
+                                                <div class="num">
+                                                    <input oninput="refreshOrderForm2();" step="0.01"; tabindex="1"; placeholder="0.00" type="number" class="form-control" id="number2" style="font-weight: 600; font-size:25px; height: 60px; background: transparent; border-color: transparent;">
+                                                </div>
+                                                 <div class="select">
+                                                    <select class="form-control form-control-lg select_item" id="to_select" onchange="refreshOrderForm1();">
+                                                        <option value="payoneer">Payoneer</option>
+                                                        <option value="paypal">Paypal</option>
+                                                        <option value="skrill">Skrill</option>
+                                                        <option value="neteller">Neteller</option>
+                                                        <option value="bkash">Bkash</option>
+                                                        <option value="btcusd">BTC USD</option>
+                                                    </select>
+                                                </div>
+
+
+                                        </div>
+                                         <div>
+                                             <div style="text-align: left; margin-left: 8px; float: left; margin-bottom: 20px;">
+                                                <a style="font-weight: 400; font-size:14px; color: red;" id="to_notice"></a>
+                                            </div>
+                                             <div style="text-align: Right; margin-right: 0px;">
+                                                <a style="color:#333; font-weight: 600; font-size:25px;" id="to_unit"></a>
+                                            </div>
+                                         </div>
+                                         </div>
+                                         <div class="col-md buy_btn" >
+                                            <button onclick="window.location.href = '{% url 'login' %}';" class="buy_btn_btn" id="buy_button">
+                                                Buy
+                                            </button>
+                                        </div>
+                                     </div>
+                                 </div>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <div style="text-align:center; margin-bottom:20px;" >
+                                <a style="color:#333; font-weight: 500; font-size:18px;">Commission details:</a>
+                            </div>
+                            <div class="row">
+                                <div class="col-md" style="margin-bottom:20px;">
+                                    <div style="text-align:center;">
+                                        <a style="color:#333; font-weight: 350; font-size:18px;" id="commission_from"></a>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <a style="color:#333; font-weight: 350; font-size:18px;" id="commission_from_am">0% 0.00USD</a>
+                                    </div>
+                                </div>
+                                <div class="col-md" style="margin-bottom:20px;">
+                                    <div style="text-align:center;">
+                                        <a style="color:#333; font-weight: 350; font-size:18px;">ExonTime</a>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <a style="color:#333; font-weight: 350; font-size:18px;" id="commission_exontime_am">0% 0.00USD</a>
+                                    </div>
+                                </div>
+                                <div class="col-md" style="margin-bottom:20px;">
+                                    <div style="text-align:center;">
+                                        <a style="color:#333; font-weight: 350; font-size:18px;" id="commission_to"></a>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <a style="color:#333; font-weight: 350; font-size:18px;" id="commission_to_am"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="our_rates">
+                            <div style="text-align:center; margin: 15px;">
+                                <a style="color:#000; font-weight: 500; font-size:22px; ">Our buying rates</a>
+                            </div>
+                            <div style="margin-top: 20px; margin-bottom: 30px;">
+                                <div class="rates js-flickity" style="background: transparent;">
+                                    {% for rate in rates %}
+                                    {% if rate.title != 'bkash' %}
+                                  <div class="rates-cell" style="border-radius: 8px;">
+                                      <div>
+                                          <div style="margin-top: 0px; margin-right: 12px; margin-bottom: -10px; text-align: left; margin-left: 8px; float:left;">
+                                              <img style="height: 20px; width: 20px; background-color: #fff; margin-top: -4px;" src="{% get_static_prefix %}home/images/{{rate.title}}_round.png">
+                                              <a style="color:#000; font-weight: 500; font-size:18px;">{{ rate.title }} $1.00</a>
+                                          </div>
+                                          <div style="margin-top: 8px; margin-bottom: -10px; text-align: right; margin-right: 8px;">
+                                              <a style="color:#000; font-weight: 350; font-size:15px;" id="{{ rate.title }}_perc">0.00%</a>
+                                          </div>
+                                      </div>
+
+                                      <hr>
+                                      <div>
+                                          <div style="margin-top: -13px; float:left; margin-left:15px;">
+                                              <a style="color:#000; font-weight: 500; font-size:18px;">{{ rate.bkash }}</a>
+                                          </div>
+                                          <div style="margin-top: -13px; float:right; margin-right: 15px;">
+                                              <a style="color:#000; font-weight: 500; font-size:18px;">BDT</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  {% endif %}
+                                  {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div style="text-align:center; margin: 15px;">
+                                <a style="color:#000; font-weight: 500; font-size:22px; ">Our selling rates</a>
+                            </div>
+
+                            <div style="margin-top: 20px; margin-bottom: 30px;">
+                                <div class="rates js-flickity" style="background: transparent;">
+                                    {% for rate in rates %}
+                                    {% if rate.title != 'bkash' %}
+                                  <div class="rates-cell" style="border-radius: 8px;">
+                                      <div>
+                                          <div style="margin-top: 0px; margin-right: 12px; margin-bottom: -10px; text-align: left; margin-left: 8px; float:left;">
+                                              <img style="height: 20px; width: 20px; background-color: #fff; margin-top: -4px;" src="{% get_static_prefix %}home/images/{{rate.title}}_round.png">
+                                              <a style="color:#000; font-weight: 500; font-size:18px;">{{ rate.title }} $1.00</a>
+                                          </div>
+                                          <div style="margin-top: 8px; margin-bottom: -10px; text-align: right; margin-right: 8px;">
+                                              <a style="color:#000; font-weight: 350; font-size:15px;" id="{{ rate.title }}_sell_perc">0.00%</a>
+                                          </div>
+                                      </div>
+                                      <hr>
+                                      <div>
+                                          <div style="margin-top: -13px; float:left; margin-left:15px;">
+                                              <a style="color:#000; font-weight: 500; font-size:18px;" id="{{ rate.title }}_sell_price">0.00</a>
+                                          </div>
+                                          <div style="margin-top: -13px; float:right; margin-right: 15px;">
+                                              <a style="color:#000; font-weight: 500; font-size:18px;">BDT</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <hr style="border-top: 1px dashed ">
+
+                    <div class="we_exchange">
+                    <div id="we_exchange">
+                        <a class="responsive_heading" style="color:black;">We exchange</a>
+                        <div class="row" style="margin: 10px;">
+                            {% for rate in rates_1 %}
+                            <div class="col-md ex_table">
+                                <a style="color: black; font-size: 27px; font-weight: 500;">{{rate.title}}</a>
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col" style="font-size: 17px;">Minimum</th>
+                                      <th scope="col" style="font-size: 17px;">Maximum</th>
+                                      <th scope="col" style="font-size: 17px;">Reserve</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size: 17px;">{{rate.minim}} {{rate.unit}}</td>
+                                      <td style="font-size: 17px;">{{rate.maxim}} {{rate.unit}}</td>
+                                      <td style="font-size: 17px;" id="{{rate.title}}_res">{{rate.reserve_am|floatformat:2}} {{rate.unit}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="row" style="margin: 10px;">
+                            {% for rate in rates_2 %}
+                            <div class="col-md ex_table">
+                                <a style="color: black; font-size: 27px; font-weight: 500;">{{rate.title}}</a>
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col" style="font-size: 17px;">Minimum</th>
+                                      <th scope="col" style="font-size: 17px;">Maximum</th>
+                                      <th scope="col" style="font-size: 17px;">Reserve</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size: 17px;">{{rate.minim}} {{rate.unit}}</td>
+                                      <td style="font-size: 17px;">{{rate.maxim}} {{rate.unit}}</td>
+                                      <td style="font-size: 17px;" id="{{ rate.title }}_res">{{rate.reserve_am|floatformat:2}} {{rate.unit}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                    </div>
+                 </div>
+
+
+            <div style="background-color:#fff;" class="our_feature">
+                <div class="container">
+                    <div style="text-align: center;"><a class="responsive_heading" style="color: black;">Our Features</a></div>
+                    <div class="row" style="margin-top: 30px; margin-bottom: 40px;">
+                        <div class="col-md" style="text-align: center; margin-bottom: 30px;">
+                            <div>
+                                <img style="height: 80px; width: 80px; background: transparent;" src="{% static 'home/images/easy_exchange.webp' %}">
+                            </div>
+                            <a style="color: black; font-size: 27px; font-weight: 500;">Easy exchange</a>
+                            <br>
+                            <a style="color: black; font-size: 20px; font-weight: 350;">Our money exchange system is very much easy and user friendly.</a>
+                        </div>
+                        <div class="col-md" style="text-align: center; margin-bottom: 30px;">
+                            <div>
+                                <img style="height: 80px; width: 80px; background: transparent;" src="{% static 'home/images/fast_payout.webp' %}">
+                            </div>
+                            <a style="color: black; font-size: 27px; font-weight: 500;">Fast payout</a>
+                            <br>
+                            <a style="color: black; font-size: 20px; font-weight: 350;">Fast payouts - no more waiting time. Exchange your cash within a very short time.</a>
+                        </div>
+                        <div class="col-md" style="text-align: center; margin-bottom: 30px;">
+                            <div>
+                                <img style="height: 80px; width: 80px; background: transparent;" src="{% static 'home/images/low_commission.png' %}">
+                            </div>
+                            <a style="color: black; font-size: 27px; font-weight: 500;">Less Commission</a>
+                            <br>
+                            <a style="color: black; font-size: 20px; font-weight: 350;">Great commission structure for all transactions with no hidden fees.</a>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-md" style="text-align: center; margin-bottom: 30px;">
+                            <div>
+                                <img style="height: 80px; width: 80px; background: transparent;" src="{% static 'home/images/easy_verification.png' %}">
+                            </div>
+                            <a style="color: black; font-size: 27px; font-weight: 500;">Easy Verification</a>
+                            <br>
+                            <a style="color: black; font-size: 20px; font-weight: 350;">Our service aims to provide fast data processing, which reflects on the verification process.</a>
+                        </div>
+                        <div class="col-md" style="text-align: center; margin-bottom: 30px;">
+                            <div>
+                                <img style="height: 80px; width: 80px; background: transparent;" src="{% static 'home/images/secure.png' %}">
+                            </div>
+                            <a style="color: black; font-size: 27px; font-weight: 500;">Secure transactions</a>
+                            <br>
+                            <a style="color: black; font-size: 20px; font-weight: 350;">We securely exchange your cash.</a>
+                        </div>
+                        <div class="col-md" style="text-align: center; margin-bottom: 30px;">
+                            <div>
+                                <img style="height: 80px; width: 80px; background: transparent;" src="{% static 'home/images/support2.png' %}">
+                            </div>
+                            <a style="color: black; font-size: 27px; font-weight: 500;">24/7 live support</a>
+                            <br>
+                            <a style="color: black; font-size: 20px; font-weight: 350;">Our dedicated support team is ready to help you out via email or live chat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="transactions" style="text-align:center; background: white;" id="transfer_24">
+                <div style="margin: 20px;">
+                    <a class="responsive_heading" style="color:black;">
+                        {% if transaction_today.transaction_amount__sum %}
+                            {{ transaction_today.transaction_amount__sum|floatformat:2 }} USD transactions in last 24hrs
+                        {% else %}
+                            0 USD transactions in last 24hrs
+                        {% endif %}
+                    </a>
+                </div>
+                <div style="margin: 20px;">
+                    <a style="font-size: 20px; font-weoght: 400; color:black;">See our transactions in realtime</a>
+                </div>
+                {% for order in orders %}
+                <hr>
+                <div class="row">
+                    <div class="col-md">
+                        <ul style="list-style-type:none; margin: 0; padding: 0;">
+                            <li>
+                                <div style="float:left">
+                                  <div style="float: left;">
+                                      <img class="history_im1" style="background-color: #fff; margin-top: 8px;" src="{% get_static_prefix %}home/images/{{order.sent_from}}_round.png">
+                                  </div>
+                                  <div style="text-align:left; float: right; margin-left: 20px;">
+                                      <div>
+                                          <a class="history_a2" style="font-weight: 600; color: black;">
+                                              {% if order.sent_from == 'btcusd' %}
+                                                Bitcoin
+                                              {% else %}
+                                                {{ order.sent_from }}
+                                              {% endif %}
+                                          </a>
+                                      </div>
+                                      <div>
+                                          <a class="history_a1" style="font-weight: 600; color: black;">{{ order.sent_amount }} {{ order.send_unit }}</a>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div style="float:right;">
+                                  <div style="float: right;">
+                                      <img class="history_im1" style="background-color: #fff; margin-top: 8px;" src="{% get_static_prefix %}home/images/{{order.receive_at}}_round.png">
+                                  </div>
+                                  <div style="text-align:right; float: left; margin-right: 20px;">
+                                      <div>
+                                          <a class="history_a2" style="font-weight: 600; color: black;">
+                                              {% if order.receive_at == 'btcusd' %}
+                                                Bitcoin
+                                              {% else %}
+                                                {{ order.receive_at }}
+                                              {% endif %}
+                                          </a>
+                                      </div>
+                                      <div>
+                                          <a class="history_a1" style="font-weight: 600; color: black;">{{ order.to_be_sent }} {{ order.rcv_unit }}</a>
+                                      </div>
+                                  </div>
+                                </div>
+                          </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-3" style="text-align:right;">
+                        <a class="history_t" style="font-weight: 400; color: black;">{{ order.date_ordered|naturaltime }}</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="join_today" style="background-color: white;">
+                <div class="join_today_inner">
+                    <div class="row">
+                        <div class="col-md">
+                            <div style="text-align: left;">
+                                <a style="font-size: 25px; font-weight: 600; color: black;">Exchange your cash in Just a Few Minutes!</a>
+                            </div>
+                            <div style="text-align: left;">
+                                <a style="font-size: 20px; font-weight: 400; color: black;">The best way to exchange crypto and e-money around the world. </a>
+                            </div>
+                        </div>
+                        <div class="col-md" style="text-align: right; padding-top: 35px;">
+
+                            {% if user.is_authenticated %}
+                            <button onclick="window.location.href = '{% url 'home' %}';" class="buy_btn_btn2" style="max-width: 250px;">Exchange Now</button>
+                            {% else %}
+                            <button onclick="window.location.href = '{% url 'register' %}';" class="buy_btn_btn2" style="max-width: 250px;">Get Started</button>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tutorial" style="text-align:center; background: white;">
+                 <a class="responsive_heading" style="color:black;">How to exchange money using ExonTime</a>
+
+                <div class="tuto_collapse_in">
+                    <div>
+                        <div>
+                            <div style="float:left;">
+                                <a style="font-size: 35px; font-weight: 600; color: black;">01</a>
+                            </div>
+                            <div style="text-align: left; margin-left: 60px;">
+                                <a class="collapsible tutorial_font_step" style="color: black;">
+                                    Enter the value of bitcoin you want purchase
+                                </a>
+                                <div class="collapse_content">
+                                  <div class="text-block" style="text-align: left;">
+                                        When you choose to buy Bitcoin with credit card or debit card, you will need to do the following:
+                                        <ul>
+                                            <li>Enter the amount you wish to exchange into Bitcoin value.&nbsp;</li>
+                                            <li>After that’s done, click the “Start Transaction” button to buy BTC with debit card or credit card.</li>
+                                        </ul>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <div>
+                            <div style="float:left;">
+                                <a style="font-size: 35px; font-weight: 600; color: black;">01</a>
+                            </div>
+                            <div style="text-align: left; margin-left: 60px;">
+                                <a class="collapsible tutorial_font_step" style="color: black;">
+                                    Enter the value of bitcoin you want purchase
+                                </a>
+                                <div class="collapse_content">
+                                  <div class="text-block" style="text-align: left;">
+                                        When you choose to buy Bitcoin with credit card or debit card, you will need to do the following:
+                                        <ul>
+                                            <li>Enter the amount you wish to exchange into Bitcoin value.&nbsp;</li>
+                                            <li>After that’s done, click the “Start Transaction” button to buy BTC with debit card or credit card.</li>
+                                        </ul>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <div>
+                            <div style="float:left;">
+                                <a style="font-size: 35px; font-weight: 600; color: black;">01</a>
+                            </div>
+                            <div style="text-align: left; margin-left: 60px;">
+                                <a class="collapsible tutorial_font_step" style="color: black;">
+                                    Enter the value of bitcoin you want purchase
+                                </a>
+                                <div class="collapse_content">
+                                  <div class="text-block" style="text-align: left;">
+                                        When you choose to buy Bitcoin with credit card or debit card, you will need to do the following:
+                                        <ul>
+                                            <li>Enter the amount you wish to exchange into Bitcoin value.&nbsp;</li>
+                                            <li>After that’s done, click the “Start Transaction” button to buy BTC with debit card or credit card.</li>
+                                        </ul>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <div>
+                            <div style="float:left;">
+                                <a style="font-size: 35px; font-weight: 600; color: black;">01</a>
+                            </div>
+                            <div style="text-align: left; margin-left: 60px;">
+                                <a class="collapsible tutorial_font_step" style="color: black;">
+                                    Enter the value of bitcoin you want purchase
+                                </a>
+                                <div class="collapse_content">
+                                  <div class="text-block" style="text-align: left;">
+                                        When you choose to buy Bitcoin with credit card or debit card, you will need to do the following:
+                                        <ul>
+                                            <li>Enter the amount you wish to exchange into Bitcoin value.&nbsp;</li>
+                                            <li>After that’s done, click the “Start Transaction” button to buy BTC with debit card or credit card.</li>
+                                        </ul>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <div>
+                            <div style="float:left;">
+                                <a style="font-size: 35px; font-weight: 600; color: black;">01</a>
+                            </div>
+                            <div style="text-align: left; margin-left: 60px;">
+                                <a class="collapsible tutorial_font_step" style="color: black;">
+                                    Enter the value of bitcoin you want purchase
+                                </a>
+                                <div class="collapse_content">
+                                  <div class="text-block" style="text-align: left;">
+                                        When you choose to buy Bitcoin with credit card or debit card, you will need to do the following:
+                                        <ul>
+                                            <li>Enter the amount you wish to exchange into Bitcoin value.&nbsp;</li>
+                                            <li>After that’s done, click the “Start Transaction” button to buy BTC with debit card or credit card.</li>
+                                        </ul>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="why_choose_us">
+                <div class="why_choose_us_head"><a class="responsive_heading" style="color: black;">Why people choose ExonTime</a></div>
+                <div class="wave_div">
+                    <div class="container h-100">
+                        <div class="row" style="text-align: center;">
+                            <div class="col-md why_us_margin" style="text-align:center;">
+                                <i class="fas fa-check-circle"  style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 30px; font-weight: 400;">No hidden fees</a>
+                            </div>
+                            <div class="col-md why_us_margin" style="text-align:center;">
+                                <i class="fas fa-check-circle"  style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 30px; font-weight: 400;">Easy Exchange</a>
+
+                            </div>
+                            <div class="col-md why_us_margin" style="text-align:center;">
+                                <i class="fas fa-check-circle"  style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 30px; font-weight: 400;">Easy verification process</a>
+
+                            </div>
+                            <div class="col-md why_us_margin" style="text-align:center; ">
+                                <i class="fas fa-check-circle"  style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 30px; font-weight: 400;">24/7 live support</a>
+
+                            </div>
+
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row" style="text-align: center;">
+                            <div class="col-md why_us_margin" style="text-align:center;">
+                                <i class="iconify" data-icon="fa-regular:check-circle" data-inline="false" style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 20px; font-weight: 300;">Instant payout</a>
+                            </div>
+                            <div class="col-md why_us_margin" style="text-align:center;">
+                                <i class="iconify" data-icon="fa-regular:check-circle" data-inline="false" style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 20px; font-weight: 300;">Lowest fee in the market</a>
+
+                            </div>
+                            <div class="col-md why_us_margin" style="text-align:center;">
+                                <i class="iconify" data-icon="fa-regular:check-circle" data-inline="false" style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 20px; font-weight: 300;">Excellent option for beginners and pros</a>
+
+                            </div>
+                            <div class="col-md why_us_margin" style="text-align:center;">
+                                <i class="iconify" data-icon="fa-regular:check-circle" data-inline="false" style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 20px; font-weight: 300;">Serving whole country</a>
+
+                            </div>
+                            <div class="col-md why_us_margin" style="text-align:center;">
+                                <i class="iconify" data-icon="fa-regular:check-circle" data-inline="false" style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 20px; font-weight: 300;">More than $120,000 in annual transactions</a>
+
+                            </div>
+                            <div class="col-md why_us_margin" style="text-align:center;">
+                                <i class="iconify" data-icon="fa-regular:check-circle" data-inline="false" style="font-size:48px; color: black;"></i>
+                                <br>
+                                <br>
+                                <a style="color: black; font-size: 20px; font-weight: 300;">10-person team with expertise and experience</a>
+
+                            </div>
+
+                        </div>
+                        <hr style="border-top: 3px solid black">
+                        <div class="row">
+                            <div class="col-md-4 review_show" id="why_ffff_us">
+                                <div class="review_show1" style="margin-top: 20px;">
+                                    <div style="float:left; margin-right: 15px;">
+                                        <img style="height: 45px; width: 45px; background: transparent; margin-top: 10px;" src="{% static 'home/images/star.png' %}">
+                                    </div>
+                                    <div style="text-align:left;">
+                                        <div>
+                                            <a style="color: black; font-size: 28px; font-weight: 600;">
+                                                {% if total_rating.rating__avg %}
+                                                    {{total_rating.rating__avg|floatformat:1}}
+                                                {% else %}
+                                                    0.0
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                        <div style="margin-top: -10px;">
+                                            <a style="color: black; font-size: 20px; font-weight: 400;">Rating</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="review_show2" style="margin-top: 20px;">
+                                    <div style="float:left; margin-right: 15px;">
+                                        <img style="height: 45px; width: 45px; background: transparent; margin-top: 10px;" src="{% static 'home/images/review.png' %}">
+                                    </div>
+                                    <div style="text-align:left;">
+                                        <div>
+                                            <a style="color: black; font-size: 28px; font-weight: 600;">
+                                                {% if rev_ord_count.review_count %}
+                                                    {{ rev_ord_count.review_count }}
+                                                {% else %}
+                                                    0
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                        <div style="margin-top: -10px;">
+                                            <a style="color: black; font-size: 20px; font-weight: 400;">Riviews</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="review_show3" style="margin-top: 20px;">
+                                    <div style="float:left; margin-right: 15px;">
+                                        <img style="height: 45px; width: 45px; background: transparent; margin-top: 10px;" src="{% static 'home/images/transaction.png' %}">
+                                    </div>
+                                    <div style="text-align:left;">
+                                        <div>
+                                            <a style="color: black; font-size: 28px; font-weight: 600;">
+                                                {% if rev_ord_count.order_count %}
+                                                    {{ rev_ord_count.order_count }}
+                                                {% else %}
+                                                    0
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                        <div style="margin-top: -10px;">
+                                            <a style="color: black; font-size: 20px; font-weight: 400;">Transactions</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8" style="text-align: left; margin-top: 30px;" id="reviews_exontime">
+                                <div class="gallery js-flickity" style="background: transparent;">
+                                    {% for review in reviews %}
+                                    <div class="gallery-cell" style="border-radius: 8px;">
+                                        <div style="text-align:left; padding-left:20px; padding-top: 15px; padding-right:20px; padding-bottom: 15px;">
+                                            <div style="margin-bottom: 10px;">
+                                                <div style="margin-top: 0px; float:left;">
+                                                    <div style="float:left; margin-right: 8px;">
+                                                        <img style="height: 25px; width: 25px; background: transparent; margin-top: 7px;" src="{% static 'home/images/star.png' %}">
+                                                    </div>
+                                                    <div style="text-align:left; float:right; ">
+                                                        <div>
+                                                            <a style="color: black; font-size: 15px; font-weight: 600;">{{ review.rating }}</a>
+                                                        </div>
+                                                        <div style="margin-top: -10px;">
+                                                            <a style="color: black; font-size: 12px; font-weight: 400;">Rating</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="float:right;">
+                                                    <div>
+                                                        <a style="color: black; font-size: 15px; font-weight: 600;">
+                                                            By, {{review.user.first_name}} {{review.user.last_name}}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div style="padding: 5px; margin-top: 40px; width:calc(100%); height: 100px; border-radius: 5px; border-width:1px; border-color: #000; border-radius: 4px; border-style: solid;">
+                                                <a style="color: black; font-size: 12px; font-weight: 400;">{{ review.msg }}</a>
+                                            </div>
+
+                                            <div style="bottom:0px; width:calc(100%); text-align:right;">
+                                                <a style="color: black; font-size: 12px; font-weight: 400;">{{ review.date_created|naturaltime }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div style="margin-top: 35px; text-align: right;">
+                                    <div style="width: flex;">
+                                        <a class="anchor" href="" style="color: black; font-size: 18px; font-weight: 300;">Read all reviews</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="with_exontime" style="text-align:center;">
+                <div class="with_exontime_inner" style="text-align:center;">
+                    <div style="text-align:center;">
+                        <a class="responsive_heading" style="color:black;">With ExonTime you can</a>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-md">
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <img style="height: 20px; width: 20px; background-color: #fff;" src="{% static 'home/images/btcusd_round.png' %}">
+                                <a style="font-size: 20px; font-weight: 500; color: black; margin-left: 10px;">
+                                    Buy or sell Bitcoin
+                                </a>
+                            </div>
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <img style="height: 20px; width: 20px; background-color: #fff;" src="{% static 'home/images/neteller_round.png' %}">
+                                <a style="font-size: 20px; font-weight: 500; color: black; margin-left: 10px;">
+                                    Buy or sell Neteller
+                                </a>
+                            </div>
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <img style="height: 20px; width: 20px; background-color: #fff;" src="{% static 'home/images/skrill_round.png' %}">
+                                <a style="font-size: 20px; font-weight: 500; color: black; margin-left: 10px;">
+                                    Buy or sell Skrill
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <img style="height: 20px; width: 20px; background-color: #fff;" src="{% static 'home/images/paypal_round.png' %}">
+                                <a style="font-size: 20px; font-weight: 500; color: black; margin-left: 10px;">
+                                    sell Paypal
+                                </a>
+                            </div>
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <img style="height: 20px; width: 20px; background-color: #fff;" src="{% static 'home/images/payoneer_round.png' %}">
+                                <a style="font-size: 20px; font-weight: 500; color: black; margin-left: 10px;">
+                                    Buy or sell Payoneer
+                                </a>
+                            </div>
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <img style="height: 20px; width: 20px; background-color: #fff;" src="{% static 'home/images/bkash_round.png' %}">
+                                <a style="font-size: 20px; font-weight: 500; color: black; margin-left: 10px;">
+                                    Buy or sell bkash
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="knee">
+            <div class="container h-100">
+                <div class="row h-100 justify-content-center align-items-center">
+                    <div class="col-10 col-md-8 col-lg-6" style="margin-bottom: 30px;">
+                        <div style="text-align: left;">
+                            <a style="font-size: 25px; font-weight: 600; color: black;">Exchange your cash in Just a Few Minutes!</a>
+                        </div>
+                        <div style="text-align: left;">
+                            <a style="font-size: 20px; font-weight: 400; color: black;">The best way to exchange crypto and e-money around the world. </a>
+                        </div>
+                    </div>
+                    <div class="col-10 col-md-8 col-lg-6">
+                        {% if user.is_authenticated %}
+                        <button onclick="window.location.href = '{% url 'home' %}';" class="buy_btn_btn2" style="max-width: 250px;">Exchange Now</button>
+                        {% else %}
+                        <button onclick="window.location.href = '{% url 'register' %}';" class="buy_btn_btn2" style="max-width: 250px;">Get Started</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if user.is_authenticated %}
+        <button class="review_msg float_btn" style="z-index: 1000; padding-top: 15px;">
+            Feedback
+        </button>
+        {% endif %}
+
+        <footer style="background-color:#373737;" id="footer" class="foot">
+            <div class="container">
+				<div class="row">
+					<!-- footer-widget -->
+					<div class="col-sm-3" style="text-align:left">
+						<div class="footer-widget news-letter">
+							<h3 style="color:#FFFFFF;font-size:20px;" ><strong>ExonTime</strong></h3>
+
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="#exchanger_exontime">Buy & Sell</a></li>
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="#reviews_exontime">Reviews</a></li>
+                                <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="#our_rates">Rates</a></li>
+                                <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="#we_exchange">Reserves</a></li>
+
+						</div>
+                        <br>
+					</div>
+
+					<div class="col-sm-3" style="text-align:left">
+						<div class="footer-widget news-letter">
+							<h3 style="color:#FFFFFF;font-size:20px;"><strong>Policies</strong></h3>
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="{% url 'terms_conditions' %}">Terms and Conditions</a></li>
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="{% url 'priv_poli' %}">Privacy Policy</a></li>
+                                <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="{% url 'refund_poli' %}">Refund Policy</a></li>
+                                <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="{% url 'aml_poli' %}">AML Policy</a></li>
+						</div>
+                        <br>
+					</div>
+
+
+
+					<div class="col-sm-3" style="text-align:left">
+						<div class="footer-widget news-letter">
+						   <h3 style="color:#FFFFFF;font-size:20px;"><strong>Company</strong></h3>
+						    <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="{% url 'about_us' %}">About Us</a></li>
+						    <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="{% url 'help' %}">Help</a></li>
+                            <li style="color:#FFFFFF" ><a style="color:#FFFFFF">Contact Us:</a></li>
+                            <li style="color:#FFFFFF" ><a style="color:#FFFFFF">support@exontime.com</a></li>
+						</div>
+                        <br>
+					</div>
+
+					<div class="col-sm-3" style="text-align:center">
+					<a href=""><img src="{% static 'home/images/GooglePlay.png' %}" width="150" height="60"></a>
+
+					<div class="footer-widget social-widget" style="text-align:center">
+                    <h3 style="color:#FFFFFF;font-size:20px;">Follow us</h3>
+
+					<a href=""><img src="{% static 'home/images/facebook.png' %}" width="35" height="35"></a>
+					<a href=""><img src="{% static 'home/images/youtube.png' %}" width="50" height="35"></a>
+                    <a href=""><img src="{% static 'home/images/instagram.png' %}" width="35" height="35"></a>
+
+					</div>
+
+
+					</div>
+				</div>
+			</div>
+            <div style="background-color:#8DBDFF;" class="foot2">
+			<div class="container" style="text-align: center; padding-top: 15px;">
+				<p style="color:#000000" ><strong>Copyright &copy; 2020 ExonTime </strong></p>
+			</div>
+		    </div>
+        </footer>
+         </div>
+
+    <button class="btn btn-primary scroll-top" data-scroll="up" type="button">
+        <i class="fa fa-chevron-up" style="font-size: 35px;"></i>
+    </button>
+    </div>
+
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+    <!-- Popper.JS -->
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'home/js/flickity.pkgd.js' %}"></script>
+    <script defer="" src="{% static 'home/js/owl-carousel.min.js' %}"></script>
+    
+    <script src="{% static 'home/js/bootstrap.js' %}"></script>
+
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <!-- You can alternatively load the minified version -->
+    <script src="{% static 'home/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        $(".review_msg").modalForm({
+            formURL: "{% url 'review_msg' %}"
+        });
+
+    });
+    </script>
+
+
+    <script type="text/javascript">
+    var update_percentage = function(){
+        $.ajax({
+            url: "{% url 'get_info_update' %}",
+            method: 'GET',
+            dataType : "json",
+            data: {
+
+            },
+            success: function(response){
+                conversion_rates = response["convert"][0];
+                for(var i = 0; i < response["reserves"].length; i++) {
+                    var product = response["reserves"][i];
+                    var id = product["title"]+"_perc";
+                    var dat = (1-(product["bkash"]/conversion_rates[product["title"]]))*100;
+                    dat = dat.toFixed(2);
+                    var out = dat + "%";
+                    document.getElementById(id).innerHTML = out;
+                    id = product["title"]+"_sell_price";
+                    var price = 1/response["reserves"][5][product["title"]];
+                    price = price.toFixed(2);
+                    document.getElementById(id).innerHTML = price;
+                    var sell_perc = (1-(conversion_rates[product["title"]]/price))*100;
+                    sell_perc = sell_perc.toFixed(2);
+                    id = product["title"]+"_sell_perc";
+                    out = sell_perc + "%";
+                    document.getElementById(id).innerHTML = out;
+                }
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+    </script>
+
+
+
+
+        <script type="text/javascript">
+    var refreshOrderForm1 = function(){
+        $.ajax({
+            url: "{% url 'get_info_update' %}",
+            method: 'GET',
+            dataType : "json",
+            data: {
+                'from': document.getElementById("from_select").value,
+                'to': document.getElementById("to_select").value
+            },
+            success: function(response){
+              var val = parseFloat(document.getElementById("number1").value);
+              if(Number.isNaN(val)){
+                val = 0.0;
+              }
+              madeSelectionfrom = document.getElementById("from_select").value;
+              madeSelectionto = document.getElementById("to_select").value;
+              var from_val = madeSelectionfrom;
+              var to_val = madeSelectionto;
+              if(madeSelectionfrom == 'btcusd'){
+                from_val = 'bitcoin';
+              }
+
+              if(madeSelectionto == 'btcusd'){
+                to_val = 'bitcoin';
+              }
+              document.getElementById("exchange_head").innerHTML = "Buy "+from_val+" with "+to_val;
+              document.getElementById("commission_from").innerHTML = from_val;
+              document.getElementById("commission_to").innerHTML = to_val;
+              var ans = 0;
+              var res = 0.0;
+              var max = 0.0;
+              var rt = 0.0;
+              var res_unit = "";
+              var from_commi = 0.0;
+              var to_commi = 0.0;
+              var from_commi_am = 0.0;
+              var to_commi_am = 0.0;
+              var from_to_to_convert = 0.0;
+              var from_unit = "";
+              var to_unit = "";
+              conversion_rates = response["convert"][0];
+              for(var i = 0; i < response["reserves"].length; i++)
+              {
+                  var product = response["reserves"][i];
+                  if(product["title"] == madeSelectionfrom){
+                      var rate = parseFloat(product[madeSelectionto]);
+                      rt = rate;
+                      max = product["maxim"];
+                      if(val == 0){ ans = 0; }
+                      else{ ans = val*rate; }
+                      document.getElementById("from_unit").innerHTML = product["unit"];
+                      from_commi = product["from_com"] * 100;
+                      from_commi_am = val*product["from_com"];
+                      from_commi_am = from_commi_am.toFixed(2);
+                      document.getElementById("commission_from_am").innerHTML = from_commi+"%"+" "+from_commi_am+product["unit"];
+                      from_unit = product["unit"];
+                      var ul = product["title"]+'.png';
+                      if(val < product["minim"]){
+                        document.getElementById("from_notice").innerHTML = "Select amount more than "+product["minim"]+" "+product["unit"];
+                        document.getElementById("buy_button").disabled = true;
+                      }
+                      else if(val > product["maxim"]){
+                        document.getElementById("from_notice").innerHTML = "Select amount less than "+product["maxim"]+" "+product["unit"];
+                        document.getElementById("buy_button").disabled = true;
+                      }
+                      else{
+                        document.getElementById("from_notice").innerHTML = "     ";
+                        document.getElementById("buy_button").disabled = false;
+                      }
+                  }
+                  if(product["title"] == madeSelectionto){
+                      document.getElementById("to_unit").innerHTML = product["unit"];
+                      var ul = product["title"]+'.png';
+                      res = product["reserve_am"];
+                      res_unit = product["unit"];
+                      to_unit = product["unit"];
+                      to_commi = product["to_com"] * 100;
+                  }
+              }
+              if(ans > res && (rt*max)>res){
+                document.getElementById("to_notice").innerHTML = "Select amount less than "+res+" "+res_unit;
+                document.getElementById("buy_button").disabled = true;
+                document.getElementById("from_notice").innerHTML = "   ";
+              }
+              else{
+                document.getElementById("to_notice").innerHTML = "    ";
+              }
+              var con_rate = 0.0;
+              if(from_unit == 'USD' && to_unit == 'BDT'){
+                from_to_to_convert = conversion_rates[madeSelectionfrom];
+                con_rate = from_to_to_convert;
+              }
+              else if(from_unit == 'BDT' && to_unit == 'USD'){
+                from_to_to_convert = 1/conversion_rates[madeSelectionto];
+                con_rate = from_to_to_convert;
+              }
+              else{
+                from_to_to_convert = 1.00;
+                con_rate = 1.00;
+              }
+              to_commi_am = ((val)*con_rate)*(to_commi/100);
+              to_commi_am = to_commi_am.toFixed(2);
+              to_commi = to_commi.toFixed(2);
+              document.getElementById("commission_to_am").innerHTML = to_commi+"%"+" "+to_commi_am+to_unit;
+              var rem = 0.00;
+              var exon_commi = 0.00;
+              if(from_unit == to_unit && val != 0){
+                rem = val - ans - to_commi_am - from_commi_am;
+                exon_commi = (rem/val)*100;
+              }
+              else if(val != 0){
+                rem = (val*from_to_to_convert) - ans - to_commi_am - (from_commi_am*from_to_to_convert);
+                exon_commi = (rem/(val*from_to_to_convert))*100;
+              }
+              var un = "USD";
+
+              if(to_unit == 'BDT' && from_unit == 'USD'){
+                rem = rem * (1/from_to_to_convert);
+                un = "USD";
+              }
+              else if(to_unit == 'BDT' && from_unit == 'BDT'){
+                un = "BDT";
+              }
+              exon_commi = exon_commi.toFixed(2);
+              rem = rem.toFixed(2);
+              document.getElementById("commission_exontime_am").innerHTML = exon_commi+"%"+" "+rem+un;
+              ans = ans.toFixed(2);
+              document.getElementById("number2").value = ans;
+
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+  </script>
+
+    <script type="text/javascript">
+    var refreshOrderForm2 = function(){
+        $.ajax({
+            url: "{% url 'get_info_update' %}",
+            method: 'GET',
+            dataType : "json",
+            data: {
+                'from': document.getElementById("from_select").value,
+                'to': document.getElementById("to_select").value
+            },
+            success: function(response){
+              var val = parseFloat(document.getElementById("number2").value);
+              if(Number.isNaN(val)){
+                val = 0.0;
+              }
+              madeSelectionfrom = document.getElementById("from_select").value;
+              madeSelectionto = document.getElementById("to_select").value;
+              var from_val = madeSelectionfrom;
+              var to_val = madeSelectionto;
+              if(madeSelectionfrom == 'btcusd'){
+                from_val = 'bitcoin';
+              }
+
+              if(madeSelectionto == 'btcusd'){
+                to_val = 'bitcoin';
+              }
+              document.getElementById("exchange_head").innerHTML = "Buy "+from_val+" with "+to_val;
+              document.getElementById("commission_from").innerHTML = from_val;
+              document.getElementById("commission_to").innerHTML = to_val;
+              var ans = 0.0;
+              var res = 0.0;
+              var max = 0.0;
+              var rt = 0.0;
+              var res_unit = "";
+              var from_commi = 0.0;
+              var to_commi = 0.0;
+              var from_commi_am = 0.0;
+              var to_commi_am = 0.0;
+              var from_to_to_convert = 0.0;
+              var from_unit = "";
+              var to_unit = "";
+              var res_unit = "";
+              conversion_rates = response["convert"][0];
+              for(var i = 0; i < response["reserves"].length; i++)
+              {
+                  var product = response["reserves"][i];
+                  if(product["title"] == madeSelectionfrom){
+                      var rate = parseFloat(product[madeSelectionto]);
+                      rt = rate;
+                      if(val == 0){ ans = 0; }
+                      else{ ans = val*(1/rate); }
+                      document.getElementById("from_unit").innerHTML = product["unit"];
+                      from_commi = product["from_com"] * 100;
+                      from_commi_am = ans*product["from_com"];
+                      from_commi_am = from_commi_am.toFixed(2);
+                      document.getElementById("commission_from_am").innerHTML = from_commi+"%"+" "+from_commi_am+product["unit"];
+                      from_unit = product["unit"];
+                      var ul = product["title"]+'.png';
+                      max = product["maxim"];
+                      if(ans < product["minim"]){
+                        document.getElementById("from_notice").innerHTML = "Select amount more than "+product["minim"]+" "+product["unit"];
+                        document.getElementById("buy_button").disabled = true;
+                      }
+                      else if(ans > product["maxim"]){
+                        document.getElementById("from_notice").innerHTML = "Select amount less than "+product["maxim"]+" "+product["unit"];
+                        document.getElementById("buy_button").disabled = true;
+                      }
+                      else{
+                        document.getElementById("from_notice").innerHTML = "   ";
+                        document.getElementById("buy_button").disabled = false;
+                      }
+                  }
+                  if(product["title"] == madeSelectionto){
+                      document.getElementById("to_unit").innerHTML = product["unit"];
+                      var ul = product["title"]+'.png';
+                      res = product["reserve_am"];
+                      res_unit = product["unit"];
+                      to_unit = product["unit"];
+                      to_commi = product["to_com"] * 100;
+                  }
+              }
+
+              if(val > res && (rt*max)>res){
+                document.getElementById("to_notice").innerHTML = "Select amount less than "+res+" "+res_unit;
+                document.getElementById("buy_button").disabled = true;
+                document.getElementById("from_notice").innerHTML = "   ";
+              }
+              else{
+                document.getElementById("to_notice").innerHTML = "    ";
+              }
+
+              var con_rate = 0.0;
+              if(from_unit == 'USD' && to_unit == 'BDT'){
+                from_to_to_convert = conversion_rates[madeSelectionfrom];
+                con_rate = from_to_to_convert;
+              }
+              else if(from_unit == 'BDT' && to_unit == 'USD'){
+                from_to_to_convert = 1/conversion_rates[madeSelectionto];
+                con_rate = from_to_to_convert;
+              }
+              else{
+                from_to_to_convert = 1.00;
+                con_rate = 1.00;
+              }
+              to_commi_am = ((ans)*con_rate)*(to_commi/100);
+              to_commi_am = to_commi_am.toFixed(2);
+              to_commi = to_commi.toFixed(2);
+              document.getElementById("commission_to_am").innerHTML = to_commi+"%"+" "+to_commi_am+to_unit;
+              var rem = 0.00;
+              var exon_commi = 0.00;
+              if(from_unit == to_unit && ans != 0){
+                rem = ans - val - to_commi_am - from_commi_am;
+                exon_commi = (rem/ans)*100;
+              }
+              else if(ans != 0){
+                rem = (ans*from_to_to_convert) - val - to_commi_am - (from_commi_am*from_to_to_convert);
+                exon_commi = (rem/(ans*from_to_to_convert))*100;
+              }
+              var un = "USD";
+
+              if(to_unit == 'BDT' && from_unit == 'USD'){
+                rem = rem * (1/from_to_to_convert);
+                un = "USD";
+              }
+              else if(to_unit == 'BDT' && from_unit == 'BDT'){
+                un = "BDT";
+              }
+              exon_commi = exon_commi.toFixed(2);
+              rem = rem.toFixed(2);
+              document.getElementById("commission_exontime_am").innerHTML = exon_commi+"%"+" "+rem+un;
+              ans = ans.toFixed(2);
+
+              document.getElementById("number1").value = ans;
+
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+  </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            madeSelectionfrom = document.getElementById("from_select").value,
+            madeSelectionto = document.getElementById("to_select").value,
+            //document.getElementById("from").value = madeSelectionfrom;
+            //document.getElementById("to").value = madeSelectionto;
+            refreshOrderForm1();
+            update_percentage();
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content, .navbar, .navbar-btn, .foot, .foot2').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+
+    </script>
+
+
+
+  <script type="text/javascript">
+
+      function DropDown(el) {
+          this.dd = el;
+          this.placeholder = this.dd.children('span');
+          this.opts = this.dd.find('ul.dropdown > li');
+          this.val = '';
+          this.index = -1;
+          this.initEvents();
+      }
+      DropDown.prototype = {
+          initEvents : function() {
+              var obj = this;
+
+              obj.dd.on('click', function(event){
+                  $(this).toggleClass('active');
+                  return false;
+              });
+
+              obj.opts.on('click',function(){
+                  var opt = $(this);
+                  obj.val = opt.text();
+                  obj.index = opt.index();
+                  obj.placeholder.text(obj.val);
+                  document.getElementById("in1").value = obj.val;
+              });
+          },
+          getValue : function() {
+              return this.val;
+          },
+          getIndex : function() {
+              return this.index;
+          }
+      }
+
+      $(function() {
+
+          var dd = new DropDown( $('#dd') );
+
+          $(document).click(function() {
+              // all dropdowns
+              $('.wrapper-dropdown-3').removeClass('active');
+          });
+
+      });
+
+  </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+          $(window).scroll(function () {
+            if ($(this).scrollTop() > 400) {
+              $('.scroll-top').fadeIn();
+            } else {
+              $('.scroll-top').fadeOut();
+            }
+          });
+
+          $('.scroll-top').click(function () {
+            $("html, body").animate({
+              scrollTop: 0
+            }, 100);
+              return false;
+          });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            }
+          });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        $('.gallery').flickity({
+          // options
+          cellAlign: 'left',
+          contain: true,
+          //"freeScroll": true,
+          //"wrapAround": true
+        });
+    </script>
+    <script type="text/javascript">
+        $('.rates').flickity({
+          // options
+          cellAlign: 'left',
+          contain: true,
+          //"freeScroll": true,
+        });
+    </script>
+    <script type="text/javascript">
+    var refreshStream = function(){
+        $.ajax({
+            url: "{% url 'home' %}",
+            method: 'GET',
+            data: {},
+            success: function(response){
+              $('#why_ffff_us').replaceWith($('#why_ffff_us',response));
+              $('#transfer_24').replaceWith($('#transfer_24',response));
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+    var total_seconds = 300;
+
+    setInterval(function(){
+        refreshStream();
+    },total_seconds * 1000);
+
+    </script>
+
+    <script type="text/javascript">
+    var update_ex_table = function(){
+        $.ajax({
+            url: "{% url 'home' %}",
+            method: 'GET',
+            data: {},
+            success: function(response){
+              $('#we_exchange').replaceWith($('#we_exchange',response));
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+    </script>
+
+<script type="text/javascript">
+    var checker = function(){
+        $.ajax({
+            url: "{% url 'get_info_update' %}",
+            method: 'GET',
+            dataType : "json",
+            data: {},
+            success: function(response){
+              var madeSelectionto = document.getElementById("to_select").value;
+              for(var i = 0; i < response["reserves"].length; i++)
+              {
+                var product = response["reserves"][i];
+
+                var id = product["title"]+"_res";
+                var val = parseFloat(document.getElementById(id).innerHTML);
+                var res = product["reserve_am"];
+                //alert(val+""+res);
+                if(res != val){
+                    refreshOrderForm1();
+                    update_ex_table();
+                }
+
+              }
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+    var total_seconds = 10;
+
+    setInterval(function(){
+        checker();
+    },total_seconds * 1000);
+
+    </script>
+    
+    <script type="text/javascript">
+        function idleTimer() {
+            var t;
+            window.onload = resetTimer;
+            //window.onmousemove = resetTimer;
+            //window.onmousedown = resetTimer;
+            window.onclick = resetTimer;
+            window.onscroll = resetTimer;
+            window.onkeypress = resetTimer;
+
+            function logout() {
+                window.location.href = "{% url 'logout' %}";
+            }
+
+           function reload() {
+                  window.location = self.location.href;
+           }
+
+           function resetTimer() {
+                clearTimeout(t);
+                t = setTimeout(logout, 1800000);
+                //t= setTimeout(reload, 300000);
+            }
+        }
+        {% if user.is_authenticated %}
+        idleTimer();
+        {% endif %}
+    </script>
+
+
+</body>
+
+</html>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5eaebdd910362a7578be90c0/1e7fdbpi0';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->

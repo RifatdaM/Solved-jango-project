@@ -1,0 +1,403 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ user.first_name }} {{ user.last_name }}'s Dashboard</title>
+
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css' %}">
+
+
+    <script defer src="{% static 'home/js/solid.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome.js' %}"></script>
+
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a href = "{% url 'home' %}" style="text-align: center"><h3>ExonTime</h3></a>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>Dashboard</p>
+                <li>
+                    <a href="{% url 'home' %}">Exchange Now</a>
+                </li>
+                <li >
+                    <!-- <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a> -->
+                    <a href="{% url 'dashboard' %}">Home</a>
+                    <!-- <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul> -->
+                </li>
+                <li>
+                    <a href="{% url 'exchange_rate' %}">Exchange rates</a>
+                </li>
+                <li class="active">
+                    <a href="{% url 'order_history' %}">Completed transactions</a>
+                </li>
+                <li>
+                    <a href="{% url 'contact_us' %}">Contact Us/ Help</a>
+                </li>
+                <li>
+                    <a href="#">Tutorial</a>
+                </li>
+                <li>
+                    <a href="{% url 'pending_order' %}">Pending orders</a>
+                </li>
+                <li>
+                    <a href="{% url 'track_order' %}">Track Your Order</a>
+                </li>
+                <li>
+                    <a href="{% url 'settings' %}">Settings</a>
+                    <!-- <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Settings</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Profile</a>
+                        </li>
+                        <li>
+                            <a href="#">Address</a>
+                        </li>
+                    </ul> -->
+                </li>
+            </ul>
+
+            <!-- <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="" class="download"></a>
+                </li>
+                <li>
+                    <a href="" class="article"></a>
+                </li>
+            </ul> -->
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" style = "background-color: #f3f5f9; color: #717171">
+
+            <main role="main" class="container">
+                <div class="row" id="replace_it" style="min-height: 100vh;">
+                    <div class="col-md" style="margin-top: 8px;">
+                      <div class="content-section" style="text-align: center">
+
+                            {% if orders %}
+                                <h3>Your Transaction History</h3>
+                            {% else %}
+                                <h3>Your have not made any transaction yet</h3>
+                            {% endif %}
+
+
+                          {% for order in orders %}
+                          <table class="table table-bordered table-dark">
+                          <thead>
+                          <tr>
+                              <th colspan="6" scope="col" style ="word-break:break-all; text-align: center;">Order ID</th>
+                            </tr>
+                          </thead>
+
+                            <tbody>
+                            <tr>
+                                <th colspan="6" style ="word-break:break-all; text-align: center;">{{ order.belonging_order_id }}</th>
+                            </tr>
+                            <tr>
+                                  <th colspan="2" scope="col" style ="word-break:break-all; text-align: center;">Sent from</th>
+                                  <th colspan="2" scope="col" style ="word-break:break-all; text-align: center;">Amount</th>
+                                  <th colspan="2" scope="col" style ="word-break:break-all; text-align: center;">Received at</th>
+                                </tr>
+                            <tr>
+
+                              <td colspan="2" scope="row" style ="word-break:break-all; text-align: center;">{% if order.sent_from == 'skrill' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 35px; width: 70px; background-color: #fff;" src="{% static 'home/images/skrill.png' %}"></div>
+                                                {% elif order.sent_from == 'neteller' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px; background-color: #fff;" src="{% static 'home/images/neteller.png' %}"></div>
+                                                {% elif order.sent_from == 'paypal' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px; background-color: #fff;" src="{% static 'home/images/paypal.png' %}"></div>
+                                                {% elif order.sent_from == 'bkash' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 35px; width: 80px; background-color: #fff;" src="{% static 'home/images/bkash.png' %}"></div>
+                                                {% elif order.sent_from == 'payoneer' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px; background-color: #fff;" src="{% static 'home/images/payoneer.png' %}"></div>
+                                                {% elif order.sent_from == 'btcusd' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px; background-color: #fff;" src="{% static 'home/images/btcusd.png' %}"></div>
+                                                {% endif %}
+
+                              </td>
+                              <td colspan="2" style="font-size: 15px; text-align: center; word-break:break-all;">
+                                    <div style="flex:0 0 26px;">{{ order.sent_amount }} {{order.send_unit}} <img style="height: 20px; width: 20px;" src="{% static 'home/images/white_arrow.png' %}"> {{ order.to_be_sent }} {{ order.rcv_unit }}</div>
+                              </td>
+
+
+                                <td colspan="2" style ="word-break:break-all; text-align: center;">
+                                    {% if order.receive_at == 'skrill' %}
+                                    <div style="flex:0 0 26px;"><img style="height: 35px; width: 70px; background-color: #fff;" src="{% static 'home/images/skrill.png' %}"></div>
+                                                {% elif order.receive_at == 'neteller' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px; background-color: #fff;" src="{% static 'home/images/neteller.png' %}"></div>
+                                                {% elif order.receive_at == 'paypal' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px; background-color: #fff;" src="{% static 'home/images/paypal.png' %}"></div>
+                                                {% elif order.receive_at == 'bkash' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 35px; width: 80px; background-color: #fff;" src="{% static 'home/images/bkash.png' %}"></div>
+                                                {% elif order.receive_at == 'payoneer' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px; background-color: #fff;" src="{% static 'home/images/payoneer.png' %}"></div>
+                                                {% elif order.receive_at == 'btcusd' %}
+                                  <div style="flex:0 0 26px;"><img style="height: 30px; width: 80px; background-color: #fff;" src="{% static 'home/images/btcusd.png' %}"></div>
+                                                {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="3" style="text-align: center; word-break:break-all;">Sender Ac/no</th>
+                                <th colspan="3" style="text-align: center; word-break:break-all;">Receiver Ac/no</th>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style ="word-break:break-all; text-align: center;">{{ order.send_acount }}</td>
+                                <td colspan="3" style ="word-break:break-all; text-align: center;">{{ order.rcv_acount }}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3" style="text-align: center; word-break:break-all;">Order Date & Time</th>
+                                <th colspan="3" style="text-align: center; word-break:break-all;">Status</th>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style ="word-break:break-all; text-align: center;">{{ order.date_ordered }}</td>
+                                <td colspan="3" style ="word-break:break-all; text-align: center;">{{ order.status }}</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                          <br>
+                          {% endfor %}
+
+                      </div>
+                    </div>
+                </div>
+            </main>
+            <nav class="navbar navbar-expand-lg" style="background-color: #7386D5">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" >
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        <footer style="background-color:#373737;" id="footer" class="foot">
+            <div class="container">
+				<div class="row">
+					<!-- footer-widget -->
+					<div class="col-sm-3" style="text-align:center">
+						<div class="footer-widget news-letter">
+							<h3 style="color:#FFFFFF;font-size:20px;" ><strong>ExonTime</strong></h3>
+
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Buy & Sell</a></li>
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Reviews</a></li>
+                                <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Rates</a></li>
+
+						</div>
+                        <br>
+					</div>
+
+					<div class="col-sm-3" style="text-align:center">
+						<div class="footer-widget news-letter">
+							<h3 style="color:#FFFFFF;font-size:20px;"><strong>Policies</strong></h3>
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Terms and Conditions</a></li>
+								<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Privacy Policy</a></li>
+                                <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Refund Policy</a></li>
+						</div>
+                        <br>
+					</div>
+
+
+
+					<div class="col-sm-3" style="text-align:center">
+						<div class="footer-widget news-letter">
+						   <h3 style="color:#FFFFFF;font-size:20px;"><strong>Company</strong></h3>
+						    <li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">About</a></li>
+							<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Tutorial</a></li>
+
+						<li style="color:#FFFFFF" ><a style="color:#FFFFFF" href="">Help</a></li>
+						</div>
+                        <br>
+					</div>
+
+					<div class="col-sm-3" style="text-align:center">
+					<a href=""><img src="{% static 'home/images/GooglePlay.png' %}" width="150" height="60"></a>
+
+					<div class="footer-widget social-widget" style="text-align:center">
+                    <h3 style="color:#FFFFFF;font-size:20px;">Follow us</h3>
+
+					<a href=""><img src="{% static 'home/images/facebook.png' %}" width="35" height="35"></a>
+					<a href=""><img src="{% static 'home/images/youtube.png' %}" width="50" height="35"></a>
+                    <a href=""><img src="{% static 'home/images/instagram.png' %}" width="35" height="35"></a>
+
+					</div>
+
+
+					</div>
+				</div>
+			</div>
+            <div style="background-color:#7386D5;" class="foot2">
+			<div class="container" style="text-align: center; padding-top: 15px;">
+				<p style="color:#FFFFFF" ><strong>Copyright &copy; 2020 ExonTime </strong></p>
+			</div>
+		    </div>
+        </footer>
+
+
+         </div>
+
+
+
+    </div>
+
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+
+    <script src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+    <!-- Popper.JS -->
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content, .navbar, .navbar-btn, .foot, .foot2').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+    var refreshStream = function(){
+        $.ajax({
+            url: "{% url 'order_history' %}",
+            method: 'GET',
+            data: {},
+            success: function(response){
+              $('#replace_it').replaceWith($('#replace_it',response));
+              //on_payment_sys_changed();
+            },
+            error: function(error){
+                console.log(error);
+                console.log("error");
+            }
+        });
+    }
+
+    var total_seconds = 1;
+
+    setInterval(function(){
+        refreshStream();
+    },total_seconds * 1000);
+
+    </script>
+
+
+  <script type="text/javascript">
+
+      function DropDown(el) {
+          this.dd = el;
+          this.placeholder = this.dd.children('span');
+          this.opts = this.dd.find('ul.dropdown > li');
+          this.val = '';
+          this.index = -1;
+          this.initEvents();
+      }
+      DropDown.prototype = {
+          initEvents : function() {
+              var obj = this;
+
+              obj.dd.on('click', function(event){
+                  $(this).toggleClass('active');
+                  return false;
+              });
+
+              obj.opts.on('click',function(){
+                  var opt = $(this);
+                  obj.val = opt.text();
+                  obj.index = opt.index();
+                  obj.placeholder.text(obj.val);
+                  document.getElementById("in1").value = obj.val;
+              });
+          },
+          getValue : function() {
+              return this.val;
+          },
+          getIndex : function() {
+              return this.index;
+          }
+      }
+
+      $(function() {
+
+          var dd = new DropDown( $('#dd') );
+
+          $(document).click(function() {
+              // all dropdowns
+              $('.wrapper-dropdown-3').removeClass('active');
+          });
+
+      });
+
+  </script>
+</body>
+
+</html>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5eaebdd910362a7578be90c0/1e7fdbpi0';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->

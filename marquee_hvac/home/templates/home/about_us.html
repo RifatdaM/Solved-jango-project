@@ -1,0 +1,396 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+{% include "home/header.html" %}
+    <div class="site-content">
+        <div class="top-bg-div-about-us">
+            <div class="bg-div-about-us" style="background-image: url('{% static 'home/images/about_us_bg.jpg'%}')">
+                <div style="background: whitesmoke; border-radius: 5px; width: 400px; height: auto; margin-left: 80px; margin-top: 100px; opacity: 0.97;  padding: 15px;">
+                    <a style="font-size: 26px; font-weight: 300;">
+                        INTEGRATED AIR-CONDITIONING SOLUTION
+                    </a>
+                    <br>
+                    <br>
+                    <a style="font-size: 16px; font-weight: 120; color: #0c5460; line-height: 2.1;">
+                        With accumulation of exceptional knowledge and experiences, Kendo Appliances Malaysia has been
+                        serving the market of air-conditioners of Malaysia since 1991. Owing to well-planned marketing
+                        strategy and positive feedback plus support from clients, our establishment has undergo a rapid yet
+                        sustainable growth over these years. As of today, our establishment includes a factory of size 27000
+                        sqft, with full facilities including a warehouse and a customized test lab. Our market position is
+                        so strong and reliable that we are able to provide full scale OEM services and consultation to
+                        number of related businesses in Malaysia and overseas export.
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 80px; width: 100%; padding-left: 120px; padding-bottom: 120px; height: auto; padding-right: 120px;">
+            <div class="row">
+                <div class="col-md" style="padding-right: 30px;">
+                    <a style="font-size: 26px; font-weight: 200;">
+                        KENDO APPLIANCES MALAYSIA
+                    </a>
+                    <br>
+                    <br>
+                    <a style="font-size: 15px; font-weight: 80; color: #0c5460; line-height: 1.2;">
+                        KENDO Appliances Malaysia takes its pride in providing our prospects a professional, comprehensive
+                        and detailed pre-sale consultation to post sales services. Your satisfaction is our priority.
+                        With more than 10 years experience in market, our professional sale personnel are able to
+                        consult you based on your needs and deliver the most effective solution to your queries.
+
+                    </a>
+
+                </div>
+                <div class="col-md" style="height: auto;">
+                    <object style="width: 550px; height: 300px;">
+                        <param name="movie" value="http://www.youtube.com/v/v1gTI4BOPUw?version=3">
+                        <param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always">
+                        <!--<embed src="http://www.youtube.com/v/v1gTI4BOPUw?version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="640" height="390">-->
+                        <embed src="http://www.youtube.com/v/v1gTI4BOPUw?version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" style="width: 550px; height: 300px;">
+                    </object>
+                    <!--<iframe width="425" height="349" src="http://www.youtube.com/embed/UnBlst3T7bY" frameborder="0" allowfullscreen></iframe>-->
+                </div>
+            </div>
+            <div class="slide-in-plant-div-expandable-text-div">
+                <div class="slide-in-plant-div-expandable-text-title-div" id="expandable-menu-1" onclick="expand_block('1')">
+                    <div class="slide-in-plant-div-expandable-text-title-text-div">
+                        <a class="slide-in-plant-div-expandable-text-title-text" id="expandable-menu-1-text">
+                            MANUFACTURING
+                        </a>
+                    </div>
+                    <div class="slide-in-plant-div-expandable-text-title-plus-sign-div">
+                        <a class="slide-in-plant-div-expandable-text-title-plus-sign" id="expandable-menu-1-plus">
+                            +
+                        </a>
+                    </div>
+                </div>
+                <div class="slide-in-plant-div-expanded-text-outer-dev" id="expanded-text-1">
+                    <div class="slide-in-plant-div-expanded-text-inner-dev">
+                        <a class="slide-in-plant-div-expanded-text">
+                            Comprehensive range of products with high variety and marketability. Flexible OEM service is
+                            available and ready to be adjusted to clients’ needs.
+                        </a>
+                    </div>
+                </div>
+                <div class="slide-in-plant-div-expandable-text-title-div" id="expandable-menu-2" onclick="expand_block('2')">
+                    <div class="slide-in-plant-div-expandable-text-title-text-div">
+                        <a class="slide-in-plant-div-expandable-text-title-text" id="expandable-menu-2-text">
+                            OEM
+                        </a>
+                    </div>
+                    <div class="slide-in-plant-div-expandable-text-title-plus-sign-div">
+                        <a class="slide-in-plant-div-expandable-text-title-plus-sign" id="expandable-menu-2-plus">
+                            +
+                        </a>
+                    </div>
+                </div>
+                <div class="slide-in-plant-div-expanded-text-outer-dev" id="expanded-text-2">
+                    <div class="slide-in-plant-div-expanded-text-inner-dev">
+                        <a class="slide-in-plant-div-expanded-text">
+                            Professional consultation and all inclusive service by experienced sale personnel from
+                            start to post sales service. Prompt delivery service and low minimum order quantity (MOQ)
+                            required.
+                        </a>
+                    </div>
+                </div>
+                <div class="slide-in-plant-div-expandable-text-title-div-last" id="expandable-menu-3" onclick="expand_block('3')">
+                    <div class="slide-in-plant-div-expandable-text-title-text-div">
+                        <a class="slide-in-plant-div-expandable-text-title-text" id="expandable-menu-3-text">
+                            FULL RANGE SELECTION
+                        </a>
+                    </div>
+                    <div class="slide-in-plant-div-expandable-text-title-plus-sign-div">
+                        <a class="slide-in-plant-div-expandable-text-title-plus-sign" id="expandable-menu-3-plus">
+                            +
+                        </a>
+                    </div>
+                </div>
+                <div class="slide-in-plant-div-expanded-text-outer-dev" id="expanded-text-3">
+                    <div class="slide-in-plant-div-expanded-text-inner-dev">
+                        <a class="slide-in-plant-div-expanded-text">
+                            Adhere to international standards and regulations. Safety approval and Free Trade Agreement
+                            (FTA) will be provided.
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="width: 100%; height: 100vh; background: white; padding-left: 120px; padding-right: 100px;">
+            <div class="row" style="width: 100%">
+                <div class="col-md" style="text-align: left; background: #0c94e3; height: 65px; padding-top: 15px;">
+                    <a style="font-size: 25px; color: white; font-weight: 10;">
+                        FACTORY & FACILITIES
+                    </a>
+                </div>
+                <div class="col-md" style="text-align: left; background: #0c94e3; height: 65px; padding-top: 15px;">
+                    <a style="font-size: 25px; color: white; font-weight: 10;">
+                        TECHNOLOGY
+                    </a>
+                </div>
+                <div class="col-md" style="text-align: left; background: #0c94e3; height: 65px; padding-top: 15px;">
+                    <a style="font-size: 25px; color: white; font-weight: 10;">
+                        AWARDS & APPROVALS
+                    </a>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 50px;">
+                <div class="col-md">
+                    <a style="font-size: 15px; font-weight: 80; color: #0c5460; line-height: 1.2;">
+                        Our manufacturing line is equipped with top of notch machinery, technology, coupled with
+                        effective management, all to ensure 100% consistency in quality of manufactured products.
+                    </a>
+                    <br>
+                    <a style="font-size: 15px; font-weight: 80; color: #0c5460; line-height: 1.2;">
+                        Our manufacturing line includes:
+                    </a>
+                    <br>
+                    <ul style="font-size: 15px; font-weight: 80; color: #0c5460;">
+                        <li style="margin: 7px 0;">Top class assembly facilities with compete chain conveyor</li>
+                        <li style="margin: 7px 0;">Customized testing station to ensure accurate data lodging</li>
+                        <li style="margin: 7px 0;">Showroom display all products and models.</li>
+                        <li style="margin: 7px 0;">World class warehouse catered for parts and finished goods</li>
+                        <li style="margin: 7px 0;">Experienced production team with more than 10 years of experience</li>
+                        <li style="margin: 7px 0;">External party quality certifications (including ISO) and product certifications (including CE mark and CB mark)</li>
+                    </ul>
+                </div>
+                <div class="col-md" style="padding-right: 60px;">
+                    <img src="{% static 'home/images/about_us_1of3img.jpg'%}" style="width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px;">
+            <div class="row">
+                <div class="col-md">
+
+                </div>
+                <div class="col-md">
+
+                </div>
+                <div class="col-md">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+
+                </div>
+                <div class="col-md">
+
+                </div>
+                <div class="col-md">
+
+                </div>
+            </div>
+        </div>
+
+    {% include "home/footer.html" %}
+    </div>
+
+
+
+{% endblock content %}
+
+{% block js %}
+    <script type="text/javascript">
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+    </script>
+
+    <script type="text/javascript">
+        var section = document.querySelector('.slide-in-grey-bg-bottom-div');
+        var hasEntered = false;
+
+        window.addEventListener('scroll', (e) => {
+            var shouldAnimate = (window.scrollY + window.innerHeight) >= section.offsetTop;
+
+            if (shouldAnimate && !hasEntered) {
+                hasEntered = true;
+
+                $('.count').each(function () {
+                    $(this).prop('Counter',0).animate({
+                    Counter: $(this).data('value')
+                    }, {
+                    duration: 4000,
+                    easing: 'swing',
+                    step: function (now) {
+                        var cnt = Math.ceil(now);
+                        var text = '';
+                        text = text + cnt + '%';
+                        $(this).text(text);
+                    }
+                    });
+                });
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        function expand_block(number) {
+            var id = 'expanded-text-' + number;
+            var id_menu = 'expandable-menu-' + number;
+            var id_menu_text = 'expandable-menu-' + number + '-text';
+            var id_menu_plus = 'expandable-menu-' + number + '-plus';
+            var element = document.getElementById(id);
+            var element_menu = document.getElementById(id_menu);
+            var element_menu_text = document.getElementById(id_menu_text);
+            var element_menu_plus = document.getElementById(id_menu_plus);
+            var check = element_menu_plus.innerHTML.indexOf('+');
+            if(check >= 0){
+                element.setAttribute("style", "display: block;");
+                element_menu.setAttribute("style", "background-color: #0c94e3;");
+                element_menu_text.setAttribute("style", "color: white;");
+                element_menu_plus.setAttribute("style", "color: white;");
+                element_menu_plus.innerHTML = '-';
+                element_menu.onmouseover = function()
+                {
+                    this.style.backgroundColor = "#0c94e3";
+                    element_menu_text.setAttribute("style", "color: white;");
+                    element_menu_plus.setAttribute("style", "color: white;");
+                }
+                element_menu.onmouseleave = function()
+                {
+                    this.style.backgroundColor = "#0c94e3";
+                    element_menu_text.setAttribute("style", "color: white;");
+                    element_menu_plus.setAttribute("style", "color: white;");
+                }
+            }
+            else{
+                element.setAttribute("style", "display: none;");
+                element_menu.setAttribute("style", "background-color: white;");
+                element_menu_text.setAttribute("style", "color: #444444;");
+                element_menu_plus.setAttribute("style", "color: #444444;");
+                element_menu_plus.innerHTML = '+';
+                element_menu.onmouseover = function()
+                {
+                    this.style.backgroundColor = "#0c94e3";
+                    element_menu_text.setAttribute("style", "color: white;");
+                    element_menu_plus.setAttribute("style", "color: white;");
+                }
+                element_menu.onmouseleave = function()
+                {
+                    this.style.backgroundColor = "white";
+                    element_menu_text.setAttribute("style", "color: #444444;");
+                    element_menu_plus.setAttribute("style", "color: #444444;");
+                }
+            }
+
+        }
+    </script>
+
+    <script type="text/javascript">
+        function slide_left() {
+            $(".cloud-img").animate({
+                    marginLeft: "-220px",
+                    overflow: "hidden",
+                },
+                20000,
+                slide_right
+            );
+        }
+        function slide_right() {
+            $(".cloud-img").animate({
+                    marginLeft: "-120px",
+                    overflow: "hidden",
+                },
+                20000,
+                slide_left
+            );
+        }
+        $(document).ready(function() {
+            slide_left();
+        });
+    </script>
+
+    <script type="text/javascript">
+        let animation1 = document.querySelector('.bg-div');
+        let animation2 = document.querySelector('.zoom-out');
+        //let animation3 = document.querySelector('.cloud-div');
+
+        window.addEventListener('focus', function() {
+            animation1.style.animationPlayState = 'running';
+            animation2.style.animationPlayState = 'running';
+            //animation3.style.animationPlayState = 'running';
+        });
+
+        window.addEventListener('blur', function() {
+
+            animation1.style.animationPlayState = 'paused';
+            animation2.style.animationPlayState = 'paused';
+            //animation3.style.animationPlayState = 'paused';
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var animation_elements = $.find('.slide-from-left');
+            var web_window = $(window);
+            function check_if_in_view() {
+                var window_height = web_window.height();
+                var window_top_position = web_window.scrollTop();
+                var window_bottom_position = (window_top_position + window_height);
+
+                $.each(animation_elements, function() {
+                    var element = $(this);
+                    var element_height = $(element).outerHeight();
+                    var element_top_position = $(element).offset().top;
+                    var element_bottom_position = (element_top_position + element_height);
+
+                    if ((element_bottom_position >= window_top_position) && (element_top_position <= window_bottom_position)) {
+                        element.animate({
+                                marginLeft: "0px",
+                            },
+                            1000,
+                        );
+                    }
+                    else {
+                        /*element.animate({
+                                marginLeft: "-500px",
+                            },
+                            20,
+                        );*/
+                    }
+                });
+            }
+
+            $(window).on('scroll resize', function() {
+                check_if_in_view()
+            })
+
+            $(window).trigger('scroll');
+
+        });
+    </script>
+{% endblock js %}

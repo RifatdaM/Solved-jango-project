@@ -1,0 +1,10 @@
+{% autoescape off %}
+Hi {{ user.username }},
+Your order with order id: {{ order_id }} is on hold as we could not match the transaction id you have provided with any of the transaction id of our accounts.
+Order details are shown below:
+Send: {{ sent_amount }} {{ sent_from }} {{ send_unit }}
+receive: {{ to_be_sent }} {{ receive_at }} {{ rcv_unit }}
+Please provide correct transaction ID so that we can complete your order.
+For uploading correct transaction id log into your account from exontime login page then from your account page select option: "Unconfirmed orders". You will find list of orders having wrong transaction id there. Simply click on Correct TrxId button and fill up the form with correct transaction id and submit.
+Thank you!
+{% endautoescape %}

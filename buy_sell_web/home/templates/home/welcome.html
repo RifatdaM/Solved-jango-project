@@ -1,0 +1,793 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Google Web Designer 8.0.1.0401">
+  <meta name="template" content="Expandable 3.0.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <title>ExonTime | Exchange your cash</title>
+  <title>ExonTime | Exchange your cash</title>
+  <link rel="stylesheet" id="site-swiper-css" href="{% static 'home/css/swiper.min.css' %}" type="text/css" media="all">
+  <link rel="stylesheet" id="site-style-css" href="{% static 'home/css/style.min.css' %}" type="text/css" media="all">
+  <script src="{% static 'home/js/gtm4wp-form-move-tracker.js' %}" defer></script>
+  <script defer="" src="{% static 'home/js/jquery-3.4.1.min.js' %}"></script>
+  <link rel="shortlink" href="">
+  <style type="text/css">
+    body {
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+    }
+  </style>
+  <link rel="icon" href="">
+  <link rel="shortcut icon" href="" type="image/x-icon">
+</head>
+
+<body class="htmlNoPages">
+  <div class="header-top fixed">
+    <div class="container">
+      <a href="" class="header-logo">
+        <img alt="" data-src="" class="lazyload" src="">
+        <noscript>
+          <img src="" alt="">
+        </noscript>
+      </a>
+      <div class="ham">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul id="menu-header-menu" class="header-nav desk">
+        <li id="nav-menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="" class="menu-link wow fadeInUp" style="visibility: hidden;">Services</a> </li>
+        <li id="nav-menu-item-3" class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="" class="menu-link wow fadeInUp" style="visibility: hidden;">About Us</a>
+        </li>
+        <li id="nav-menu-item-4" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="" class="menu-link wow fadeInUp" style="visibility: hidden;">Contact</a>
+        </li>
+        <li id="nav-menu-item-5" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="" class="menu-link wow fadeInUp" style="visibility: hidden;">Reviews</a>
+        </li>
+        {% if user.is_authenticated == False %}
+        <li id="nav-menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="{% url 'login' %}" class="menu-link wow fadeInUp" style="visibility: hidden;">Login</a>
+        </li>
+        {% else %}
+        <li id="nav-menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom">
+          <a href="{% url 'logout' %}" class="menu-link wow fadeInUp" style="visibility: hidden;">Logout</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% if user.is_authenticated == False %}
+      <a href="{% url 'register' %}" class="header-button desk wow fadeInRight" data-wow-delay=".5s" style="visibility: hidden;">Register <i class="icon-circles"><span></span></i></a>
+      {% else %}
+      <a href="{% url 'dashboard' %}" class="header-button desk wow fadeInRight" data-wow-delay=".5s" style="visibility: hidden;">Dashboard <i class="icon-circles"><span></span></i></a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="wrapper">
+    <div class="mobile-nav">
+      <div class="close">
+        <span></span>
+        <span></span>
+      </div>
+      <ul id="menu-header-menu-1" class="header-nav mob">
+        <li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11">
+          <a href="">Services</a>
+        </li>
+        <li id="menu-item-3" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4967">
+          <a href="">About Us</a>
+        </li>
+        <li id="menu-item-4" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12">
+          <a href="">Contact</a>
+        </li>
+        <li id="menu-item-5" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13">
+          <a href="">Blog</a>
+        </li>
+        {% if user.is_authenticated == False %}
+        <li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14">
+          <a href="{% url 'login' %}">Login</a>
+        </li>
+        {% else %}
+        <li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14">
+          <a href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% if user.is_authenticated == False %}
+      <a href="{% url 'register' %}" class="header-button mob">Register <i class="icon-circles"><span></span></i></a>
+      {% else %}
+      <a href="{% url 'dashboard' %}" class="header-button mob">Dashboard <i class="icon-circles"><span></span></i></a>
+      {% endif %}
+    </div>
+    <div class="header-section" data-bg-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/header-bg.png">
+      <div class="container">
+        <div class="header-top">
+          <a href="" class="header-logo wow fadeInUp" data-wow-delay=".5s" style="visibility: hidden;">
+            <img alt="" data-src="" class="lazyload" src="">
+            <noscript>
+              <img src="" alt="">
+            </noscript>
+          </a>
+          <div class="ham">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <ul id="menu-header-menu-1" class="header-nav desk">
+            <li id="nav-menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="" class="menu-link wow fadeInUp" style="visibility: hidden;">Services</a> </li>
+            <li id="nav-menu-item-3" class="menu-item menu-item-type-post_type menu-item-object-page">
+              <a href="" class="menu-link wow fadeInUp" style="visibility: hidden;">About Us</a>
+            </li>
+            <li id="nav-menu-item-4" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="" class="menu-link wow fadeInUp" style="visibility: hidden;">Contact</a> </li>
+            <li id="nav-menu-item-5" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="/blog/" class="menu-link wow fadeInUp" style="visibility: hidden;">Blog</a>
+            </li>
+            {% if user.is_authenticated == False %}
+            <li id="nav-menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="{% url 'login' %}" class="menu-link wow fadeInUp" style="visibility: hidden;">Login</a> </li>
+            {% else %}
+            <li id="nav-menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom">
+              <a href="{% url 'logout' %}" class="menu-link wow fadeInUp" style="visibility: hidden;">Logout</a> </li>
+            {% endif %}
+          </ul>
+          {% if user.is_authenticated == False %}
+          <a href="{% url 'register' %}" class="header-button desk wow fadeInUp" data-wow-delay=".5s" style="visibility: hidden;">Register <i class="icon-circles"><span></span></i></a>
+          {% else %}
+          <a href="{% url 'dashboard' %}" class="header-button desk wow fadeInUp" data-wow-delay=".5s" style="visibility: hidden;">Dashboard <i class="icon-circles"><span></span></i></a>
+          {% endif %}
+        </div>
+        <div class="header-content">
+          <div class="header-left">
+            <div class="header-title on-main">
+              Hey, <span class="typed-text"></span><span class="cursor">&nbsp;</span>
+            </div>
+            <ul class="header-second-nav">
+              <li>
+                <a href="" class=" wow fadeInUp" data-wow-delay="0.3s" style="visibility: hidden;">Tutorials</a>
+              </li>
+              <li>
+                <a href="" class=" wow fadeInUp" data-wow-delay="0.35s" style="visibility: hidden;">Convertion rate</a>
+              </li>
+              <li><a href="" class=" wow fadeInUp" data-wow-delay="0.4s" style="visibility: hidden;">Supported Payment System</a>
+              </li>
+              <li>
+                <a href="" class=" wow fadeInUp" data-wow-delay="0.45s" style="visibility: hidden;">Rules & Regulations</a>
+              </li>
+              <li>
+                <a href="" class=" wow fadeInUp" data-wow-delay="0.5s" style="visibility: hidden;">Start Taking Our Service</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="header-bottom">
+          <a href="#start" class="header-scroll-button smooth  wow fadeInUp" data-wow-delay=".8s" data-wow-duration="1s" style="visibility: hidden;">
+            <div class="img">
+              <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+              <noscript>
+                <img src="" alt=""> </noscript>
+            </div>
+            <span class="header-text-to-hide">Scroll to <span class="gray"> selected cases</span></span>
+          </a>
+          <ul class="header-socials">
+            <li class=" wow fadeInUp" data-wow-delay=".8s" style="visibility: hidden;">
+              <a href="">
+                <div class="img">
+                  <img alt="" data-src="" class="soc-color lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img class="soc-color" src="" alt="">
+                  </noscript>
+                  <img alt="" data-src="" class="soc-black lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img class="soc-black" src="" alt="">
+                  </noscript>
+                </div>
+              </a>
+            </li>
+            <li class=" wow fadeInUp" data-wow-delay=".8s" style="visibility: hidden;">
+              <a href="">
+                <div class="img">
+                  <img alt="" data-src="" class="soc-color lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img class="soc-color" src="" alt="">
+                  </noscript>
+                  <img alt="" data-src="" class="soc-black lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img class="soc-black" src="" alt="">
+                  </noscript>
+                </div>
+              </a>
+            </li>
+            <li class=" wow fadeInUp" data-wow-delay=".8s" style="visibility: hidden;">
+              <a href="">
+                <div class="img">
+                  <img alt="" data-src="" class="soc-color lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img class="soc-color" src="" alt="">
+                  </noscript>
+                  <img alt="" data-src="" class="soc-black lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img class="soc-black" src="" alt="">
+                  </noscript>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="slider-section2" id="start">
+      <div class="swiper-wrap">
+        <div class="swiper-container swiper2 wow fadeInUp" data-wow-delay=".2s" style="visibility: hidden;">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="swiper-cont">
+                <div class="swiper-tags">
+                  <div class="swiper-tag">Product Design</div>
+                </div>
+                <a href="" class="swiper-title">
+                                    Lime Home                                </a>
+                <div class="swiper-text">
+                  Limehome is better than a hotel. Run by hospitality professionals and equipped by interior designers, they are able to combine the quality standard of a hotel with the advantages of an apartment. </div>
+                <a href="" class="swiper-button">
+                                    VIEW MORE
+                                </a>
+              </div>
+              <a href="" class="img">
+                <img alt="" data-src="" class="manDefer lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img class="manDefer" src="" alt="">
+                </noscript>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <div class="swiper-cont">
+                <div class="swiper-tags">
+                  <div class="swiper-tag">Product Design</div>
+                </div>
+                <a href="" class="swiper-title">
+                                    TuneGo                                </a>
+                <div class="swiper-text">
+                  TuneGO is a free platform to protect your rights and distribute your music globally through hundreds of digital music stores, and collect royalties. </div>
+                <a href="" class="swiper-button">
+                                    VIEW MORE
+                                </a>
+              </div>
+              <a href="" class="img">
+                <img alt="" data-src="" class="manDefer lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img class="manDefer" src="" alt="">
+                </noscript>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <div class="swiper-cont">
+                <div class="swiper-tags">
+                  <div class="swiper-tag">Product Design</div>
+                </div>
+                <a href="" class="swiper-title">
+                                    Rebranding Concept for WinRAR – The Most Famous File Compression Software                                </a>
+                <div class="swiper-text">
+                  Strengthen the company’s presence with the new rebrand concept.<br>
+                   Here's how we have done it for WinRAR. </div>
+                <a href="" class="swiper-button">
+                                    VIEW MORE
+                                </a>
+              </div>
+              <a href="" class="img">
+                <img alt="" data-src="" class="manDefer lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img class="manDefer" src="" alt="">
+                </noscript>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <div class="swiper-cont">
+                <div class="swiper-tags">
+                  <div class="swiper-tag">Full-Cycle Product Development</div>
+                  <div class="swiper-tag">Product Design</div>
+                </div>
+                <a href="" class="swiper-title">
+                                    Quinlex. Design for a Project Management Application                                </a>
+                <div class="swiper-text">
+                  Catch here how we designed the mobile experience for teams on the go. There is nothing better than a top-notch project management app that helps keep everyone productive </div>
+                <a href="" class="swiper-button">
+                                    VIEW MORE
+                                </a>
+              </div>
+              <a href="" class="img">
+                <img alt="" data-src="" class="manDefer lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img class="manDefer" src="" alt="">
+                </noscript>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <div class="swiper-cont">
+                <div class="swiper-tags">
+                  <div class="swiper-tag">Full-Cycle Product Development</div>
+                  <div class="swiper-tag">Product Design</div>
+                </div>
+                <a href="" class="swiper-title">
+                                    Design and Development for Radial Hub Social Web Application                                </a>
+                <div class="swiper-text">
+                  We designed and built a business and employment-oriented web application that is mainly used for professional networking. </div>
+                <a href="" class="swiper-button">
+                                    VIEW MORE
+                                </a>
+              </div>
+              <a href="" class="img">
+                <img alt="" data-src="" class="manDefer lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img class="manDefer" src="" alt="">
+                </noscript>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="team-nav">
+          <div class="swiper-button-prev prev2"></div>
+          <div class="swiper-pagination pag2"></div>
+          <div class="swiper-button-next next2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="text1-section">
+      <div class="container">
+        <div class="text1-col">
+          <div class="text1-title wow fadeInUp" data-wow-delay=".1s" style="visibility: hidden;">
+            We build more than just experiences </div>
+          <div class="text1-span wow fadeInUp" data-wow-delay="0.15s" style="visibility: hidden;">Fireart Studio is a boutique design and software development company. We have 50+ JS and design experts on board and 6+ years of experience in building digital projects from scratch or refreshing existing ones. We digitize businesses in a creative manner and build elegant products that help brands shine throughout each user interaction.</div>
+        </div>
+        <div class="text1-col">
+          <div class="text1-span wow fadeInUp" data-wow-delay="0.2s" style="visibility: hidden;">Since 2013, we support global companies and startups at every stage of a product life cycle, starting with conceptualization, design, prototyping, development, user testing, and deployment of a complete solution.</div>
+          <div class="text1-span wow fadeInUp" data-wow-delay="0.25s" style="visibility: hidden;">Being a trusted partner for more than 700 bold businesses worldwide, we deliver the overarching design and development solutions to help our customers become the industry game - changers, giants, influencers, icons.</div>
+          <div class="text1-logos">
+            <div class="logo wow fadeInUp" data-wow-delay="0.3s" style="visibility: hidden;">
+              <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+              <noscript>
+                <img src="" alt="">
+              </noscript>
+            </div>
+            <div class="logo wow fadeInUp" data-wow-delay="0.35s" style="visibility: hidden;">
+              <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+              <noscript>
+                <img src="" alt="">
+              </noscript>
+            </div>
+            <div class="logo wow fadeInUp" data-wow-delay="0.4s" style="visibility: hidden;">
+              <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+              <noscript>
+                <img src="" alt="">
+              </noscript>
+            </div>
+            <div class="logo wow fadeInUp" data-wow-delay="0.45s" style="visibility: hidden;">
+              <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+              <noscript>
+                <img src="" alt="">
+              </noscript>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="team-section">
+      <div class="container">
+        <!-- <div class="team-title wow fadeInUp" data-wow-delay=".05s" style="visibility: hidden;">
+                Testimonials
+            </div> -->
+        <div class="swiper-wrap">
+          <div class="swiper-container swiper1">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide wow fadeInUp" data-wow-delay="0.05s" style="visibility: hidden;">
+                <img alt="" data-src="" class="manDefer lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img class="manDefer" src="" alt="">
+                </noscript>
+              </div>
+              <div class="swiper-slide wow fadeInUp" data-wow-delay="0.15s" style="visibility: hidden;">
+                <img alt="" data-src="" class="manDefer lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img class="manDefer" src="" alt="">
+                </noscript>
+              </div>
+              <div class="swiper-slide wow fadeInUp" data-wow-delay="0.25s" style="visibility: hidden;">
+                <img alt="" data-src="" class="manDefer lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img class="manDefer" src="" alt="">
+                </noscript>
+              </div>
+              <div class="swiper-slide wow fadeInUp" data-wow-delay="0.35s" style="visibility: hidden;">
+                <img alt="" data-src="" class="manDefer lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img class="manDefer" src="" alt="">
+                </noscript>
+              </div>
+            </div>
+          </div>
+          <div class="team-nav wow fadeInUp" data-wow-delay=".05s" style="visibility: hidden;">
+            <div class="swiper-button-prev prev1"></div>
+            <div class="swiper-pagination pag1"></div>
+            <div class="swiper-button-next next1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="numbers-section">
+      <div class="container">
+        <div class="numbers-line">
+          <div class="numbers-left">
+            <div class="numbers-title wow fadeInUp" data-wow-delay=".05s" style="visibility: hidden;">
+              Our Clients
+            </div>
+            <div class="numbers-subtitle wow fadeInUp" data-wow-delay=".15s" style="visibility: hidden;">We have been proudly partnering with more than 700 forward-thinking companies of all sizes, from startups to world-famous enterprises.</div>
+          </div>
+          <div class="numbers-right">
+            <div class="part-items">
+              <div class="part-item wow fadeInUp" data-wow-delay="0.25s" style="visibility: hidden;">
+                <div class="img">
+                  <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img src="" alt="">
+                  </noscript>
+                </div>
+              </div>
+              <div class="part-item wow fadeInUp" data-wow-delay="0.3s" style="visibility: hidden;">
+                <div class="img">
+                  <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img src="" alt="">
+                  </noscript>
+                </div>
+              </div>
+              <div class="part-item wow fadeInUp" data-wow-delay="0.35s" style="visibility: hidden;">
+                <div class="img">
+                  <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img src="" alt="">
+                  </noscript>
+                </div>
+              </div>
+              <div class="part-item wow fadeInUp" data-wow-delay="0.4s" style="visibility: hidden;">
+                <div class="img">
+                  <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img src="" alt="">
+                  </noscript>
+                </div>
+              </div>
+              <div class="part-item wow fadeInUp" data-wow-delay="0.45s" style="visibility: hidden;">
+                <div class="img">
+                  <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img src="" alt="">
+                  </noscript>
+                </div>
+              </div>
+              <div class="part-item wow fadeInUp" data-wow-delay="0.5s" style="visibility: hidden;">
+                <div class="img">
+                  <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img src="" alt="">
+                  </noscript>
+                </div>
+              </div>
+            </div>
+            <div class="numbers-line">
+            </div>
+          </div>
+        </div>
+        <div class="numbers-line">
+          <div class="numbers-left">
+            <div class="numbers-title wow fadeInUp" data-wow-delay=".05s" style="visibility: hidden;">Our Achievements</div>
+          </div>
+          <div class="numbers-right">
+            <div class="part-items">
+              <div class="part-item wow fadeInUp" data-wow-delay="0.15s" style="visibility: hidden;">
+                <div class="img">
+                  <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img src="" alt="">
+                  </noscript>
+                </div>
+              </div>
+              <div class="part-item wow fadeInUp" data-wow-delay="0.2s" style="visibility: hidden;">
+                <div class="img">
+                  <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img src="" alt="">
+                  </noscript>
+                </div>
+              </div>
+              <div class="part-item wow fadeInUp" data-wow-delay="0.25s" style="visibility: hidden;">
+                <div class="img">
+                  <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <noscript>
+                    <img src="" alt="">
+                  </noscript>
+                </div>
+              </div>
+            </div>
+            <div class="numbers-line">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cases-section team-section">
+      <div class="container">
+        <div class="team-title wow fadeInUp" data-wow-delay=".05s" style="visibility: hidden;">
+          Collection of Practices &amp; Insights
+        </div>
+        <div class="cases-items">
+          <div class="cases-item-wrap">
+            <div class="cases-item">
+              <a href="" class="cases-img wow fadeInUp" data-wow-delay=".05s" style="visibility: hidden;">
+                <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img src="" alt="">
+                </noscript>
+              </a>
+              <div class="cases-info">
+                <div class="cases-tags">
+                </div>
+                <a href="" class="cases-title wow fadeInUp" data-wow-delay=".3s" style="visibility: hidden;">
+                                        Rebranding Concept for WinRAR – The Most Famous File Compression Software                                    </a>
+              </div>
+            </div>
+          </div>
+          <div class="cases-item-wrap">
+            <div class="cases-item">
+              <a href="" class="cases-img wow fadeInUp" data-wow-delay=".05s" style="visibility: hidden;">
+                <img alt="" data-src="" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <noscript>
+                  <img src="" alt="">
+                </noscript>
+              </a>
+              <div class="cases-info">
+                <div class="cases-tags">
+                </div>
+                <a href="" class="cases-title wow fadeInUp" data-wow-delay=".3s" style="visibility: hidden;">
+                                        A Conceptual Dating App Design for Swipex                                    </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="end-section">
+            <div class="container">
+            <div class="end-text wow fadeInUp" data-wow-delay=".05s" style="visibility: hidden;">
+                Let’s make something amazing together <br />
+Start by <a href="mailto:client@fireart.studio">saying hi</a>            </div>
+        </div>
+            <div class="end-abs-img">
+            <img   data-wow-delay=".05s" style="visibility: hidden;" alt="" data-src="https://fireart.studio/wp-content/themes/fireart/img/img4.svg" class=" wow fadeInRight lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img src="https://fireart.studio/wp-content/themes/fireart/img/img4.svg" class=" wow fadeInRight" data-wow-delay=".05s" style="visibility: hidden;" alt=""></noscript>
+        </div>
+    </div>
+    <div class="footer-section">
+        <div class="container wow fadeInUp" data-wow-delay=".05s" style="visibility: hidden;">
+
+            <div class="footer-columns">
+                                <a href="https://fireart.studio" class="footer-col">
+                    <img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/uploads/2019/12/logo2.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img src="https://fireartstudio.s3-accelerate.amazonaws.com/uploads/2019/12/logo2.svg" alt=""></noscript>
+                </a>
+                                <div class="footer-col">
+                    <div class="footer-col-title">
+                        Visit us
+                    </div>
+                    <ul class="footer-items">
+                                                                                    <li><a>21 Marynarska St.,</a></li>
+
+                                                            <li><a>Warsaw, 02-674, Poland</a></li>
+
+                                                                                                        <li><a href="mailto:client@fireart.studio">client@fireart.studio</a></li>
+                                            </ul>
+                </div>
+                                    <div class="footer-col">
+                        <div class="footer-col-title">
+                            Call us
+                        </div>
+
+                        <ul class="footer-items">
+                                                            <li><a>Poland</a></li>
+                                <li><a href="tel:48222086111">+48 (22) 208 61 11</a></li>
+                                <br><br>                                                                <li><a>United States</a></li>
+                                <li><a href="tel:14158771612">+1 (415) 877 16 12</a></li>
+                                <br><br>                                                                <li><a>United Kingdom</a></li>
+                                <li><a href="tel:4403333034645">+44 (033) 33034645</a></li>
+                                                                                        </ul>
+                    </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">
+                        Services
+                    </div>
+                    <ul id="menu-footer-services" class="footer-items"><li id="menu-item-5019" class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5019"><a href="https://fireart.studio/services/agile-team-of-js-programmers/">Agile Team of JS Programmers</a></li>
+<li id="menu-item-5020" class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5020"><a href="https://fireart.studio/services/product-refreshment/">Product Refreshment</a></li>
+<li id="menu-item-5021" class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5021"><a href="https://fireart.studio/services/development/">Full-Cycle Product Development</a></li>
+<li id="menu-item-5022" class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5022"><a href="https://fireart.studio/services/product-design/">Product Design</a></li>
+<li id="menu-item-5023" class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5023"><a href="https://fireart.studio/services/logo-branding/">Branding</a></li>
+<li id="menu-item-5024" class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5024"><a href="https://fireart.studio/services/motion-design/">Motion Design</a></li>
+<li id="menu-item-5025" class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5025"><a href="https://fireart.studio/services/outstaffing/">Design Outstaffing</a></li>
+</ul>                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">
+                        Company
+                    </div>
+                    <ul id="menu-footer-company" class="footer-items"><li id="menu-item-5026" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-5026"><a  href="https://fireart.studio/cases/">Cases</a></li>
+<li id="menu-item-5027" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-5027"><a  href="https://fireart.studio/services/">Services</a></li>
+<li id="menu-item-5028" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-5028"><a  href="https://fireart.studio/about-us/">About Us</a></li>
+<li id="menu-item-5029" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-5029"><a  href="https://fireart.studio/blog/">Blog</a></li>
+<li id="menu-item-5030" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-5030"><a  class="hire" href="https://fireart.studio/careers/">Careers<span class="foot-pop"><img  alt="" data-src="https://fireart.studio/wp-content/themes/fireart/img/hire.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img src="https://fireart.studio/wp-content/themes/fireart/img/hire.svg" alt=""></noscript></span></a></li>
+<li id="menu-item-5031" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-5031"><a  href="https://fireart.studio/contact/">Contact Us</a></li>
+</ul>                </div>
+
+                <div class="footer-col">
+                    <div class="footer-col-title">
+                        Follow us
+                    </div>
+                    <ul id="menu-footer-follow-us" class="footer-items"><li id="menu-item-231" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231"><a target="_blank" href="https://dribbble.com/Fireart-d">Dribbble</a></li>
+<li id="menu-item-232" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232"><a target="_blank" href="https://www.behance.net/fireart">Behance</a></li>
+<li id="menu-item-233" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-233"><a target="_blank" href="https://www.instagram.com/fireart_studio/">Instagram</a></li>
+<li id="menu-item-234" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-234"><a target="_blank" href="https://www.facebook.com/fireartd/">Facebook</a></li>
+<li id="menu-item-235" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-235"><a target="_blank" href="https://twitter.com/fireart_studio">Twitter</a></li>
+<li id="menu-item-5032" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5032"><a href="https://medium.com/fireart-studio">Medium</a></li>
+</ul>                </div>
+            </div>
+
+
+
+
+
+            <div class="acc footer-acc">
+
+                <div class="acc-item">
+                    <div class="acc-button">
+                        <div class="footer-col-title">
+                            Visit us
+                        </div>
+                    </div>
+
+                    <div class="acc-content">
+                        <ul class="footer-items">
+                        <li><a>21 Marynarska St.,</a></li>
+
+                    <li><a>Warsaw, 02-674, Poland</a></li>
+
+                                                                        <li><a href="mailto:client@fireart.studio">client@fireart.studio</a></li>
+
+                                                    </ul>
+                    </div>
+                </div>
+                                <div class="acc-item">
+                    <div class="acc-button">
+                        <div class="footer-col-title">
+                            Call us
+                        </div>
+                    </div>
+                    <div class="acc-content">
+                        <ul class="footer-items">
+                                                            <li><a>Poland</a></li>
+                                <li><a href="tel:48222086111">+48 (22) 208 61 11</a></li>
+                                <br><br>                                                                <li><a>United States</a></li>
+                                <li><a href="tel:14158771612">+1 (415) 877 16 12</a></li>
+                                <br><br>                                                                <li><a>United Kingdom</a></li>
+                                <li><a href="tel:4403333034645">+44 (033) 33034645</a></li>
+                                                                                        </ul>
+                    </div>
+                </div>
+                                <div class="acc-item">
+                    <div class="acc-button">
+                        <div class="footer-col-title">
+                            Services
+                        </div>
+                    </div>
+
+                    <div class="acc-content">
+                        <ul id="menu-footer-services-1" class="footer-items"><li class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5019"><a href="https://fireart.studio/services/agile-team-of-js-programmers/">Agile Team of JS Programmers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5020"><a href="https://fireart.studio/services/product-refreshment/">Product Refreshment</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5021"><a href="https://fireart.studio/services/development/">Full-Cycle Product Development</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5022"><a href="https://fireart.studio/services/product-design/">Product Design</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5023"><a href="https://fireart.studio/services/logo-branding/">Branding</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5024"><a href="https://fireart.studio/services/motion-design/">Motion Design</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-service menu-item-5025"><a href="https://fireart.studio/services/outstaffing/">Design Outstaffing</a></li>
+</ul>                    </div>
+                </div>
+
+                <div class="acc-item">
+                    <div class="acc-button">
+                        <div class="footer-col-title">
+                            Company
+                        </div>
+                    </div>
+
+                    <div class="acc-content">
+                        <ul id="menu-footer-company-1" class="footer-items"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5026"><a href="https://fireart.studio/cases/">Cases</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5027"><a href="https://fireart.studio/services/">Services</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5028"><a href="https://fireart.studio/about-us/">About Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5029"><a href="https://fireart.studio/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5030"><a href="https://fireart.studio/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5031"><a href="https://fireart.studio/contact/">Contact Us</a></li>
+</ul>                    </div>
+                </div>
+
+                <div class="acc-item">
+                    <div class="acc-button">
+                        <div class="footer-col-title">
+                            Follow us
+                        </div>
+                    </div>
+
+                    <div class="acc-content">
+                        <ul id="menu-footer-follow-us-1" class="footer-items"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231"><a target="_blank" href="https://dribbble.com/Fireart-d">Dribbble</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232"><a target="_blank" href="https://www.behance.net/fireart">Behance</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-233"><a target="_blank" href="https://www.instagram.com/fireart_studio/">Instagram</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-234"><a target="_blank" href="https://www.facebook.com/fireartd/">Facebook</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-235"><a target="_blank" href="https://twitter.com/fireart_studio">Twitter</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5032"><a href="https://medium.com/fireart-studio">Medium</a></li>
+</ul>                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <div class="last-img">
+                        <img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/last-img.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img src="https://fireartstudio.s3-accelerate.amazonaws.com/img/last-img.svg" alt=""></noscript>
+                    </div>
+
+                    <div class="last-right">
+                        <div class="last-stars">
+                            <div class="last-star"><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" alt=""></noscript></noscript></noscript></noscript></noscript></div>
+                            <div class="last-star"><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" alt=""></noscript></noscript></noscript></noscript></noscript></div>
+                            <div class="last-star"><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" alt=""></noscript></noscript></noscript></noscript></noscript></div>
+                            <div class="last-star"><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" alt=""></noscript></noscript></noscript></noscript></noscript></div>
+                            <div class="last-star"><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img  alt="" data-src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img src="https://fireartstudio.s3-accelerate.amazonaws.com/img/star.svg" alt=""></noscript></noscript></noscript></noscript></noscript></div>
+                        </div>
+
+                        <div class="last-text">
+                            5.0 by 12 Reviews
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom-right">
+                    <div class="footer-rights">
+                        Copyright © 2020 Fireart Studio. All rights reserved.
+                    </div>
+                                        <a href="https://fireart.studio/cookie-policy/" class="footer-cookie">
+                        Cookie Policy
+                    </a>
+                                                            <a href="https://fireart.studio/privacy-policy/" class="footer-privacy">
+                        Privacy Policy
+                    </a>
+                                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+  <script defer="" src="{% static 'home/js/smush-lazy-load.min.js' %}"></script>
+  <script defer="" src="{% static 'home/js/swiper.min.js' %}"></script>
+  <script defer="" src="{% static 'home/js/wow.min.js' %}"></script>
+  <script defer="" src="{% static 'home/js/jquery.matchHeight.js' %}"></script>
+  <script defer="" src="{% static 'home/js/luxy.min.js' %}"></script>
+  <script defer="" src="{% static 'home/js/owl-carousel.min.js' %}"></script>
+  <script defer="" src="{% static 'home/js/script.min.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+{% extends "home/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+<main role="main" class="container">
+      <div>
+        <div class="col-md">
+    <div class="content-section">
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+          {% endfor %}
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <!-- <label for="first_name">First name</label> -->
+            <!-- <input type="text" class="form-control" id="validationServer01" placeholder="First name" required> -->
+            {{ form.first_name.label_tag }}
+            {% render_field form.first_name id="first_name" class="form-control" placeholder="First name"%}
+            <!-- <div class="valid-feedback">
+              Looks good!
+            </div> -->
+          </div>
+          <div class="col-md-4 mb-3">
+            <!-- <label for="validationServer02">Last name</label>
+            <input type="text" class="form-control" id="validationServer02" placeholder="Last name"required> -->
+            {{ form.last_name.label_tag }}
+            {% render_field form.last_name id="last_name" class="form-control" placeholder="Last name" %}
+            <!-- <div class="valid-feedback">
+              Looks good!
+            </div> -->
+          </div>
+          <div class="col-md-4 mb-3">
+            <!-- <label for="validationServerUsername">Username</label> -->
+            {{ form.username.label_tag }}
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrepend3">@</span>
+              </div>
+              <!-- <input type="text" class="form-control" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required> -->
+              {% render_field form.username id="username" class="form-control" placeholder="Username" aria-describedby="inputGroupPrepend3" %}
+              <!-- <div class="invalid-feedback">
+                Please choose a username.
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <!-- <label for="inputEmail4">Email</label> -->
+          {{ form.email.label_tag }}
+          {% render_field form.email id="email" class="form-control" placeholder="Enter your Email" %}
+          <!-- <input type="email" class="form-control" id="inputEmail4" placeholder="Email"> -->
+        </div>
+          <div class="form-row">
+        <div class="form-group col-md-6">
+          {{ form.password1.label_tag }}
+          {% render_field form.password1 id="password1" class="form-control" placeholder="Password" %}
+          <!-- <label for="inputPassword4">Password</label>
+          <input type="email" class="form-control" id="inputPassword4" placeholder="Email"> -->
+        </div>
+        <div class="form-group col-md-6">
+          {{ form.password2.label_tag }}
+          {% render_field form.password2 id="password2" class="form-control" placeholder="Retype password" %}
+          <!-- <label for="reinputPassword42">Retype password</label>
+          <input type="password" class="form-control" id="reinputPassword42" placeholder="Password"> -->
+        </div>
+      </div>
+      <div class="form-group">
+        {{ form.address.label_tag }}
+        {% render_field form.address id="address" class="form-control" placeholder="1234 Main St" %}
+        <!-- <label for="inputAddress">Address</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"> -->
+      </div>
+      <div class="form-group">
+        {{ form.address2.label_tag }}
+        {% render_field form.address2 id="address2" class="form-control" placeholder="Apartment, studio, or floor" %}
+        <!-- <label for="inputAddress2">Address 2</label>
+        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"> -->
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+        {{ form.city.label_tag }}
+        {% render_field form.city id="city" class="form-control" placeholder="Dhaka" %}
+          <!-- <label for="inputCity">City</label>
+          <input type="text" class="form-control" id="inputCity"> -->
+        </div>
+        <div class="form-group col-md-4">
+          {{ form.state.label_tag }}
+          {% render_field form.state id="state" class="form-control" %}
+          <!-- <label for="inputState">State</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select> -->
+        </div>
+        <div class="form-group col-md-2">
+          {{ form.zip.label_tag }}
+          {% render_field form.zip id="zip" class="form-control" %}
+          <!--<label for="inputZip">Zip</label>
+          <input type="text" class="form-control" id="inputZip"> -->
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+          <label class="form-check-label" for="invalidCheck2">
+            Agree to terms and conditions
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{}">Sign in</a>
+            </small>
+        </div>
+    </div>
+                    </div>
+        <!-- <div class="col-md-4">
+          <div class="content-section">
+            <h3>Our Sidebar</h3>
+            <p class='text-muted'>You can put any information here you'd like.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Latest Posts</li>
+                <li class="list-group-item list-group-item-light">Announcements</li>
+                <li class="list-group-item list-group-item-light">Calendars</li>
+                <li class="list-group-item list-group-item-light">etc</li>
+              </ul>
+            </p>
+          </div>
+        </div> -->
+      </div>
+    </main>
+{% endblock content %}
