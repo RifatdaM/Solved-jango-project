@@ -24,3 +24,8 @@ def services(request):
     context = {
     }
     return render(request, 'home/3d_printer_ui.html', context)
+
+def services1(request):
+    context = {
+    }
+    return render(request, 'home/services.html', context)
